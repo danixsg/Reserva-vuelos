@@ -39,7 +39,7 @@ function handleLogout() {
     if (logoutButton) {
         logoutButton.addEventListener('click', () => {
             localStorage.removeItem('currentUser');
-            window.location.href = '/src/views/login.html';
+            window.location.href = '/views/login.html';
         });
     }
 }
