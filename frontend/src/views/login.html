@@ -43,7 +43,7 @@
               />
             </svg>
             <a
-              href="/src/views/home.html"
+              href="../../index.html"
               class="text-2xl font-bold text-gray-800"
               >AereoSky</a
             >
@@ -51,7 +51,7 @@
 
           <div class="hidden md:flex items-center space-x-6">
             <a
-              href="/src/views/home.html"
+              href="../../index.html"
               class="text-gray-600 hover:text-blue-600 transition duration-300"
               >Home</a
             >
@@ -484,7 +484,7 @@
             <ul class="space-y-2 text-gray-400" id="footer-links">
               <li>
                 <a
-                  href="/src/views/home.html"
+                  href="../../index.html"
                   class="hover:text-white"
                   >Home</a
                 >
@@ -687,7 +687,7 @@
 
               if (res.ok) {
                 localStorage.setItem("currentUser", JSON.stringify(data));
-                window.location.href = "/src/views/home.html";
+                window.location.href = "../../index.html";
               } else {
                 alert("Error: " + data.message);
               }

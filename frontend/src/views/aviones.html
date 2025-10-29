@@ -23,11 +23,11 @@
                 <svg class="h-8 w-8 text-blue-600 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
                 </svg>
-                <a href="/src/views/home.html" class="text-2xl font-bold text-gray-800">AereoSky</a>
+                <a href="../../index.html" class="text-2xl font-bold text-gray-800">AereoSky</a>
             </div>
 
             <div class="hidden md:flex items-center space-x-6">
-                <a href="/src/views/home.html" class="text-gray-600 hover:text-blue-600 transition duration-300">Home</a>
+                <a href="../../index.html" class="text-gray-600 hover:text-blue-600 transition duration-300">Home</a>
                 <a href="/src/views/consulta-vuelos.html" class="text-gray-600 hover:text-blue-600 transition duration-300">Vuelos</a>
 
                 <!-- Mis Reservas solo visible autenticado -->
@@ -119,7 +119,7 @@
                 <h4 class="text-lg font-semibold mb-4">Enlaces Rápidos</h4>
                 <ul class="space-y-2 text-gray-400" id="footer-links">
                     <li>
-                        <a href="/src/views/home.html" class="hover:text-white">Home</a>
+                        <a href="../../index.html" class="hover:text-white">Home</a>
                     </li>
                     <li>
                         <a href="/src/views/consulta-vuelos.html" class="hover:text-white">Vuelos</a>
@@ -236,7 +236,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const user = JSON.parse(localStorage.getItem('currentUser'));
     if (!user || user.rol !== "Administrador") {
         alert('Acceso denegado. Debes ser administrador.');
-        window.location.href = '/src/views/home.html';
+        window.location.href = '../../index.html';
         return;
     }
 
