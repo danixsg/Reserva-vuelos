@@ -4,7 +4,7 @@ const app = express();
 
 // 🧠 Habilitar CORS (permite peticiones desde tu frontend)
 app.use(cors({
-  origin: 'http://localhost:5173', 
+  origin: 'https://reserva-vuelos-1l5d.onrender.com', 
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
@@ -18,4 +18,4 @@ app.use('/', require('./routes'));
 
 
 // Servidor
-app.listen(3000, () => console.log('Server up on http://localhost:3000'));
+app.listen(3000, () => console.log('Server up on https://reserva-vuelos-backend.onrender.com'));

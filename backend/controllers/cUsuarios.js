@@ -423,7 +423,7 @@ async function enviarCorreoRecuperacion(req, res) {
     const tokenId = Buffer.from(String(usuario.id_usuario)).toString("base64");
 
     // Enlace al frontend (puedes cambiar por tu dominio o ruta real)
-    const enlaceRecuperacion = `http://localhost:5173/src/views/recuperar-cuenta?id=${encodeURIComponent(
+    const enlaceRecuperacion = `http://localhost:5173/views/recuperar-cuenta?id=${encodeURIComponent(
       tokenId
     )}`;
 
