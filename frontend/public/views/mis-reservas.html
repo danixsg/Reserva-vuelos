@@ -413,17 +413,17 @@
       // -------- back: listar reservas del usuario ----------
       async function cargarReservasUsuario(idUsuario) {
         var try1 = await fetchJSON(
-          "http://localhost:3000/reservas/usuario/" + idUsuario
+          "https://reserva-vuelos-backend.onrender.com/reservas/usuario/" + idUsuario
         );
         if (try1.ok && Array.isArray(try1.data)) return try1.data;
 
         var try2 = await fetchJSON(
-          "http://localhost:3000/usuarios/" + idUsuario + "/reservas"
+          "https://reserva-vuelos-backend.onrender.com/usuarios/" + idUsuario + "/reservas"
         );
         if (try2.ok && Array.isArray(try2.data)) return try2.data;
 
         var try3 = await fetchJSON(
-          "http://localhost:3000/reservas?usuario=" +
+          "https://reserva-vuelos-backend.onrender.com/reservas?usuario=" +
             encodeURIComponent(idUsuario)
         );
         if (try3.ok && Array.isArray(try3.data)) return try3.data;
@@ -438,7 +438,7 @@
 
       // -------- back: resumen / checkout de una reserva ----------
       async function cargarResumenReserva(idReserva) {
-        var r = await fetchJSON("http://localhost:3000/checkout/" + idReserva);
+        var r = await fetchJSON("https://reserva-vuelos-backend.onrender.com/checkout/" + idReserva);
         if (!r.ok)
           throw new Error(
             r.data && r.data.message
@@ -689,7 +689,7 @@
       // pide al backend el id_compra para una reserva dada
       async function fetchIdCompraPorReserva(idReserva) {
         const resp = await fetchJSON(
-          "http://localhost:3000/compra/" + idReserva
+          "https://reserva-vuelos-backend.onrender.com/compra/" + idReserva
         );
         if (!resp.ok) {
           throw new Error(
@@ -713,7 +713,7 @@
           // 2. llamar al endpoint oficial:
           //    router.post("/correo-compra/:id_compra", reenviarCorreoCompra);
           const resp = await fetchJSON(
-            "http://localhost:3000/correo-compra/" + id_compra,
+            "https://reserva-vuelos-backend.onrender.com/correo-compra/" + id_compra,
             { method: "POST" }
           );
 
@@ -743,7 +743,7 @@
           msg = "Reserva cancelada.";
 
         var r1 = await fetchJSON(
-          "http://localhost:3000/reservas/" + idReserva + "/cancelar",
+          "https://reserva-vuelos-backend.onrender.com/reservas/" + idReserva + "/cancelar",
           { method: "POST" }
         );
         if (r1.ok) {
@@ -752,7 +752,7 @@
         }
 
         if (!ok) {
-          var r2 = await fetch("http://localhost:3000/reservas/" + idReserva, {
+          var r2 = await fetch("https://reserva-vuelos-backend.onrender.com/reservas/" + idReserva, {
             method: "DELETE",
           });
           if (r2.ok) {
@@ -762,7 +762,7 @@
         }
 
         if (!ok) {
-          var r3 = await fetch("http://localhost:3000/reservas/" + idReserva, {
+          var r3 = await fetch("https://reserva-vuelos-backend.onrender.com/reservas/" + idReserva, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ estado: "Cancelada" }),

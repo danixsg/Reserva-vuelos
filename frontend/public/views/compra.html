@@ -503,7 +503,7 @@
 
         try {
           var resp = await fetch(
-            "http://localhost:3000/checkout/" + id_reserva
+            "https://reserva-vuelos-backend.onrender.com/checkout/" + id_reserva
           );
           var data = await resp.json();
 
@@ -622,7 +622,7 @@
         if (!currentUser) return;
         try {
           var resp = await fetch(
-            "http://localhost:3000/tarjetas/" + currentUser.id_usuario
+            "https://reserva-vuelos-backend.onrender.com/tarjetas/" + currentUser.id_usuario
           );
           var data = await resp.json();
 
@@ -727,7 +727,7 @@
         try {
           btnPagar.disabled = true;
 
-          var resp = await fetch("http://localhost:3000/compras", {
+          var resp = await fetch("https://reserva-vuelos-backend.onrender.com/compras", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload),

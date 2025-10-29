@@ -275,8 +275,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const populateDropdowns = async () => {
         try {
             const [aerolineasRes, fabricantesRes] = await Promise.all([
-                fetch('http://localhost:3000/aerolineas'),
-                fetch('http://localhost:3000/fabricantes')
+                fetch('https://reserva-vuelos-backend.onrender.com/aerolineas'),
+                fetch('https://reserva-vuelos-backend.onrender.com/fabricantes')
             ]);
 
             const aerolineas = await aerolineasRes.json();
@@ -304,7 +304,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const fetchAviones = async () => {
         try {
-            const response = await fetch('http://localhost:3000/aviones');
+            const response = await fetch('https://reserva-vuelos-backend.onrender.com/aviones');
             if (!response.ok) {
                 tableBody.innerHTML = `<tr><td colspan="6" class="text-center p-8 text-red-500">Error al cargar los aviones.</td></tr>`;
                 return;
@@ -383,8 +383,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const url = isEditMode
-            ? `http://localhost:3000/update-avion/${currentAvionId}`
-            : 'http://localhost:3000/create-avion';
+            ? `https://reserva-vuelos-backend.onrender.com/update-avion/${currentAvionId}`
+            : 'https://reserva-vuelos-backend.onrender.com/create-avion';
         const method = isEditMode ? 'PUT' : 'POST';
 
         try {
@@ -409,7 +409,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const id = e.target.dataset.id;
             if (confirm('¿Estás seguro de que deseas eliminar este avión? Esta acción no se puede deshacer.')) {
                 try {
-                    const response = await fetch(`http://localhost:3000/delete-avion/${id}`, { method: 'DELETE' });
+                    const response = await fetch(`https://reserva-vuelos-backend.onrender.com/delete-avion/${id}`, { method: 'DELETE' });
                     const result = await response.json();
                     if (!response.ok) throw new Error(result.message);
 

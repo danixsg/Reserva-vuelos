@@ -304,7 +304,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // READ - listar aerolíneas
     const fetchData = async () => {
         try {
-            const response = await fetch('http://localhost:3000/aerolineas');
+            const response = await fetch('https://reserva-vuelos-backend.onrender.com/aerolineas');
             const data = await response.json();
             
             tableBody.innerHTML = '';
@@ -346,7 +346,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (isEditMode && id) {
             try {
-                const res = await fetch(`http://localhost:3000/aerolineas/${id}`);
+                const res = await fetch(`https://reserva-vuelos-backend.onrender.com/aerolineas/${id}`);
                 const data = await res.json();
                 if (!res.ok) throw new Error(data.message);
                 
@@ -378,8 +378,8 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         const url = isEditMode
-            ? `http://localhost:3000/update-aerolinea/${currentId}`
-            : 'http://localhost:3000/create-aerolinea';
+            ? `https://reserva-vuelos-backend.onrender.com/update-aerolinea/${currentId}`
+            : 'https://reserva-vuelos-backend.onrender.com/create-aerolinea';
 
         const method = isEditMode ? 'PUT' : 'POST';
 
@@ -407,7 +407,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const id = target.dataset.id;
             if (confirm('¿Estás seguro de que deseas desactivar esta aerolínea?')) {
                 try {
-                    const response = await fetch(`http://localhost:3000/delete-aerolinea/${id}`, { method: 'DELETE' });
+                    const response = await fetch(`https://reserva-vuelos-backend.onrender.com/delete-aerolinea/${id}`, { method: 'DELETE' });
                     const result = await response.json();
                     if (!response.ok) throw new Error(result.message);
                     

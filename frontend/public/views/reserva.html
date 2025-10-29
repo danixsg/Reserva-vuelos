@@ -323,7 +323,7 @@
       // 3. cargar categorías desde backend
       async function cargarCategorias() {
         try {
-          const resp = await fetch("http://localhost:3000/categorias-asiento");
+          const resp = await fetch("https://reserva-vuelos-backend.onrender.com/categorias-asiento");
           const data = await resp.json();
 
           if (!resp.ok) {
@@ -396,7 +396,7 @@
         try {
           btnSubmit.disabled = true;
 
-          const resp = await fetch("http://localhost:3000/reservas", {
+          const resp = await fetch("https://reserva-vuelos-backend.onrender.com/reservas", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload),

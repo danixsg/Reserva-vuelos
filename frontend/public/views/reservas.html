@@ -369,7 +369,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const fetchReservas = async () => {
         try {
-            const response = await fetch(`http://localhost:3000/reservas/admin/all`); 
+            const response = await fetch(`https://reserva-vuelos-backend.onrender.com/reservas/admin/all`); 
             const data = await response.json();
             if (!response.ok) throw new Error('No se pudieron cargar los datos.');
             
@@ -414,7 +414,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const id = e.target.dataset.id;
             if (confirm('¿Estás seguro de que deseas cancelar esta reserva?')) {
                 try {
-                    const response = await fetch(`http://localhost:3000/reservas/${id}/cancelar`, {
+                    const response = await fetch(`https://reserva-vuelos-backend.onrender.com/reservas/${id}/cancelar`, {
                         method: 'POST'
                     });
                     const result = await response.json();

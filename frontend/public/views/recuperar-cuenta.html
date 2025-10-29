@@ -107,7 +107,7 @@
             mensajeEl.className = "text-center mt-4 text-blue-600 font-medium";
 
             const res = await fetch(
-              `http://localhost:3000/update-password-rec/${idUsuario}`,
+              `https://reserva-vuelos-backend.onrender.com/update-password-rec/${idUsuario}`,
               {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },

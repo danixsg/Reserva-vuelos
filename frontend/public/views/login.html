@@ -637,7 +637,7 @@
           };
 
           try {
-            const res = await fetch("http://localhost:3000/register", {
+            const res = await fetch("https://reserva-vuelos-backend.onrender.com/register", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify(payload),
@@ -677,7 +677,7 @@
             }
 
             try {
-              const res = await fetch("http://localhost:3000/login", {
+              const res = await fetch("https://reserva-vuelos-backend.onrender.com/login", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ correo, contraseña }),
@@ -734,7 +734,7 @@
             }
 
             try {
-              const res = await fetch("http://localhost:3000/recuperar-cuenta", {
+              const res = await fetch("https://reserva-vuelos-backend.onrender.com/recuperar-cuenta", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ correo: email }),

@@ -758,7 +758,7 @@
         // -------- backend: GET todos --------
         async function fetchUsuarios() {
           try {
-            const res = await fetch("http://localhost:3000/usuarios");
+            const res = await fetch("https://reserva-vuelos-backend.onrender.com/usuarios");
             const data = await res.json();
 
             if (!res.ok) {
@@ -788,7 +788,7 @@
         // -------- backend: GET uno --------
         async function cargarUsuario(id) {
           try {
-            const res = await fetch("http://localhost:3000/usuarios/" + id);
+            const res = await fetch("https://reserva-vuelos-backend.onrender.com/usuarios/" + id);
             const data = await res.json();
 
             if (!res.ok) {
@@ -858,7 +858,7 @@
 
           try {
             const res = await fetch(
-              "http://localhost:3000/usuarios/" + currentUsuarioId,
+              "https://reserva-vuelos-backend.onrender.com/usuarios/" + currentUsuarioId,
               {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
@@ -897,7 +897,7 @@
 
           try {
             const res = await fetch(
-              "http://localhost:3000/usuarios/" +
+              "https://reserva-vuelos-backend.onrender.com/usuarios/" +
                 idUsuario +
                 "/estado",
               {
