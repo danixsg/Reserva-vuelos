@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Pago y emisión de billete - AereoSky</title>
+
+    <!-- igual que home.html -->
+    <script src="/src/services/auth.js" defer></script>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- misma fuente que home.html -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+      }
+    </style>
+  </head>
+
+  <body class="bg-gray-100 text-gray-800 min-h-screen flex flex-col">
+    <!-- NAVBAR (exactamente igual al de home.html) -->
+    <nav class="bg-white shadow-lg fixed w-full z-10">
+      <div class="container mx-auto px-6 py-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center">
+            <svg
+              class="h-8 w-8 text-blue-600 mr-2"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+              />
+            </svg>
+            <a
+              href="/src/views/home.html"
+              class="text-2xl font-bold text-gray-800"
+              >AereoSky</a
+            >
+          </div>
+
+          <div class="hidden md:flex items-center space-x-6">
+            <a
+              href="/src/views/home.html"
+              class="text-gray-600 hover:text-blue-600 transition duration-300"
+              >Home</a
+            >
+            <a
+              href="/src/views/consulta-vuelos.html"
+              class="text-gray-600 hover:text-blue-600 transition duration-300"
+              >Vuelos</a
+            >
+
+            <!-- Mis Reservas solo visible si autenticado -->
+            <a
+              href="/src/views/mis-reservas.html"
+              id="nav-mis-reservas"
+              class="hidden text-gray-600 hover:text-blue-600 transition duration-300"
+              >Mis Reservas</a
+            >
+
+            <a
+              href="/src/views/contacto.html"
+              class="text-gray-600 hover:text-blue-600 transition duration-300"
+              >Contacto</a
+            >
+
+            <div id="admin-panel" class="hidden relative">
+              <button
+                id="admin-panel-button"
+                class="flex items-center text-gray-600 font-semibold hover:text-blue-600 p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition"
+              >
+                <span>Administración</span>
+                <svg
+                  class="h-5 w-5 ml-1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </button>
+              <div
+                id="admin-panel-menu"
+                class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-xl z-20"
+              >
+                <a
+                  href="/src/views/aviones.html"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >Aviones</a
+                >
+                <a
+                  href="/src/views/aerolineas.html"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >Aerolineas</a
+                >
+                <a
+                  href="/src/views/fabricantes.html"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >Fabricantes</a
+                >
+                <a
+                  href="/src/views/usuarios.html"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >Usuarios</a
+                >
+                <a
+                  href="/src/views/reservas.html"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >Reservas</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <a
+            href="/src/views/login.html"
+            id="login-button"
+            class="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition duration-300 shadow"
+          >
+            Iniciar Sesión
+          </a>
+
+          <div id="user-menu" class="hidden items-center space-x-4">
+            <a
+              href="/src/views/perfil.html"
+              class="text-gray-600 hover:text-blue-600 font-medium"
+              >Mi Perfil</a
+            >
+            <button
+              id="logout-button"
+              class="bg-red-600 text-white px-5 py-2 rounded-lg hover:bg-red-600 transition duration-300 shadow"
+            >
+              Cerrar Sesión
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- MAIN -->
+    <main
+      class="pt-24 flex-1 container mx-auto px-4 py-8 max-w-3xl grid gap-8 md:grid-cols-2"
+    >
+      <!-- mini info sesión -->
+      <div class="md:col-span-2 text-right text-xs text-gray-500 mb-[-16px]">
+        <span id="user-info"></span>
+      </div>
+
+      <!-- Resumen -->
+      <section class="bg-white border border-gray-200 shadow rounded-xl p-6">
+        <h2 class="text-xl font-bold text-gray-900 mb-4">
+          Resumen de tu viaje
+        </h2>
+
+        <div id="resumen" class="text-sm text-gray-700 space-y-3">
+          Cargando detalles de la reserva...
+        </div>
+
+        <div class="border-t mt-4 pt-4 text-sm">
+          <p class="text-gray-500">Al confirmar el pago:</p>
+          <ul class="list-disc list-inside text-gray-600">
+            <li>Se genera tu billete.</li>
+            <li>Se emite tu factura.</li>
+            <li>Tu reserva pasa a pagada.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Pago -->
+      <section class="bg-white p-6 rounded-xl shadow">
+        <h2 class="text-lg font-semibold mb-4">Método de pago</h2>
+
+        <!-- Método de entrega -->
+        <div class="mb-4">
+          <label
+            for="metodo_entrega_billete"
+            class="block text-sm text-gray-700 mb-1"
+            >Entrega del billete</label
+          >
+          <select id="metodo_entrega_billete" class="w-full border rounded p-2">
+            <option value="Electronico" selected>Envío electrónico</option>
+            <option value="Retiro en aeropuerto">Retiro en aeropuerto</option>
+          </select>
+        </div>
+
+        <!-- Tarjetas guardadas -->
+        <label class="block text-sm text-gray-700 mb-1"
+          >Tarjetas guardadas</label
+        >
+        <select id="selTarjetas" class="w-full border rounded p-2 mb-4">
+          <option value="" selected>Cargando...</option>
+        </select>
+
+        <!-- Nueva tarjeta -->
+        <div id="newCardBox" class="hidden space-y-3">
+          <div>
+            <label class="block text-sm text-gray-700 mb-1"
+              >Número de tarjeta</label
+            >
+            <input
+              id="cardNumber"
+              type="text"
+              inputmode="numeric"
+              autocomplete="cc-number"
+              placeholder="0000 0000 0000 0000"
+              class="w-full border rounded p-2"
+            />
+            <p id="cardNumberHelp" class="text-xs text-gray-500 mt-1">
+              Solo números. Visa: 16 dígitos · Mastercard: 16 · Amex: 15.
+            </p>
+            <p
+              id="cardNumberError"
+              class="hidden text-sm text-red-600 mt-1"
+            ></p>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-sm text-gray-700 mb-1"
+                >Vencimiento</label
+              >
+              <input
+                id="cardExp"
+                type="month"
+                class="w-full border rounded p-2"
+              />
+            </div>
+            <div>
+              <label class="block text-sm text-gray-700 mb-1">CVV</label>
+              <input
+                id="cardCvv"
+                type="password"
+                inputmode="numeric"
+                maxlength="4"
+                class="w-full border rounded p-2"
+                placeholder="3 o 4 dígitos"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- BOTÓN PAGAR -->
+        <button
+          id="btnPagar"
+          class="mt-6 w-full bg-blue-600 text-white font-semibold py-3 rounded-lg shadow hover:bg-blue-700 transition disabled:bg-gray-400 disabled:cursor-not-allowed"
+        >
+          Confirmar y pagar
+        </button>
+
+        <!-- RESULTADO COMPRA -->
+        <div
+          id="resultadoCompra"
+          class="hidden mt-6 p-4 rounded-lg border text-sm"
+        ></div>
+      </section>
+    </main>
+
+    <!-- FOOTER (exactamente igual al de home.html) -->
+    <footer class="bg-gray-800 text-white py-10">
+      <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div>
+            <h4 class="text-lg font-semibold mb-4">AereoSky</h4>
+            <p class="text-gray-400">
+              Tu compañero de viaje ideal. Hacemos que la reserva de vuelos sea
+              simple, rápida y asequible.
+            </p>
+          </div>
+
+          <div>
+            <h4 class="text-lg font-semibold mb-4">Enlaces Rápidos</h4>
+            <ul class="space-y-2 text-gray-400" id="footer-links">
+              <li>
+                <a
+                  href="/src/views/home.html"
+                  class="hover:text-white"
+                  >Home</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/src/views/consulta-vuelos.html"
+                  class="hover:text-white"
+                  >Vuelos</a
+                >
+              </li>
+              <!-- Mis Reservas solo autenticado -->
+              <li id="footer-mis-reservas" class="hidden">
+                <a
+                  href="/src/views/mis-reservas.html"
+                  class="hover:text-white"
+                  >Mis Reservas</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/src/views/contacto.html"
+                  class="hover:text-white"
+                  >Contacto</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="text-lg font-semibold mb-4">Contacto</h4>
+            <ul class="space-y-2 text-gray-400">
+              <li>Email: soporte@AereoSky.com</li>
+              <li>Teléfono: +593 985 514 590</li>
+              <li>Dirección: Machala, Ecuador</li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="text-lg font-semibold mb-4">Síguenos</h4>
+            <div class="flex space-x-4">
+              <a href="#" class="text-gray-400 hover:text-white"
+                ><svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M22.46,6C21.69,6.35 20.86,6.58 20,6.69C20.88,6.16 21.56,5.32 21.88,4.31C21.05,4.81 20.13,5.16 19.16,5.36C18.37,4.5 17.26,4 16,4C13.65,4 11.73,5.92 11.73,8.29C11.73,8.63 11.77,8.96 11.84,9.28C8.28,9.09 5.11,7.38 2.9,4.79C2.53,5.42 2.33,6.16 2.33,6.94C2.33,8.43 3.08,9.75 4.18,10.53C3.49,10.51 2.82,10.31 2.22,10V10.06C2.22,12.23 3.78,14.05 5.9,14.45C5.55,14.54 5.18,14.59 4.8,14.59C4.54,14.59 4.28,14.56 4.03,14.51C4.6,16.28 6.26,17.56 8.24,17.6C6.68,18.81 4.77,19.53 2.72,19.53C2.38,19.53 2.05,19.51 1.72,19.46C3.72,20.78 6.11,21.56 8.75,21.56C16.01,21.56 20.24,15.71 20.24,10.65C20.24,10.46 20.24,10.27 20.23,10.08C21.02,9.49 21.8,8.78 22.46,7.92V6Z"
+                  /></svg
+              ></a>
+              <a href="#" class="text-gray-400 hover:text-white"
+                ><svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.32 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96C18.34 21.21 22 17.06 22 12.06C22 6.53 17.5 2.04 12 2.04Z"
+                  /></svg
+              ></a>
+              <a href="#" class="text-gray-400 hover:text-white"
+                ><svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.8,5.8 0 0,1 16.2,22H7.8C4.6,22 2,19.4 2,16.2V7.8A5.8,5.8 0 0,1 7.8,2M7.6,4A3.6,3.6 0 0,0 4,7.6V16.4C4,18.39 5.61,20 7.6,20H16.4A3.6,3.6 0 0,0 20,16.4V7.6C20,5.61 18.39,4 16.4,4H7.6M17.25,5.5A1.25,1.25 0 0,1 18.5,6.75A1.25,1.25 0 0,1 17.25,8A1.25,1.25 0 0,1 16,6.75A1.25,1.25 0 0,1 17.25,5.5M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z"
+                  /></svg
+              ></a>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="mt-8 border-t border-gray-700 pt-6 text-center text-gray-500"
+        >
+          <p>&copy; 2025 AereoSky. Todos los derechos reservados.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- SCRIPT -->
+    <script>
+      //
+      // === utilidades de tarjeta ===
+      //
+      function onlyDigits(s) {
+        return String(s || "").replace(/\D/g, "");
+      }
+
+      function detectBrand(d) {
+        if (/^4/.test(d)) return "VISA";
+        if (/^(5[1-5]|2[2-7])/.test(d)) return "MASTERCARD";
+        if (/^3[47]/.test(d)) return "AMEX";
+        return "DESCONOCIDA";
+      }
+
+      function validLengthByBrand(d) {
+        const brand = detectBrand(d);
+        const len = d.length;
+        if (brand === "AMEX") return len === 15;
+        if (brand === "VISA") return len === 13 || len === 16 || len === 19;
+        if (brand === "MASTERCARD") return len === 16;
+        return len >= 13 && len <= 19;
+      }
+
+      function formatGroups(d) {
+        return d.replace(/(\d{4})(?=\d)/g, "$1 ").trim();
+      }
+
+      //
+      // === utilidades de fecha/hora legible ===
+      //
+      function formatDateTime(raw) {
+        if (!raw) {
+          return { fechaHumana: "N/D", horaHumana: "N/D" };
+        }
+
+        var isoCandidate = raw.replace(" ", "T");
+        var d = new Date(isoCandidate);
+
+        if (isNaN(d.getTime())) {
+          var d2 = new Date(isoCandidate + "Z");
+          if (!isNaN(d2.getTime())) {
+            d = d2;
+          }
+        }
+
+        if (isNaN(d.getTime())) {
+          return { fechaHumana: raw, horaHumana: "" };
+        }
+
+        var fechaHumana = d.toLocaleDateString("es-EC", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        });
+
+        var horaHumana = d.toLocaleTimeString("es-EC", {
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+
+        return { fechaHumana: fechaHumana, horaHumana: horaHumana };
+      }
+
+      //
+      // === estado global / refs ===
+      //
+      var currentUser = null;
+      try {
+        var rawUser = localStorage.getItem("currentUser");
+        if (rawUser) currentUser = JSON.parse(rawUser);
+      } catch (e) {}
+
+      // sincronizar navbar/footer visibilidad de Mis Reservas y sesión
+      (function syncSessionUI() {
+        var navMisReservas = document.getElementById("nav-mis-reservas");
+        var footerMisReservas = document.getElementById(
+          "footer-mis-reservas"
+        );
+        var loginBtn = document.getElementById("login-button");
+        var userMenu = document.getElementById("user-menu");
+
+        if (currentUser && currentUser.id_usuario) {
+          if (navMisReservas) navMisReservas.classList.remove("hidden");
+          if (footerMisReservas)
+            footerMisReservas.classList.remove("hidden");
+          if (loginBtn) loginBtn.classList.add("hidden");
+          if (userMenu) userMenu.classList.remove("hidden");
+        } else {
+          if (navMisReservas) navMisReservas.classList.add("hidden");
+          if (footerMisReservas) footerMisReservas.classList.add("hidden");
+          if (loginBtn) loginBtn.classList.remove("hidden");
+          if (userMenu) userMenu.classList.add("hidden");
+        }
+      })();
+
+      var params = new URLSearchParams(window.location.search);
+      var id_reserva = params.get("id_reserva");
+
+      var userInfoEl = document.getElementById("user-info");
+      var resumenEl = document.getElementById("resumen");
+
+      var selTarjetas = document.getElementById("selTarjetas");
+      var newCardBox = document.getElementById("newCardBox");
+      var cardNumber = document.getElementById("cardNumber");
+      var cardNumberError = document.getElementById("cardNumberError");
+      var cardExp = document.getElementById("cardExp");
+      var cardCvv = document.getElementById("cardCvv");
+      var btnPagar = document.getElementById("btnPagar");
+      var resultadoCompra = document.getElementById("resultadoCompra");
+      var metodoEntregaEl = document.getElementById("metodo_entrega_billete");
+
+      var cacheResumen = null;
+
+      //
+      // === pintar user ===
+      //
+      if (!currentUser) {
+        userInfoEl.textContent = "No autenticado";
+      } else {
+        userInfoEl.textContent = "Sesión: " + currentUser.correo;
+      }
+
+      //
+      // === cargar resumen (detalle reserva + totales) ===
+      //
+      async function cargarResumen() {
+        if (!id_reserva) {
+          resumenEl.textContent =
+            "No se especificó id_reserva en la URL (ej: compra.html?id_reserva=5)";
+          btnPagar.disabled = true;
+          return;
+        }
+
+        try {
+          var resp = await fetch(
+            "http://localhost:3000/checkout/" + id_reserva
+          );
+          var data = await resp.json();
+
+          if (!resp.ok) {
+            resumenEl.innerHTML =
+              '<p class="text-red-600 font-semibold">' +
+              (data.message || "No se pudo obtener la reserva.") +
+              "</p>";
+            btnPagar.disabled = true;
+            return;
+          }
+
+          cacheResumen = data;
+
+          var salidaFmt = formatDateTime(data.vuelo.fecha_salida);
+          var llegadaFmt = formatDateTime(data.vuelo.fecha_llegada);
+
+          resumenEl.innerHTML =
+            "<div>" +
+            '<div class="text-xs uppercase text-gray-500">Ruta</div>' +
+            '<div class="font-semibold text-gray-900 text-lg">' +
+            data.vuelo.origen +
+            " → " +
+            data.vuelo.destino +
+            "</div>" +
+            '<div class="text-gray-600 text-xs">' +
+            "Aerolínea: " +
+            data.vuelo.aerolinea +
+            " (" +
+            data.vuelo.codigo_aerolinea +
+            ")" +
+            "</div>" +
+            "</div>" +
+            '<div class="grid grid-cols-2 gap-4 text-sm mt-4">' +
+            "<div>" +
+            '<div class="text-xs text-gray-500 uppercase">Salida</div>' +
+            '<div class="font-medium">' +
+            salidaFmt.fechaHumana +
+            "</div>" +
+            '<div class="text-gray-800">' +
+            salidaFmt.horaHumana +
+            "</div>" +
+            "</div>" +
+            "<div>" +
+            '<div class="text-xs text-gray-500 uppercase">Llegada</div>' +
+            '<div class="font-medium">' +
+            llegadaFmt.fechaHumana +
+            "</div>" +
+            '<div class="text-gray-800">' +
+            llegadaFmt.horaHumana +
+            "</div>" +
+            "</div>" +
+            "</div>" +
+            '<div class="mt-4 text-sm">' +
+            '<div class="text-xs text-gray-500 uppercase">Clase</div>' +
+            '<div class="font-medium">' +
+            data.categoria.nombre_categoria +
+            "</div>" +
+            '<div class="text-gray-500 text-xs">' +
+            "Rango asientos " +
+            data.categoria.rango_inicio +
+            " - " +
+            data.categoria.rango_fin +
+            "</div>" +
+            "</div>" +
+            '<div class="mt-4 text-sm space-y-1">' +
+            '<div class="flex justify-between">' +
+            "<span>Tarifa base del vuelo</span>" +
+            "<span>$ " +
+            Number(data.precios.precio_base_vuelo).toFixed(2) +
+            "</span>" +
+            "</div>" +
+            '<div class="flex justify-between">' +
+            "<span>Recargo de categoría</span>" +
+            "<span>$ " +
+            Number(data.precios.recargo_categoria).toFixed(2) +
+            "</span>" +
+            "</div>" +
+            '<div class="flex justify-between font-semibold border-t pt-2">' +
+            "<span>Subtotal</span>" +
+            "<span>$ " +
+            Number(data.precios.monto_total).toFixed(2) +
+            "</span>" +
+            "</div>" +
+            '<div class="flex justify-between">' +
+            "<span>Impuestos (12%)</span>" +
+            "<span>$ " +
+            Number(data.precios.impuestos).toFixed(2) +
+            "</span>" +
+            "</div>" +
+            '<div class="flex justify-between text-lg font-bold border-t pt-2">' +
+            "<span>Total a pagar</span>" +
+            "<span>$ " +
+            Number(data.precios.total_con_impuestos).toFixed(2) +
+            "</span>" +
+            "</div>" +
+            "</div>" +
+            '<div class="mt-4 text-xs text-gray-500">' +
+            "Reserva #" +
+            data.id_reserva +
+            " | Estado: " +
+            data.estado_reserva +
+            "</div>";
+        } catch (err) {
+          console.error("Error cargando resumen:", err);
+          resumenEl.innerHTML =
+            '<p class="text-red-600 font-semibold">Error de conexión con el servidor.</p>';
+          btnPagar.disabled = true;
+        }
+      }
+
+      //
+      // === cargar tarjetas guardadas ===
+      //
+      async function cargarTarjetas() {
+        if (!currentUser) return;
+        try {
+          var resp = await fetch(
+            "http://localhost:3000/tarjetas/" + currentUser.id_usuario
+          );
+          var data = await resp.json();
+
+          selTarjetas.innerHTML =
+            '<option value="">-- Selecciona una tarjeta --</option>' +
+            '<option value="__new__">+ Agregar nueva tarjeta</option>';
+
+          data.forEach(function (t) {
+            var opt = document.createElement("option");
+            opt.value = String(t.id_tarjeta);
+            opt.textContent =
+              (t.tipo_tarjeta || "Tarjeta") + " · " + t.numero_mask;
+            selTarjetas.appendChild(opt);
+          });
+        } catch (e) {
+          selTarjetas.innerHTML =
+            '<option value="">(No se pudieron cargar tarjetas)</option>' +
+            '<option value="__new__">+ Agregar nueva tarjeta</option>';
+        }
+      }
+
+      // Mostrar / ocultar formulario de nueva tarjeta
+      selTarjetas.addEventListener("change", function () {
+        if (selTarjetas.value === "__new__") {
+          newCardBox.classList.remove("hidden");
+        } else {
+          newCardBox.classList.add("hidden");
+        }
+      });
+
+      // Validación de número de tarjeta en vivo
+      cardNumber.addEventListener("input", function () {
+        var digits = onlyDigits(cardNumber.value);
+        cardNumber.value = formatGroups(digits);
+
+        cardNumberError.classList.add("hidden");
+        cardNumberError.textContent = "";
+
+        if (digits.length >= 13) {
+          if (!validLengthByBrand(digits)) {
+            cardNumberError.textContent =
+              "La longitud del número no corresponde a la marca detectada.";
+            cardNumberError.classList.remove("hidden");
+          }
+        }
+      });
+
+      //
+      // === ejecutar compra ===
+      //
+      async function pagar() {
+        if (!currentUser) {
+          alert("Debes iniciar sesión.");
+          return;
+        }
+        if (!id_reserva) {
+          alert("Falta id_reserva en la URL.");
+          return;
+        }
+
+        var payload = {
+          id_reserva: Number(id_reserva),
+          metodo_entrega_billete: metodoEntregaEl.value || "Electronico",
+          tarjeta: {},
+        };
+
+        if (selTarjetas.value && selTarjetas.value !== "__new__") {
+          payload.tarjeta = {
+            usarExistente: true,
+            id_tarjeta: Number(selTarjetas.value),
+          };
+        } else {
+          var digits = onlyDigits(cardNumber.value);
+          if (!digits) {
+            alert("Ingresa un número de tarjeta válido.");
+            return;
+          }
+          if (!validLengthByBrand(digits)) {
+            alert(
+              "Número de tarjeta con longitud inválida para la marca detectada."
+            );
+            return;
+          }
+          if (!cardExp.value) {
+            alert("Ingresa fecha de vencimiento.");
+            return;
+          }
+          if (!cardCvv.value) {
+            alert("Ingresa CVV.");
+            return;
+          }
+
+          payload.tarjeta = {
+            usarExistente: false,
+            numero: digits,
+            fecha_vencimiento: cardExp.value + "-01",
+            codigo_seguridad: cardCvv.value,
+            tipo_tarjeta: detectBrand(digits),
+          };
+        }
+
+        try {
+          btnPagar.disabled = true;
+
+          var resp = await fetch("http://localhost:3000/compras", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          });
+
+          var data = await resp.json();
+
+          resultadoCompra.classList.remove("hidden");
+
+          if (resp.ok) {
+            resultadoCompra.className =
+              "mt-6 p-4 rounded-lg border text-sm bg-green-50 border-green-400 text-green-800";
+
+            var html =
+              '<p class="font-semibold mb-2">✅ Compra realizada con éxito</p>' +
+              "<p><strong>ID Compra:</strong> " +
+              data.compra.id_compra +
+              "</p>" +
+              "<p><strong>Billete #:</strong> " +
+              data.billete.id_billete +
+              "</p>" +
+              "<p><strong>Asiento asignado:</strong> " +
+              data.billete.numero_asiento +
+              "</p>" +
+              "<p><strong>ID Factura:</strong> " +
+              (data.factura.id_factura || "(generada)") +
+              "</p>";
+
+            if (data.correo && data.correo.facturaEnviada) {
+              if (data.correo.billeteEnviado) {
+                html +=
+                  '<p class="mt-3 text-xs text-gray-600">' +
+                  "Te enviamos tu <strong>factura</strong> y tu <strong>billete electrónico</strong> al correo " +
+                  data.correo.correoEnviadoA +
+                  ".</p>";
+              } else {
+                html +=
+                  '<p class="mt-3 text-xs text-gray-600">' +
+                  "Te enviamos tu <strong>factura</strong> al correo " +
+                  data.correo.correoEnviadoA +
+                  ".<br>Tu billete físico se retira en el aeropuerto con tu documento y el número de compra <strong>" +
+                  data.compra.id_compra +
+                  "</strong>." +
+                  "</p>";
+              }
+            } else {
+              html +=
+                '<p class="mt-3 text-xs text-amber-700">' +
+                "No pudimos enviar el correo automáticamente. Tu compra está confirmada; conserva este comprobante y, si no recibes tu factura en unos minutos, solicitala en 'Mis Reservas' o contáctanos con el número de compra <strong>" +
+                data.compra.id_compra +
+                "</strong>." +
+                "</p>";
+            }
+
+            resultadoCompra.innerHTML = html;
+          } else {
+            resultadoCompra.className =
+              "mt-6 p-4 rounded-lg border text-sm bg-red-50 border-red-400 text-red-800";
+            resultadoCompra.textContent =
+              data.message || "Ocurrió un error al procesar la compra.";
+          }
+        } catch (e) {
+          console.error("Error compra:", e);
+          resultadoCompra.classList.remove("hidden");
+          resultadoCompra.className =
+            "mt-6 p-4 rounded-lg border text-sm bg-red-50 border-red-400 text-red-800";
+          resultadoCompra.textContent =
+            "No se pudo conectar al servidor para completar la compra.";
+        } finally {
+          btnPagar.disabled = false;
+        }
+      }
+
+      //
+      // === init ===
+      //
+      btnPagar.addEventListener("click", function (e) {
+        e.preventDefault();
+        pagar();
+      });
+
+      cargarResumen();
+      cargarTarjetas();
+    </script>
+  </body>
+</html>

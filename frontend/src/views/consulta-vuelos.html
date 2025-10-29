@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Consulta de Vuelos - AereoSky</title>
+
+    <!-- mismo script que home.html -->
+    <script src="/src/services/auth.js" defer></script>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+      }
+    </style>
+  </head>
+
+  <body class="bg-gray-100 text-gray-800 min-h-screen flex flex-col">
+    <!-- NAVBAR (exactamente igual al de home.html) -->
+    <nav class="bg-white shadow-lg fixed w-full z-10">
+      <div class="container mx-auto px-6 py-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center">
+            <svg
+              class="h-8 w-8 text-blue-600 mr-2"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+              />
+            </svg>
+            <a
+              href="/src/views/home.html"
+              class="text-2xl font-bold text-gray-800"
+              >AereoSky</a
+            >
+          </div>
+
+          <div class="hidden md:flex items-center space-x-6">
+            <a
+              href="/src/views/home.html"
+              class="text-gray-600 hover:text-blue-600 transition duration-300"
+              >Home</a
+            >
+            <a
+              href="/src/views/consulta-vuelos.html"
+              class="text-gray-600 hover:text-blue-600 transition duration-300"
+              >Vuelos</a
+            >
+
+            <!-- Mis Reservas solo visible si autenticado -->
+            <a
+              href="/src/views/mis-reservas.html"
+              id="nav-mis-reservas"
+              class="hidden text-gray-600 hover:text-blue-600 transition duration-300"
+              >Mis Reservas</a
+            >
+
+            <a
+              href="/src/views/contacto.html"
+              class="text-gray-600 hover:text-blue-600 transition duration-300"
+              >Contacto</a
+            >
+
+            <div id="admin-panel" class="hidden relative">
+              <button
+                id="admin-panel-button"
+                class="flex items-center text-gray-600 font-semibold hover:text-blue-600 p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition"
+              >
+                <span>Administración</span>
+                <svg
+                  class="h-5 w-5 ml-1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </button>
+              <div
+                id="admin-panel-menu"
+                class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-xl z-20"
+              >
+                <a
+                  href="/src/views/aviones.html"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >Aviones</a
+                >
+                <a
+                  href="/src/views/aerolineas.html"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >Aerolineas</a
+                >
+                <a
+                  href="/src/views/fabricantes.html"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >Fabricantes</a
+                >
+                <a
+                  href="/src/views/usuarios.html"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >Usuarios</a
+                >
+                <a
+                  href="/src/views/reservas.html"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >Reservas</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <a
+            href="/src/views/login.html"
+            id="login-button"
+            class="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition duration-300 shadow"
+          >
+            Iniciar Sesión
+          </a>
+
+          <div id="user-menu" class="hidden items-center space-x-4">
+            <a
+              href="/src/views/perfil.html"
+              class="text-gray-600 hover:text-blue-600 font-medium"
+              >Mi Perfil</a
+            >
+            <button
+              id="logout-button"
+              class="bg-red-600 text-white px-5 py-2 rounded-lg hover:bg-red-600 transition duration-300 shadow"
+            >
+              Cerrar Sesión
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- MAIN -->
+    <main
+      class="flex-1 pt-28 pb-12 container mx-auto px-6 w-full max-w-7xl flex flex-col lg:flex-row gap-6"
+    >
+      <!-- COLUMNA PRINCIPAL -->
+      <section class="flex-1 flex flex-col gap-6">
+        <!-- BUSCADOR PRINCIPAL -->
+        <div class="bg-white rounded-2xl shadow-xl p-6 lg:p-8">
+          <h1 class="text-2xl font-semibold text-gray-800 mb-2">
+            Busca tu vuelo
+          </h1>
+          <p class="text-gray-500 text-sm mb-6">
+            Selecciona ciudad de origen, destino y fecha. Luego puedes afinar
+            con filtros avanzados.
+          </p>
+
+          <form
+            id="buscadorVuelos"
+            class="grid gap-4 md:grid-cols-2 lg:grid-cols-4 items-end"
+          >
+            <!-- ORIGEN -->
+            <div class="flex flex-col">
+              <label class="text-sm text-gray-700 font-medium mb-1"
+                >Origen</label
+              >
+              <select
+                id="origen"
+                class="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              >
+                <option value="">Selecciona ciudad</option>
+              </select>
+            </div>
+
+            <!-- DESTINO -->
+            <div class="flex flex-col">
+              <label class="text-sm text-gray-700 font-medium mb-1"
+                >Destino</label
+              >
+              <select
+                id="destino"
+                class="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              >
+                <option value="">Selecciona ciudad</option>
+              </select>
+            </div>
+
+            <!-- FECHA -->
+            <div class="flex flex-col">
+              <label class="text-sm text-gray-700 font-medium mb-1"
+                >Fecha de salida</label
+              >
+              <input
+                type="date"
+                id="fecha"
+                class="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              />
+            </div>
+
+            <!-- BOTÓN BUSCAR -->
+            <div class="md:col-span-2 lg:col-span-1 flex items-end">
+              <button
+                type="submit"
+                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-lg shadow transition duration-200"
+              >
+                Buscar vuelos
+              </button>
+            </div>
+          </form>
+
+          <p id="mensajeBuscador" class="text-sm mt-4 text-center"></p>
+        </div>
+
+        <!-- RESULTADOS -->
+        <section class="flex-1">
+          <div class="flex flex-wrap items-baseline justify-between mb-4 gap-4">
+            <div>
+              <h2 class="text-xl font-semibold text-gray-800 flex items-center">
+                Resultados
+              </h2>
+              <span
+                id="cantidadResultados"
+                class="ml-1 text-sm text-gray-500 font-normal"
+              ></span>
+            </div>
+
+            <!-- SELECT ORDEN -->
+            <div class="text-sm text-gray-700 flex items-center space-x-2">
+              <label
+                class="text-gray-500 text-xs uppercase"
+                for="ordenRapido"
+                >Ordenar</label
+              >
+              <select
+                id="ordenRapido"
+                class="rounded-lg border border-gray-300 bg-white px-2 py-1 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                <option value="">Relevancia</option>
+                <option value="horarios">Más temprano primero</option>
+                <option value="tarifas">Más barato primero</option>
+                <option value="info">Estado del vuelo</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="resultadosVuelos" class="grid gap-6">
+            <!-- tarjetas dinámicas -->
+          </div>
+        </section>
+      </section>
+
+      <!-- SIDEBAR FILTROS AVANZADOS -->
+      <aside class="w-full lg:w-72 flex-shrink-0">
+        <details
+          class="bg-white rounded-2xl shadow-xl border border-gray-200 p-6 lg:open"
+        >
+          <summary
+            class="flex items-center justify-between cursor-pointer lg:cursor-default list-none"
+          >
+            <div>
+              <h3 class="text-lg font-semibold text-gray-800">
+                Filtros avanzados
+              </h3>
+              <p class="text-xs text-gray-500">
+                Ajusta resultados sin rehacer la búsqueda.
+              </p>
+            </div>
+            <span
+              class="text-xs text-blue-600 bg-blue-50 border border-blue-200 px-2 py-1 rounded-lg lg:hidden"
+              >mostrar/ocultar</span
+            >
+          </summary>
+
+          <div class="mt-6 space-y-6 text-sm text-gray-700">
+            <!-- HORA MIN SALIDA -->
+            <div>
+              <label
+                for="horaMin"
+                class="block text-sm text-gray-700 font-medium mb-1"
+                >Hora mínima de salida</label
+              >
+              <input
+                type="time"
+                id="horaMin"
+                class="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+              />
+              <p class="text-xs text-gray-500 mt-1">
+                Ej: "08:00" para evitar vuelos demasiado temprano.
+              </p>
+            </div>
+
+            <!-- CATEGORIA -->
+            <div>
+              <label
+                for="categoria"
+                class="block text-sm text-gray-700 font-medium mb-1"
+                >Categoría de asiento</label
+              >
+              <select
+                id="categoria"
+                class="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+              >
+                <option value="">(Cualquiera)</option>
+              </select>
+              <p class="text-xs text-gray-500 mt-1">
+                Económica, Ejecutiva, Primera...
+              </p>
+            </div>
+
+            <!-- DIRECTO -->
+            <div>
+              <label class="block text-sm text-gray-700 font-medium mb-1"
+                >Tipo de vuelo</label
+              >
+              <div
+                class="flex items-center bg-white rounded-lg border border-gray-300 px-3 py-2"
+              >
+                <input
+                  id="soloDirecto"
+                  type="checkbox"
+                  class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                />
+                <span class="ml-2 text-sm text-gray-700"
+                  >Solo vuelos directos</span
+                >
+              </div>
+            </div>
+
+            <!-- AEROLÍNEAS -->
+            <div>
+              <p class="block text-sm text-gray-700 font-medium mb-2">
+                Aerolínea
+              </p>
+              <div
+                id="aerolineasCheckboxes"
+                class="bg-white rounded-lg border border-gray-300 p-3 max-h-40 overflow-y-auto space-y-2 text-sm"
+              >
+                <!-- checkboxes dinámicos -->
+              </div>
+              <p class="text-xs text-gray-500 mt-1">
+                Puedes seleccionar más de una.
+              </p>
+            </div>
+
+            <!-- BOTÓN APLICAR -->
+            <div class="pt-2 border-t border-gray-200">
+              <button
+                id="btnAplicarFiltros"
+                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-lg shadow transition duration-200 text-sm"
+              >
+                Aplicar filtros
+              </button>
+            </div>
+          </div>
+        </details>
+      </aside>
+    </main>
+
+    <!-- FOOTER (exactamente igual al de home.html) -->
+    <footer class="bg-gray-800 text-white py-10">
+      <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div>
+            <h4 class="text-lg font-semibold mb-4">AereoSky</h4>
+            <p class="text-gray-400">
+              Tu compañero de viaje ideal. Hacemos que la reserva de vuelos sea
+              simple, rápida y asequible.
+            </p>
+          </div>
+
+          <div>
+            <h4 class="text-lg font-semibold mb-4">Enlaces Rápidos</h4>
+            <ul class="space-y-2 text-gray-400" id="footer-links">
+              <li>
+                <a
+                  href="/src/views/home.html"
+                  class="hover:text-white"
+                  >Home</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/src/views/consulta-vuelos.html"
+                  class="hover:text-white"
+                  >Vuelos</a
+                >
+              </li>
+              <!-- Mis Reservas solo autenticado -->
+              <li id="footer-mis-reservas" class="hidden">
+                <a
+                  href="/src/views/mis-reservas.html"
+                  class="hover:text-white"
+                  >Mis Reservas</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/src/views/contacto.html"
+                  class="hover:text-white"
+                  >Contacto</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="text-lg font-semibold mb-4">Contacto</h4>
+            <ul class="space-y-2 text-gray-400">
+              <li>Email: soporte@AereoSky.com</li>
+              <li>Teléfono: +593 985 514 590</li>
+              <li>Dirección: Machala, Ecuador</li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="text-lg font-semibold mb-4">Síguenos</h4>
+            <div class="flex space-x-4">
+              <a href="#" class="text-gray-400 hover:text-white"
+                ><svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M22.46,6C21.69,6.35 20.86,6.58 20,6.69C20.88,6.16 21.56,5.32 21.88,4.31C21.05,4.81 20.13,5.16 19.16,5.36C18.37,4.5 17.26,4 16,4C13.65,4 11.73,5.92 11.73,8.29C11.73,8.63 11.77,8.96 11.84,9.28C8.28,9.09 5.11,7.38 2.9,4.79C2.53,5.42 2.33,6.16 2.33,6.94C2.33,8.43 3.08,9.75 4.18,10.53C3.49,10.51 2.82,10.31 2.22,10V10.06C2.22,12.23 3.78,14.05 5.9,14.45C5.55,14.54 5.18,14.59 4.8,14.59C4.54,14.59 4.28,14.56 4.03,14.51C4.6,16.28 6.26,17.56 8.24,17.6C6.68,18.81 4.77,19.53 2.72,19.53C2.38,19.53 2.05,19.51 1.72,19.46C3.72,20.78 6.11,21.56 8.75,21.56C16.01,21.56 20.24,15.71 20.24,10.65C20.24,10.46 20.24,10.27 20.23,10.08C21.02,9.49 21.8,8.78 22.46,7.92V6Z"
+                  /></svg
+              ></a>
+              <a href="#" class="text-gray-400 hover:text-white"
+                ><svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.32 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96C18.34 21.21 22 17.06 22 12.06C22 6.53 17.5 2.04 12 2.04Z"
+                  /></svg
+              ></a>
+              <a href="#" class="text-gray-400 hover:text-white"
+                ><svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.8,5.8 0 0,1 16.2,22H7.8C4.6,22 2,19.4 2,16.2V7.8A5.8,5.8 0 0,1 7.8,2M7.6,4A3.6,3.6 0 0,0 4,7.6V16.4C4,18.39 5.61,20 7.6,20H16.4A3.6,3.6 0 0,0 20,16.4V7.6C20,5.61 18.39,4 16.4,4H7.6M17.25,5.5A1.25,1.25 0 0,1 18.5,6.75A1.25,1.25 0 0,1 17.25,8A1.25,1.25 0 0,1 16,6.75A1.25,1.25 0 0,1 17.25,5.5M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z"
+                  /></svg
+              ></a>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="mt-8 border-t border-gray-700 pt-6 text-center text-gray-500"
+        >
+          <p>&copy; 2025 AereoSky. Todos los derechos reservados.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- SCRIPT LÓGICA DE PÁGINA -->
+    <script>
+      // ======================
+      // refs DOM
+      // ======================
+      var origenEl = document.getElementById("origen");
+      var destinoEl = document.getElementById("destino");
+      var fechaEl = document.getElementById("fecha");
+
+      var ordenRapidoEl = document.getElementById("ordenRapido");
+
+      var horaMinEl = document.getElementById("horaMin");
+      var categoriaEl = document.getElementById("categoria");
+      var soloDirectoEl = document.getElementById("soloDirecto");
+
+      var buscadorForm = document.getElementById("buscadorVuelos");
+      var mensajeBuscador = document.getElementById("mensajeBuscador");
+      var resultadosVuelos = document.getElementById("resultadosVuelos");
+      var cantidadResultados = document.getElementById("cantidadResultados");
+      var aerolineasCheckboxes = document.getElementById("aerolineasCheckboxes");
+      var btnAplicarFiltros = document.getElementById("btnAplicarFiltros");
+
+      // navbar / footer auth UI
+      var loginBtn = document.getElementById("login-button");
+      var userMenu = document.getElementById("user-menu");
+      var navMisReservas = document.getElementById("nav-mis-reservas");
+      var footerMisReservas = document.getElementById("footer-mis-reservas");
+
+      // estado global
+      var currentUser = null;
+      var lastBaseCriteria = null;        // {id_origen, id_destino, fecha} o null
+      var lastFetchedFlights = [];        // array crudo del backend (sin filtrar)
+
+      // ======================
+      // sesión / visibilidad igual que home.html
+      // ======================
+      try {
+        var raw = localStorage.getItem("currentUser");
+        if (raw) currentUser = JSON.parse(raw);
+      } catch (e) {}
+
+      (function syncSessionUI() {
+        if (currentUser && currentUser.id_usuario) {
+          if (loginBtn) loginBtn.classList.add("hidden");
+          if (userMenu) userMenu.classList.remove("hidden");
+          if (navMisReservas) navMisReservas.classList.remove("hidden");
+          if (footerMisReservas) footerMisReservas.classList.remove("hidden");
+        } else {
+          if (loginBtn) loginBtn.classList.remove("hidden");
+          if (userMenu) userMenu.classList.add("hidden");
+          if (navMisReservas) navMisReservas.classList.add("hidden");
+          if (footerMisReservas) footerMisReservas.classList.add("hidden");
+        }
+      })();
+
+      // ======================
+      // helpers UI
+      // ======================
+      function setMensaje(tipo, txt) {
+        mensajeBuscador.textContent = txt;
+        if (tipo === "ok") {
+          mensajeBuscador.className =
+            "text-sm mt-4 text-center text-blue-600 font-medium";
+        } else if (tipo === "error") {
+          mensajeBuscador.className =
+            "text-sm mt-4 text-center text-red-600 font-medium";
+        } else if (tipo === "info") {
+          mensajeBuscador.className =
+            "text-sm mt-4 text-center text-gray-600 font-medium";
+        } else {
+          mensajeBuscador.className = "text-sm mt-4 text-center";
+        }
+      }
+
+      // tarjeta de vuelo
+      function renderCardHTML(vuelo) {
+        var salida = new Date(vuelo.fecha_salida);
+        var llegada = new Date(vuelo.fecha_llegada);
+
+        var salidaStr =
+          salida.toLocaleDateString() +
+          " " +
+          salida.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+
+        var llegadaStr =
+          llegada.toLocaleDateString() +
+          " " +
+          llegada.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+
+        var punctualityNote = "";
+        var hoy = new Date();
+        var sameDay =
+          salida.getFullYear() === hoy.getFullYear() &&
+          salida.getMonth() === hoy.getMonth() &&
+          salida.getDate() === hoy.getDate();
+
+        if (sameDay) {
+          var onTime =
+            vuelo.estado === "Programado" || vuelo.estado === "En hora";
+          punctualityNote =
+            '<div class="text-xs mt-1 ' +
+            (onTime ? "text-green-600" : "text-yellow-600") +
+            '">' +
+            (onTime ? "En hora" : (vuelo.estado || "")) +
+            "</div>";
+        }
+
+        var html = "";
+        html +=
+          '<div class="bg-white rounded-xl shadow-md p-5 flex flex-col md:flex-row md:items-center md:justify-between">';
+        html += '  <div class="flex-1">';
+        html +=
+          '    <div class="flex items-center text-gray-800 font-semibold text-lg">';
+        html +=
+          "      <span>" +
+          vuelo.ciudad_origen +
+          " (" +
+          (vuelo.iata_origen || "N/A") +
+          ")</span>";
+        html += '      <span class="mx-2 text-blue-600">→</span>';
+        html +=
+          "      <span>" +
+          vuelo.ciudad_destino +
+          " (" +
+          (vuelo.iata_destino || "N/A") +
+          ")</span>";
+        html += "    </div>";
+
+        html += '    <div class="text-sm text-gray-500 mt-1">';
+        html +=
+          '      <span class="font-medium text-gray-700">' +
+          (vuelo.nombre_aerolinea || "Aerolínea") +
+          "</span>";
+        html +=
+          '      <span class="text-gray-400 ml-1">[' +
+          (vuelo.codigo_aerolinea || "--") +
+          "]</span>";
+        html += "    </div>";
+
+        html +=
+          '    <div class="grid grid-cols-2 gap-4 mt-4 text-sm text-gray-700">';
+        html += "      <div>";
+        html +=
+          '        <div class="text-gray-500 text-xs uppercase">Sale</div>';
+        html += '        <div class="font-medium">' + salidaStr + "</div>";
+        html += "      </div>";
+
+        html += "      <div>";
+        html +=
+          '        <div class="text-gray-500 text-xs uppercase">Llega</div>';
+        html += '        <div class="font-medium">' + llegadaStr + "</div>";
+        html += "      </div>";
+
+        html += "      <div>";
+        html +=
+          '        <div class="text-gray-500 text-xs uppercase">Tipo</div>';
+        html +=
+          '        <div class="font-medium">' +
+          (vuelo.tipo_vuelo || "N/D") +
+          "</div>";
+        html += "      </div>";
+
+        html += "      <div>";
+        html +=
+          '        <div class="text-gray-500 text-xs uppercase">Estado</div>';
+        html +=
+          '        <div class="font-medium">' +
+          (vuelo.estado || "N/D") +
+          "</div>";
+        html += punctualityNote;
+        html += "      </div>";
+
+        html += "    </div>";
+        html += "  </div>";
+
+        html += '  <div class="mt-6 md:mt-0 md:text-right flex-shrink-0">';
+        html +=
+          '    <div class="text-2xl font-semibold text-blue-600">$' +
+          Number(vuelo.precio).toFixed(2) +
+          "</div>";
+        html +=
+          '    <div class="text-sm text-gray-600 mt-1">' +
+          vuelo.asientos_disponibles +
+          " asientos disponibles</div>";
+        html +=
+          '    <a href="/src/views/detalle-vuelo.html?id_vuelo=' +
+          vuelo.id_vuelo +
+          '" class="inline-block mt-4 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2 rounded-lg shadow transition duration-200">';
+        html += "      Ver detalles";
+        html += "    </a>";
+        html += "  </div>";
+
+        html += "</div>";
+        return html;
+      }
+
+      function pintarResultados(data) {
+        resultadosVuelos.innerHTML = "";
+
+        if (!Array.isArray(data) || data.length === 0) {
+          setMensaje("info", "😕 No hay vuelos que cumplan tus criterios.");
+          cantidadResultados.textContent = "(0 resultados)";
+          return;
+        }
+
+        setMensaje("", "");
+        cantidadResultados.textContent = "(" + data.length + " resultados)";
+
+        for (var i = 0; i < data.length; i++) {
+          var vuelo = data[i];
+          var cardWrap = document.createElement("div");
+          cardWrap.innerHTML = renderCardHTML(vuelo);
+          resultadosVuelos.appendChild(cardWrap.firstChild);
+        }
+      }
+
+      // ======================
+      // carga de selects
+      // ======================
+      async function cargarCiudades() {
+        try {
+          var res = await fetch("http://localhost:3000/ciudades");
+          var data = await res.json();
+
+          if (!res.ok) {
+            console.error("Error ciudades:", data);
+            setMensaje("error", "⚠️ No se pudieron cargar las ciudades.");
+            return;
+          }
+
+          for (var i = 0; i < data.length; i++) {
+            var ci = data[i];
+            var label =
+              ci.ciudad +
+              " (" +
+              (ci.iata || "N/A") +
+              ") - " +
+              ci.pais;
+
+            var optO = document.createElement("option");
+            optO.value = ci.id_ciudad;
+            optO.textContent = label;
+            origenEl.appendChild(optO);
+
+            var optD = document.createElement("option");
+            optD.value = ci.id_ciudad;
+            optD.textContent = label;
+            destinoEl.appendChild(optD);
+          }
+        } catch (err) {
+          console.error("Error fetch /ciudades:", err);
+          setMensaje("error", "❌ Error de conexión al cargar ciudades.");
+        }
+      }
+
+      async function cargarCategorias() {
+        try {
+          var res = await fetch("http://localhost:3000/categorias-asiento");
+          var data = await res.json();
+          if (!res.ok) return;
+
+          for (var i = 0; i < data.length; i++) {
+            var cat = data[i];
+            var opt = document.createElement("option");
+            opt.value = cat.id_categoria;
+            opt.textContent =
+              cat.categoria +
+              " (+$" +
+              Number(cat.precio_categoria).toFixed(2) +
+              ")";
+            categoriaEl.appendChild(opt);
+          }
+        } catch (err) {
+          console.warn("No pude cargar categorias-asiento:", err);
+        }
+      }
+
+      // Aerolíneas para checkboxes
+      async function cargarAerolineas() {
+        try {
+          var res = await fetch("http://localhost:3000/aerolineas");
+          var data = await res.json();
+          if (!res.ok) return;
+
+          aerolineasCheckboxes.innerHTML = "";
+
+          for (var i = 0; i < data.length; i++) {
+            var aero = data[i];
+
+            var wrap = document.createElement("label");
+            wrap.className = "flex items-start space-x-2 text-gray-700 text-sm";
+
+            var cbId = "aero_" + aero.codigo_aerolinea;
+
+            var cb = document.createElement("input");
+            cb.type = "checkbox";
+            cb.value = (aero.codigo_aerolinea || "").toLowerCase();
+            cb.id = cbId;
+            cb.className =
+              "h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500 aerolineaCheck";
+
+            var span = document.createElement("span");
+            span.className = "leading-tight";
+            span.textContent =
+              aero.nombre_aerolinea +
+              " (" +
+              aero.codigo_aerolinea +
+              ")";
+
+            wrap.appendChild(cb);
+            wrap.appendChild(span);
+
+            aerolineasCheckboxes.appendChild(wrap);
+          }
+        } catch (err) {
+          console.warn("No pude cargar aerolineas:", err);
+        }
+      }
+
+      // ======================
+      // FILTROS AVANZADOS (front-end)
+      // ======================
+      function getFiltrosAvanzados() {
+        var hora_min = horaMinEl.value || "";
+        var id_categoria = categoriaEl.value || "";
+        var solo_directos = soloDirectoEl.checked ? "true" : "";
+
+        var checks = document.querySelectorAll(".aerolineaCheck");
+        var aerolineasSeleccionadas = [];
+        for (var i = 0; i < checks.length; i++) {
+          if (checks[i].checked) {
+            aerolineasSeleccionadas.push(checks[i].value);
+          }
+        }
+
+        return {
+          hora_min: hora_min,
+          id_categoria: id_categoria,
+          solo_directos: solo_directos,
+          aerolineas: aerolineasSeleccionadas
+        };
+      }
+
+      function parseHoraMinToMinutes(hhmm) {
+        if (!hhmm || hhmm.indexOf(":") === -1) return null;
+        var parts = hhmm.split(":");
+        var h = parseInt(parts[0], 10);
+        var m = parseInt(parts[1], 10);
+        if (isNaN(h) || isNaN(m)) return null;
+        return h * 60 + m;
+      }
+
+      function getMinutesOfDate(dateObj) {
+        return dateObj.getHours() * 60 + dateObj.getMinutes();
+      }
+
+      function filtrarLocalmente(flights, filtros) {
+        var res = [];
+        var minSalidaMins = parseHoraMinToMinutes(filtros.hora_min);
+
+        for (var i = 0; i < flights.length; i++) {
+          var f = flights[i];
+          var keep = true;
+
+          // Hora mínima salida
+          if (keep && minSalidaMins !== null) {
+            var salidaDate = new Date(f.fecha_salida);
+            var salidaMins = getMinutesOfDate(salidaDate);
+            if (salidaMins < minSalidaMins) {
+              keep = false;
+            }
+          }
+
+          // Solo directos
+          if (keep && filtros.solo_directos === "true") {
+            if (
+              !f.tipo_vuelo ||
+              f.tipo_vuelo.toLowerCase().indexOf("direct") === -1
+            ) {
+              keep = false;
+            }
+          }
+
+          // Categoría de asiento
+          if (keep && filtros.id_categoria) {
+            if (
+              !f.id_categoria ||
+              String(f.id_categoria) !== String(filtros.id_categoria)
+            ) {
+              keep = false;
+            }
+          }
+
+          // Aerolíneas seleccionadas
+          if (
+            keep &&
+            filtros.aerolineas &&
+            filtros.aerolineas.length > 0
+          ) {
+            var codigoVuelo =
+              (f.codigo_aerolinea || "").toLowerCase().trim();
+            if (filtros.aerolineas.indexOf(codigoVuelo) === -1) {
+              keep = false;
+            }
+          }
+
+          if (keep) {
+            res.push(f);
+          }
+        }
+
+        return res;
+      }
+
+      function ordenarLocalmente(flights, orden) {
+        var data = flights.slice();
+
+        if (orden === "horarios") {
+          data.sort(function (a, b) {
+            return (
+              new Date(a.fecha_salida).getTime() -
+              new Date(b.fecha_salida).getTime()
+            );
+          });
+        } else if (orden === "tarifas") {
+          data.sort(function (a, b) {
+            return Number(a.precio) - Number(b.precio);
+          });
+        } else if (orden === "info") {
+          data.sort(function (a, b) {
+            var ea = (a.estado || "").toLowerCase();
+            var eb = (b.estado || "").toLowerCase();
+            if (ea < eb) return -1;
+            if (ea > eb) return 1;
+            return 0;
+          });
+        }
+
+        return data;
+      }
+
+      function aplicarFiltrosYOrden() {
+        if (!lastFetchedFlights || lastFetchedFlights.length === 0) {
+          pintarResultados([]);
+          return;
+        }
+
+        var filtros = getFiltrosAvanzados();
+        var filtrados = filtrarLocalmente(lastFetchedFlights, filtros);
+        var orden = ordenRapidoEl.value;
+        var ordenados = ordenarLocalmente(filtrados, orden);
+
+        pintarResultados(ordenados);
+      }
+
+      // ======================
+      // FETCH BASE
+      // ======================
+      async function fetchVuelosBase(baseCriteria) {
+        var params = new URLSearchParams();
+
+        if (baseCriteria && baseCriteria.id_origen) {
+          params.append("id_origen", baseCriteria.id_origen);
+        }
+        if (baseCriteria && baseCriteria.id_destino) {
+          params.append("id_destino", baseCriteria.id_destino);
+        }
+        if (baseCriteria && baseCriteria.fecha) {
+          params.append("fecha", baseCriteria.fecha);
+        }
+
+        var url = "http://localhost:3000/vuelos";
+        if (params.toString().length > 0) {
+          url += "?" + params.toString();
+        }
+
+        try {
+          setMensaje("ok", "⏳ Buscando vuelos...");
+
+          var res = await fetch(url);
+          var data = await res.json();
+
+          if (!res.ok) {
+            console.error("Error fetch vuelos base:", data);
+            setMensaje("error", "⚠️ No se pudo obtener resultados.");
+            cantidadResultados.textContent = "";
+            resultadosVuelos.innerHTML = "";
+            lastFetchedFlights = [];
+            return;
+          }
+
+          lastFetchedFlights = Array.isArray(data) ? data : [];
+
+          aplicarFiltrosYOrden();
+        } catch (err) {
+          console.error("Error fetch vuelos base:", err);
+          setMensaje("error", "❌ Error de conexión al buscar vuelos.");
+          cantidadResultados.textContent = "";
+          resultadosVuelos.innerHTML = "";
+          lastFetchedFlights = [];
+        }
+      }
+
+      // ======================
+      // handlers
+      // ======================
+      async function handleBuscar(e) {
+        e && e.preventDefault && e.preventDefault();
+
+        var id_origen = origenEl.value;
+        var id_destino = destinoEl.value;
+        var fecha = fechaEl.value;
+
+        if (!id_origen || !id_destino || !fecha) {
+          setMensaje("error", "⚠️ Selecciona origen, destino y fecha.");
+          return;
+        }
+
+        if (id_origen === id_destino) {
+          setMensaje("error", "⚠️ Origen y destino no pueden ser iguales.");
+          return;
+        }
+
+        lastBaseCriteria = {
+          id_origen: id_origen,
+          id_destino: id_destino,
+          fecha: fecha
+        };
+
+        fetchVuelosBase(lastBaseCriteria);
+      }
+
+      ordenRapidoEl.addEventListener("change", function () {
+        aplicarFiltrosYOrden();
+      });
+
+      btnAplicarFiltros.addEventListener("click", function () {
+        aplicarFiltrosYOrden();
+      });
+
+      // ======================
+      // carga inicial
+      // ======================
+      async function cargarTodosLosVuelos() {
+        lastBaseCriteria = null;
+        fetchVuelosBase(null);
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        // fecha mínima = hoy
+        var hoy = new Date();
+        var yyyy = hoy.getFullYear();
+        var mm = String(hoy.getMonth() + 1).padStart(2, "0");
+        var dd = String(hoy.getDate()).padStart(2, "0");
+        fechaEl.min = yyyy + "-" + mm + "-" + dd;
+        fechaEl.value = yyyy + "-" + mm + "-" + dd;
+
+        buscadorForm.addEventListener("submit", handleBuscar);
+
+        cargarCiudades();
+        cargarCategorias();
+        cargarAerolineas();
+        cargarTodosLosVuelos();
+      });
+    </script>
+  </body>
+</html>

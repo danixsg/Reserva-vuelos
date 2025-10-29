@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Aerolíneas - AereoSky Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/src/services/auth.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- NAVBAR (igual home.html) -->
+    <nav class="bg-white shadow-lg fixed w-full z-10">
+      <div class="container mx-auto px-6 py-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center">
+            <svg
+              class="h-8 w-8 text-blue-600 mr-2"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+              />
+            </svg>
+            <a
+              href="/src/views/home.html"
+              class="text-2xl font-bold text-gray-800"
+            >AereoSky</a>
+          </div>
+
+          <div class="hidden md:flex items-center space-x-6">
+            <a
+              href="/src/views/home.html"
+              class="text-gray-600 hover:text-blue-600 transition duration-300"
+            >Home</a>
+            <a
+              href="/src/views/consulta-vuelos.html"
+              class="text-gray-600 hover:text-blue-600 transition duration-300"
+            >Vuelos</a>
+
+            <a
+              href="/src/views/mis-reservas.html"
+              id="nav-mis-reservas"
+              class="hidden text-gray-600 hover:text-blue-600 transition duration-300"
+            >Mis Reservas</a>
+
+            <a
+              href="/src/views/contacto.html"
+              class="text-gray-600 hover:text-blue-600 transition duration-300"
+            >Contacto</a>
+
+            <div id="admin-panel" class="hidden relative">
+              <button
+                id="admin-panel-button"
+                class="flex items-center text-gray-600 font-semibold hover:text-blue-600 p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition"
+              >
+                <span>Administración</span>
+                <svg
+                  class="h-5 w-5 ml-1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </button>
+              <div
+                id="admin-panel-menu"
+                class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-xl z-20"
+              >
+                <a
+                  href="/src/views/aviones.html"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >Aviones</a>
+                <a
+                  href="/src/views/aerolineas.html"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 font-semibold text-blue-600"
+                >Aerolíneas</a>
+                <a
+                  href="/src/views/fabricantes.html"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >Fabricantes</a>
+                <a
+                  href="/src/views/usuarios.html"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >Usuarios</a>
+                <a
+                  href="/src/views/reservas.html"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >Reservas</a>
+              </div>
+            </div>
+          </div>
+
+          <a
+            href="/src/views/login.html"
+            id="login-button"
+            class="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition duration-300 shadow"
+          >
+            Iniciar Sesión
+          </a>
+          <div id="user-menu" class="hidden items-center space-x-4">
+            <a
+              href="/src/views/perfil.html"
+              class="text-gray-600 hover:text-blue-600 font-medium"
+            >Mi Perfil</a>
+            <button
+              id="logout-button"
+              class="bg-red-600 text-white px-5 py-2 rounded-lg hover:bg-red-600 transition duration-300 shadow"
+            >
+              Cerrar Sesión
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- CONTENIDO DE AEROLÍNEAS -->
+    <main class="pt-24 pb-12">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between md:items-center mb-8 gap-4">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-800">Gestión de Aerolíneas</h1>
+                    <p class="mt-1 text-gray-600">Administra las aerolíneas asociadas a la plataforma.</p>
+                </div>
+                <button id="add-button" class="bg-blue-600 text-white font-bold px-5 py-2.5 rounded-lg hover:bg-blue-700 transition shadow-md flex items-center justify-center w-full md:w-auto">
+                    <svg class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                    </svg>
+                    Agregar Aerolínea
+                </button>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-2xl overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nombre</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Código</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Correo</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Teléfono</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Estado</th>
+                                <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body" class="bg-white divide-y divide-gray-200">
+                            <tr><td colspan="6" class="text-center p-8 text-gray-500">Cargando datos...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- MODAL CREAR/EDITAR -->
+    <div id="modal" class="hidden fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 z-50">
+        <div class="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-lg relative">
+            <button id="close-modal-button" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+              <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+
+            <h2 id="modal-title" class="text-2xl font-bold text-gray-800 mb-6">Agregar Aerolínea</h2>
+
+            <form id="modal-form" class="space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="nombre_aerolinea" class="block text-sm font-medium text-gray-700">Nombre de la Aerolínea</label>
+                        <input type="text" id="nombre_aerolinea" required class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label for="codigo_aerolinea" class="block text-sm font-medium text-gray-700">Código (IATA)</label>
+                        <input type="text" id="codigo_aerolinea" required class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="correo_aerolinea" class="block text-sm font-medium text-gray-700">Correo Electrónico</label>
+                        <input type="email" id="correo_aerolinea" class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label for="telefono_aerolinea" class="block text-sm font-medium text-gray-700">Teléfono</label>
+                        <input type="tel" id="telefono_aerolinea" class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="direccion_aerolinea" class="block text-sm font-medium text-gray-700">Dirección</label>
+                    <input type="text" id="direccion_aerolinea" class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                </div>
+
+                <div class="pt-4 flex justify-end gap-4">
+                    <button type="button" id="cancel-button" class="bg-gray-200 text-gray-800 font-bold px-6 py-2 rounded-lg hover:bg-gray-300 transition">Cancelar</button>
+                    <button type="submit" class="bg-blue-600 text-white font-bold px-6 py-2 rounded-lg hover:bg-blue-700 transition">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- FOOTER (igual home.html) -->
+    <footer class="bg-gray-800 text-white py-10 mt-16">
+      <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div>
+            <h4 class="text-lg font-semibold mb-4">AereoSky</h4>
+            <p class="text-gray-400">
+              Tu compañero de viaje ideal. Hacemos que la reserva de vuelos sea
+              simple, rápida y asequible.
+            </p>
+          </div>
+          <div>
+            <h4 class="text-lg font-semibold mb-4">Enlaces Rápidos</h4>
+            <ul class="space-y-2 text-gray-400" id="footer-links">
+              <li>
+                <a href="/src/views/home.html" class="hover:text-white">Home</a>
+              </li>
+              <li>
+                <a href="/src/views/consulta-vuelos.html" class="hover:text-white">Vuelos</a>
+              </li>
+              <li id="footer-mis-reservas" class="hidden">
+                <a href="/src/views/mis-reservas.html" class="hover:text-white">Mis Reservas</a>
+              </li>
+              <li>
+                <a href="/src/views/contacto.html" class="hover:text-white">Contacto</a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-lg font-semibold mb-4">Contacto</h4>
+            <ul class="space-y-2 text-gray-400">
+              <li>Email: soporte@AereoSky.com</li>
+              <li>Teléfono: +593 985 514 590</li>
+              <li>Dirección: Machala, Ecuador</li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-lg font-semibold mb-4">Síguenos</h4>
+            <div class="flex space-x-4">
+              <a href="#" class="text-gray-400 hover:text-white">
+                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M22.46,6C21.69,6.35 20.86,6.58 20,6.69C20.88,6.16 21.56,5.32 21.88,4.31C21.05,4.81 20.13,5.16 19.16,5.36C18.37,4.5 17.26,4 16,4C13.65,4 11.73,5.92 11.73,8.29C11.73,8.63 11.77,8.96 11.84,9.28C8.28,9.09 5.11,7.38 2.9,4.79C2.53,5.42 2.33,6.16 2.33,6.94C2.33,8.43 3.08,9.75 4.18,10.53C3.49,10.51 2.82,10.31 2.22,10V10.06C2.22,12.23 3.78,14.05 5.9,14.45C5.55,14.54 5.18,14.59 4.8,14.59C4.54,14.59 4.28,14.56 4.03,14.51C4.6,16.28 6.26,17.56 8.24,17.6C6.68,18.81 4.77,19.53 2.72,19.53C2.38,19.53 2.05,19.51 1.72,19.46C3.72,20.78 6.11,21.56 8.75,21.56C16.01,21.56 20.24,15.71 20.24,10.65C20.24,10.46 20.24,10.27 20.23,10.08C21.02,9.49 21.8,8.78 22.46,7.92V6Z" />
+                </svg>
+              </a>
+              <a href="#" class="text-gray-400 hover:text-white">
+                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.32 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96C18.34 21.21 22 17.06 22 12.06C22 6.53 17.5 2.04 12 2.04Z" />
+                </svg>
+              </a>
+              <a href="#" class="text-gray-400 hover:text-white">
+                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.8,5.8 0 0,1 16.2,22H7.8C4.6,22 2,19.4 2,16.2V7.8A5.8,5.8 0 0,1 7.8,2M7.6,4A3.6,3.6 0 0,0 4,7.6V16.4C4,18.39 5.61,20 7.6,20H16.4A3.6,3.6 0 0,0 20,16.4V7.6C20,5.61 18.39,4 16.4,4H7.6M17.25,5.5A1.25,1.25 0 0,1 18.5,6.75A1.25,1.25 0 0,1 17.25,8A1.25,1.25 0 0,1 16,6.75A1.25,1.25 0 0,1 17.25,5.5M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7Z" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-8 border-t border-gray-700 pt-6 text-center text-gray-500">
+          <p>&copy; 2025 AereoSky. Todos los derechos reservados.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- LÓGICA DE LA PÁGINA -->
+    <script>
+document.addEventListener('DOMContentLoaded', () => {
+    const user = JSON.parse(localStorage.getItem('currentUser'));
+    if (!user || user.rol !== "Administrador") { 
+        alert('Acceso denegado. Esta sección es solo para administradores.');
+        window.location.href = '/src/views/home.html';
+        return;
+    }
+
+    const tableBody = document.getElementById('table-body');
+    const addButton = document.getElementById('add-button');
+    const modal = document.getElementById('modal');
+    const closeModalButton = document.getElementById('close-modal-button');
+    const cancelButton = document.getElementById('cancel-button');
+    const modalTitle = document.getElementById('modal-title');
+    const form = document.getElementById('modal-form');
+    
+    let isEditMode = false;
+    let currentId = null;
+
+    // READ - listar aerolíneas
+    const fetchData = async () => {
+        try {
+            const response = await fetch('http://localhost:3000/aerolineas');
+            const data = await response.json();
+            
+            tableBody.innerHTML = '';
+            if (!response.ok || data.length === 0) {
+                 tableBody.innerHTML = `<tr><td colspan="6" class="text-center p-8 text-gray-500">No hay aerolíneas activas registradas.</td></tr>`;
+                 return;
+            }
+
+            data.forEach(item => {
+                const row = `
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">${item.nombre_aerolinea}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-gray-600">${item.codigo_aerolinea}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-gray-600">${item.correo_aerolinea || 'N/A'}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-gray-600">${item.telefono_aerolinea || 'N/A'}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">${item.estado}</span>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-2">
+                            <button class="edit-btn text-blue-600 hover:text-blue-900 font-semibold" data-id="${item.id_aerolinea}">Editar</button>
+                            <button class="delete-btn text-red-600 hover:text-red-900 font-semibold" data-id="${item.id_aerolinea}">Eliminar</button>
+                        </td>
+                    </tr>
+                `;
+                tableBody.innerHTML += row;
+            });
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            tableBody.innerHTML = `<tr><td colspan="6" class="text-center p-8 text-red-500">No se pudo conectar al servidor.</td></tr>`;
+        }
+    };
+    
+    // abrir modal en modo crear o editar
+    const openModal = async (mode, id = null) => {
+        isEditMode = mode === 'edit';
+        currentId = id;
+        form.reset();
+        modalTitle.textContent = isEditMode ? 'Editar Aerolínea' : 'Agregar Aerolínea';
+
+        if (isEditMode && id) {
+            try {
+                const res = await fetch(`http://localhost:3000/aerolineas/${id}`);
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.message);
+                
+                document.getElementById('nombre_aerolinea').value = data.nombre_aerolinea;
+                document.getElementById('codigo_aerolinea').value = data.codigo_aerolinea;
+                document.getElementById('correo_aerolinea').value = data.correo_aerolinea || '';
+                document.getElementById('telefono_aerolinea').value = data.telefono_aerolinea || '';
+                document.getElementById('direccion_aerolinea').value = data.direccion_aerolinea || '';
+            } catch (error) {
+                alert(`⚠️ Error al cargar datos: ${error.message}`);
+                return;
+            }
+        }
+        modal.classList.remove('hidden');
+    };
+
+    // cerrar modal
+    const closeModal = () => modal.classList.add('hidden');
+
+    // submit crear/editar
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = {
+            nombre_aerolinea: document.getElementById('nombre_aerolinea').value.trim(),
+            codigo_aerolinea: document.getElementById('codigo_aerolinea').value.trim(),
+            correo_aerolinea: document.getElementById('correo_aerolinea').value.trim(),
+            telefono_aerolinea: document.getElementById('telefono_aerolinea').value.trim(),
+            direccion_aerolinea: document.getElementById('direccion_aerolinea').value.trim(),
+        };
+
+        const url = isEditMode
+            ? `http://localhost:3000/update-aerolinea/${currentId}`
+            : 'http://localhost:3000/create-aerolinea';
+
+        const method = isEditMode ? 'PUT' : 'POST';
+
+        try {
+            const response = await fetch(url, {
+                method,
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            });
+            const result = await response.json();
+            if (!response.ok) throw new Error(result.message);
+            
+            alert(`✅ ${result.message}`);
+            closeModal();
+            fetchData();
+        } catch (error) {
+            alert(`⚠️ Error: ${error.message}`);
+        }
+    });
+
+    // acciones editar / eliminar (delete = desactivar lógicamente)
+    tableBody.addEventListener('click', async (e) => {
+        const target = e.target;
+        if (target.classList.contains('delete-btn')) {
+            const id = target.dataset.id;
+            if (confirm('¿Estás seguro de que deseas desactivar esta aerolínea?')) {
+                try {
+                    const response = await fetch(`http://localhost:3000/delete-aerolinea/${id}`, { method: 'DELETE' });
+                    const result = await response.json();
+                    if (!response.ok) throw new Error(result.message);
+                    
+                    alert(`✅ ${result.message}`);
+                    fetchData();
+                } catch (error) {
+                    alert(`⚠️ Error: ${error.message}`);
+                }
+            }
+        }
+        if (target.classList.contains('edit-btn')) {
+             openModal('edit', target.dataset.id);
+        }
+    });
+
+    addButton.addEventListener('click', () => openModal('create'));
+    closeModalButton.addEventListener('click', closeModal);
+    cancelButton.addEventListener('click', closeModal);
+
+    // inicializar tabla
+    fetchData();
+
+    // ------ sincronizar navbar/footer con sesión y rol admin ------
+    (function syncSessionUI() {
+        let u = null;
+        try {
+          const raw = localStorage.getItem("currentUser");
+          if (raw) u = JSON.parse(raw);
+        } catch (e) {}
+
+        const navMisReservas = document.getElementById("nav-mis-reservas");
+        const footerMisReservas = document.getElementById("footer-mis-reservas");
+        const loginBtn = document.getElementById("login-button");
+        const userMenu = document.getElementById("user-menu");
+        const adminPanel = document.getElementById("admin-panel");
+
+        if (u && u.id_usuario) {
+          if (navMisReservas) navMisReservas.classList.remove("hidden");
+          if (footerMisReservas) footerMisReservas.classList.remove("hidden");
+
+          if (loginBtn) loginBtn.classList.add("hidden");
+          if (userMenu) userMenu.classList.remove("hidden");
+
+          if (adminPanel && u.rol === "Administrador") {
+            adminPanel.classList.remove("hidden");
+          }
+        } else {
+          if (navMisReservas) navMisReservas.classList.add("hidden");
+          if (footerMisReservas) footerMisReservas.classList.add("hidden");
+
+          if (loginBtn) loginBtn.classList.remove("hidden");
+          if (userMenu) userMenu.classList.add("hidden");
+        }
+    })();
+
+});
+    </script>
+
+</body>
+</html>

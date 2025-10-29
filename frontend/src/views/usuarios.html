@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestión de Usuarios - AereoSky Admin</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="/src/services/auth.js" defer></script>
+
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+      }
+    </style>
+  </head>
+
+  <body class="bg-gray-100">
+    <!-- NAVBAR -->
+    <nav class="bg-white shadow-lg fixed w-full z-10">
+      <div class="container mx-auto px-6 py-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center">
+            <svg
+              class="h-8 w-8 text-blue-600 mr-2"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+              />
+            </svg>
+            <a
+              href="/src/views/home.html"
+              class="text-2xl font-bold text-gray-800"
+              >AereoSky</a
+            >
+          </div>
+
+          <div class="hidden md:flex items-center space-x-6">
+            <a
+              href="/src/views/home.html"
+              class="text-gray-600 hover:text-blue-600 transition duration-300"
+              >Home</a
+            >
+            <a
+              href="/src/views/consulta-vuelos.html"
+              class="text-gray-600 hover:text-blue-600 transition duration-300"
+              >Vuelos</a
+            >
+
+            <!-- Mis Reservas solo si está logueado -->
+            <a
+              href="/src/views/mis-reservas.html"
+              id="nav-mis-reservas"
+              class="hidden text-gray-600 hover:text-blue-600 transition duration-300"
+              >Mis Reservas</a
+            >
+
+            <a
+              href="/src/views/contacto.html"
+              class="text-gray-600 hover:text-blue-600 transition duration-300"
+              >Contacto</a
+            >
+
+            <div id="admin-panel" class="hidden relative">
+              <button
+                id="admin-panel-button"
+                class="flex items-center text-gray-600 font-semibold hover:text-blue-600 p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition"
+              >
+                <span>Administración</span>
+                <svg
+                  class="h-5 w-5 ml-1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </button>
+              <div
+                id="admin-panel-menu"
+                class="hidden absolute right-0 mt-2 w-56 bg-white rounded-md shadow-xl z-20"
+              >
+                <a
+                  href="/src/views/aviones.html"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >Aviones</a
+                >
+                <a
+                  href="/src/views/aerolineas.html"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >Aerolineas</a
+                >
+                <a
+                  href="/src/views/fabricantes.html"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >Fabricantes</a
+                >
+                <a
+                  href="/src/views/usuarios.html"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 font-semibold text-blue-600"
+                  >Usuarios</a
+                >
+                <a
+                  href="/src/views/reservas.html"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >Reservas</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <a
+            href="/src/views/login.html"
+            id="login-button"
+            class="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition duration-300 shadow"
+          >
+            Iniciar Sesión
+          </a>
+
+          <div id="user-menu" class="hidden items-center space-x-4">
+            <a
+              href="/src/views/perfil.html"
+              class="text-gray-600 hover:text-blue-600 font-medium"
+              >Mi Perfil</a
+            >
+            <button
+              id="logout-button"
+              class="bg-red-600 text-white px-5 py-2 rounded-lg hover:bg-red-600 transition duration-300 shadow"
+            >
+              Cerrar Sesión
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main class="pt-24 pb-12">
+      <div class="container mx-auto px-6 max-w-7xl">
+        <!-- Header sección -->
+        <div
+          class="flex flex-col md:flex-row justify-between md:items-center mb-8 gap-4"
+        >
+          <div>
+            <h1 class="text-3xl font-bold text-gray-800">
+              Gestión de Usuarios
+            </h1>
+            <p class="mt-1 text-gray-600">
+              Consulta, edita y habilita/deshabilita cuentas.
+            </p>
+          </div>
+
+        <div
+          class="text-xs text-gray-500 bg-gray-100 px-3 py-2 rounded-lg self-start md:self-auto"
+        >
+          Solo Administradores
+        </div>
+      </div>
+
+      <!-- 🔎 FILTROS -->
+      <div class="bg-white rounded-xl shadow p-4 mb-8">
+        <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
+
+          <!-- scope estado -->
+          <div class="flex items-center gap-2">
+            <button
+              data-scope="all"
+              class="tab-scope bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold"
+            >
+              Todos
+            </button>
+            <button
+              data-scope="Activo"
+              class="tab-scope bg-gray-100 text-gray-700 px-4 py-2 rounded-lg font-semibold hover:bg-gray-200"
+            >
+              Activos
+            </button>
+            <button
+              data-scope="Inactivo"
+              class="tab-scope bg-gray-100 text-gray-700 px-4 py-2 rounded-lg font-semibold hover:bg-gray-200"
+            >
+              Inactivos
+            </button>
+          </div>
+
+          <!-- search + sort -->
+          <div class="flex flex-col sm:flex-row gap-3 sm:items-center">
+            <input
+              id="txtBuscar"
+              type="text"
+              placeholder="Buscar por nombre, cédula o correo..."
+              class="w-full sm:w-64 border border-gray-300 rounded-md px-3 py-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+            />
+
+            <select
+              id="ordenResultados"
+              class="border border-gray-300 rounded-md px-2 py-2 text-sm"
+            >
+              <option value="nombre-asc">Nombre A → Z</option>
+              <option value="nombre-desc">Nombre Z → A</option>
+              <option value="registro-reciente">Registro más reciente</option>
+              <option value="registro-antiguo">Registro más antiguo</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- resumen -->
+        <div class="flex items-center justify-between mt-4 text-xs text-gray-500">
+          <div id="lblResumenLista"></div>
+          <div id="lblErrores" class="text-red-500"></div>
+        </div>
+      </div>
+
+      <!-- TABLA -->
+      <div class="bg-white rounded-2xl shadow-2xl overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+              <tr>
+                <th
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  ID
+                </th>
+                <th
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Cédula
+                </th>
+                <th
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Nombre Completo
+                </th>
+                <th
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Correo
+                </th>
+                <th
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Teléfono
+                </th>
+                <th
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Dirección
+                </th>
+                <th
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Registro
+                </th>
+                <th
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Estado
+                </th>
+                <th
+                  class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Acciones
+                </th>
+              </tr>
+            </thead>
+            <tbody
+              id="usuarios-table-body"
+              class="bg-white divide-y divide-gray-200"
+            >
+              <tr>
+                <td colspan="9" class="text-center p-8 text-gray-500">
+                  Cargando usuarios...
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      </div>
+    </main>
+
+    <!-- MODAL EDITAR USUARIO -->
+    <div
+      id="usuario-modal"
+      class="hidden fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 z-50"
+    >
+      <div
+        class="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-2xl relative"
+      >
+        <button
+          id="close-modal-button"
+          class="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
+        >
+          <svg
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+
+        <h2
+          id="modal-title"
+          class="text-2xl font-bold text-gray-800 mb-6 leading-tight"
+        >
+          Editar Usuario
+        </h2>
+
+        <form id="usuario-form" class="space-y-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label
+                for="edit_cedula"
+                class="block text-sm font-medium text-gray-700"
+                >Cédula</label
+              >
+              <input
+                type="text"
+                id="edit_cedula"
+                class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+
+            <div>
+              <label
+                for="edit_correo"
+                class="block text-sm font-medium text-gray-700"
+                >Correo</label
+              >
+              <input
+                type="email"
+                id="edit_correo"
+                class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label
+                for="edit_p_nombre"
+                class="block text-sm font-medium text-gray-700"
+                >Primer Nombre</label
+              >
+              <input
+                type="text"
+                id="edit_p_nombre"
+                class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+
+            <div>
+              <label
+                for="edit_s_nombre"
+                class="block text-sm font-medium text-gray-700"
+                >Segundo Nombre</label
+              >
+              <input
+                type="text"
+                id="edit_s_nombre"
+                class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label
+                for="edit_p_apellido"
+                class="block text-sm font-medium text-gray-700"
+                >Primer Apellido</label
+              >
+              <input
+                type="text"
+                id="edit_p_apellido"
+                class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+
+            <div>
+              <label
+                for="edit_s_apellido"
+                class="block text-sm font-medium text-gray-700"
+                >Segundo Apellido</label
+              >
+              <input
+                type="text"
+                id="edit_s_apellido"
+                class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label
+                for="edit_telefono"
+                class="block text-sm font-medium text-gray-700"
+                >Teléfono</label
+              >
+              <input
+                type="text"
+                id="edit_telefono"
+                class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+
+            <!-- Estado SOLO lectura -->
+            <div>
+              <label
+                for="edit_estado"
+                class="block text-sm font-medium text-gray-700"
+                >Estado</label
+              >
+              <input
+                id="edit_estado"
+                type="text"
+                class="mt-1 w-full px-4 py-2 border border-gray-200 rounded-lg bg-gray-100 text-gray-600 cursor-not-allowed"
+                disabled
+              />
+            </div>
+          </div>
+
+          <div>
+            <label
+              for="edit_direccion"
+              class="block text-sm font-medium text-gray-700"
+              >Dirección</label
+            >
+            <input
+              type="text"
+              id="edit_direccion"
+              class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label
+                class="block text-sm font-medium text-gray-500"
+                >Fecha de Registro</label
+              >
+              <input
+                id="edit_fecha_registro"
+                type="text"
+                class="mt-1 w-full px-4 py-2 border border-gray-200 rounded-lg bg-gray-100 text-gray-500 cursor-not-allowed"
+                disabled
+              />
+            </div>
+          </div>
+
+          <div class="pt-6 flex justify-end gap-4">
+            <button
+              type="button"
+              id="cancel-button"
+              class="bg-gray-200 text-gray-800 font-bold px-6 py-2 rounded-lg hover:bg-gray-300 transition"
+            >
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              id="save-button"
+              class="bg-blue-600 text-white font-bold px-6 py-2 rounded-lg hover:bg-blue-700 transition"
+            >
+              Guardar Cambios
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-800 text-white py-10 mt-20">
+      <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div>
+            <h4 class="text-lg font-semibold mb-4">AereoSky</h4>
+            <p class="text-gray-400">
+              Tu compañero de viaje ideal. Hacemos que la reserva de vuelos sea
+              simple, rápida y asequible.
+            </p>
+          </div>
+          <div>
+            <h4 class="text-lg font-semibold mb-4">Enlaces Rápidos</h4>
+            <ul class="space-y-2 text-gray-400" id="footer-links">
+              <li>
+                <a href="/src/views/home.html" class="hover:text-white">Home</a>
+              </li>
+              <li>
+                <a
+                  href="/src/views/consulta-vuelos.html"
+                  class="hover:text-white"
+                  >Vuelos</a
+                >
+              </li>
+
+              <!-- Mis Reservas solo autenticado -->
+              <li id="footer-mis-reservas" class="hidden">
+                <a
+                  href="/src/views/mis-reservas.html"
+                  class="hover:text-white"
+                  >Mis Reservas</a
+                >
+              </li>
+
+              <li>
+                <a href="/src/views/contacto.html" class="hover:text-white"
+                  >Contacto</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-lg font-semibold mb-4">Contacto</h4>
+            <ul class="space-y-2 text-gray-400">
+              <li>Email: soporte@AereoSky.com</li>
+              <li>Teléfono: +593 985 514 590</li>
+              <li>Dirección: Machala, Ecuador</li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-lg font-semibold mb-4">Síguenos</h4>
+            <div class="flex space-x-4">
+              <a href="#" class="text-gray-400 hover:text-white"
+                ><svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M22.46,6C21.69,6.35 20.86,6.58 20,6.69C20.88,6.16 21.56,5.32 21.88,4.31C21.05,4.81 20.13,5.16 19.16,5.36C18.37,4.5 17.26,4 16,4C13.65,4 11.73,5.92 11.73,8.29C11.73,8.63 11.77,8.96 11.84,9.28C8.28,9.09 5.11,7.38 2.9,4.79C2.53,5.42 2.33,6.16 2.33,6.94C2.33,8.43 3.08,9.75 4.18,10.53C3.49,10.51 2.82,10.31 2.22,10V10.06C2.22,12.23 3.78,14.05 5.9,14.45C5.55,14.54 5.18,14.59 4.8,14.59C4.54,14.59 4.28,14.56 4.03,14.51C4.6,16.28 6.26,17.56 8.24,17.6C6.68,18.81 4.77,19.53 2.72,19.53C2.38,19.53 2.05,19.51 1.72,19.46C3.72,20.78 6.11,21.56 8.75,21.56C16.01,21.56 20.24,15.71 20.24,10.65C20.24,10.46 20.24,10.27 20.23,10.08C21.02,9.49 21.8,8.78 22.46,7.92V6Z"
+                  /></svg
+              ></a>
+              <a href="#" class="text-gray-400 hover:text-white"
+                ><svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.32 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96C18.34 21.21 22 17.06 22 12.06C22 6.53 17.5 2.04 12 2.04Z"
+                  /></svg
+              ></a>
+              <a href="#" class="text-gray-400 hover:text-white"
+                ><svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.8,5.8 0 0,1 16.2,22H7.8C4.6,22 2,19.4 2,16.2V7.8A5.8,5.8 0 0,1 7.8,2M7.6,4A3.6,3.6 0 0,0 4,7.6V16.4C4,18.39 5.61,20 7.6,20H16.4A3.6,3.6 0 0,0 20,16.4V7.6C20,5.61 18.39,4 16.4,4H7.6M17.25,5.5A1.25,1.25 0 0,1 18.5,6.75A1.25,1.25 0 0,1 17.25,8A1.25,1.25 0 0,1 16,6.75A1.25,1.25 0 0,1 17.25,5.5M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7Z"
+                  /></svg
+              ></a>
+            </div>
+          </div>
+        </div>
+        <div
+          class="mt-8 border-t border-gray-700 pt-6 text-center text-gray-500"
+        >
+          <p>&copy; 2025 AereoSky. Todos los derechos reservados.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- SCRIPT DE LÓGICA -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // --- seguridad admin ---
+        const user = JSON.parse(localStorage.getItem("currentUser") || "null");
+        if (!user || user.rol !== "Administrador") {
+          alert("Acceso denegado. Esta sección es solo para administradores.");
+          window.location.href = "/src/views/home.html";
+          return;
+        }
+
+        // --- refs DOM ---
+        const tableBody = document.getElementById("usuarios-table-body");
+
+        const modal = document.getElementById("usuario-modal");
+        const closeModalButton = document.getElementById("close-modal-button");
+        const cancelButton = document.getElementById("cancel-button");
+        const form = document.getElementById("usuario-form");
+        const modalTitle = document.getElementById("modal-title");
+
+        // filtros / estado UI
+        const scopeBtns = Array.from(document.querySelectorAll(".tab-scope"));
+        const txtBuscar = document.getElementById("txtBuscar");
+        const ordenSelect = document.getElementById("ordenResultados");
+        const lblResumenLista = document.getElementById("lblResumenLista");
+        const lblErrores = document.getElementById("lblErrores");
+
+        // campos del form
+        const fCedula = document.getElementById("edit_cedula");
+        const fCorreo = document.getElementById("edit_correo");
+        const fPNombre = document.getElementById("edit_p_nombre");
+        const fSNombre = document.getElementById("edit_s_nombre");
+        const fPApellido = document.getElementById("edit_p_apellido");
+        const fSApellido = document.getElementById("edit_s_apellido");
+        const fTelefono = document.getElementById("edit_telefono");
+        const fDireccion = document.getElementById("edit_direccion");
+        const fEstado = document.getElementById("edit_estado"); // solo lectura
+        const fFechaRegistro = document.getElementById("edit_fecha_registro");
+
+        let currentUsuarioId = null;
+
+        // estado de la vista
+        let usuariosRaw = []; // todos desde backend
+        let scope = "all"; // all | Activo | Inactivo
+
+        // -------- utils --------
+        function formatFechaRegistro(raw) {
+          if (!raw) return "—";
+          const d = new Date(raw);
+          if (isNaN(d.getTime())) return raw;
+          const dia = String(d.getDate()).padStart(2, "0");
+          const mes = String(d.getMonth() + 1).padStart(2, "0");
+          const anio = d.getFullYear();
+          const hora = String(d.getHours()).padStart(2, "0");
+          const min = String(d.getMinutes()).padStart(2, "0");
+          return `${dia}/${mes}/${anio} ${hora}:${min}`;
+        }
+
+        function nombreCompletoDe(u) {
+          return (
+            (u.p_nombre || "") +
+            " " +
+            (u.s_nombre || "") +
+            " " +
+            (u.p_apellido || "") +
+            " " +
+            (u.s_apellido || "")
+          )
+            .replace(/\s+/g, " ")
+            .trim();
+        }
+
+        function parseFechaMs(raw) {
+          // para ordenar
+          const d = new Date(raw);
+          if (isNaN(d.getTime())) return 0;
+          return d.getTime();
+        }
+
+        // -------- pintar tabla con filtros aplicados --------
+        function renderTabla() {
+          let list = [...usuariosRaw];
+
+          // 1) scope estado
+          if (scope !== "all") {
+            list = list.filter(
+              (u) =>
+                String(u.estado || "").toLowerCase() ===
+                String(scope).toLowerCase()
+            );
+          }
+
+          // 2) filtro texto
+          const q = txtBuscar.value.trim().toLowerCase();
+          if (q) {
+            list = list.filter((u) => {
+              const nom = nombreCompletoDe(u).toLowerCase();
+              const ced = String(u.cedula || "").toLowerCase();
+              const cor = String(u.correo || "").toLowerCase();
+              return (
+                nom.includes(q) || ced.includes(q) || cor.includes(q)
+              );
+            });
+          }
+
+          // 3) ordenar
+          const ord = ordenSelect.value;
+          list.sort((a, b) => {
+            if (ord === "nombre-asc" || ord === "nombre-desc") {
+              const na = nombreCompletoDe(a).toLowerCase();
+              const nb = nombreCompletoDe(b).toLowerCase();
+              if (na < nb) return ord === "nombre-asc" ? -1 : 1;
+              if (na > nb) return ord === "nombre-asc" ? 1 : -1;
+              return 0;
+            }
+            if (
+              ord === "registro-reciente" ||
+              ord === "registro-antiguo"
+            ) {
+              const ta = parseFechaMs(a.fecha_registro);
+              const tb = parseFechaMs(b.fecha_registro);
+              if (ord === "registro-reciente") {
+                // más nuevo primero
+                return tb - ta;
+              } else {
+                // más viejo primero
+                return ta - tb;
+              }
+            }
+            return 0;
+          });
+
+          // 4) pintar resumen
+          lblResumenLista.textContent = `(${list.length} usuarios mostrados)`;
+
+          // 5) pintar tabla
+          if (list.length === 0) {
+            tableBody.innerHTML =
+              '<tr><td colspan="9" class="text-center p-8 text-gray-500">Sin resultados con los filtros actuales.</td></tr>';
+            return;
+          }
+
+          tableBody.innerHTML = "";
+          list.forEach((u) => {
+            const nombreCompleto = nombreCompletoDe(u);
+            const estadoBadge =
+              u.estado === "Activo"
+                ? '<span class="px-2 py-1 text-xs font-semibold bg-green-100 text-green-800 rounded-full border border-green-300">Activo</span>'
+                : '<span class="px-2 py-1 text-xs font-semibold bg-red-100 text-red-800 rounded-full border border-red-300">Inactivo</span>';
+
+            const labelEstadoBtn =
+              u.estado === "Activo"
+                ? "Desactivar Usuario"
+                : "Activar Usuario";
+
+            const fila = `
+              <tr class="hover:bg-gray-50">
+                <td class="px-6 py-4 whitespace-nowrap text-gray-900 font-medium">${u.id_usuario}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-gray-700">${u.cedula || "—"}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-gray-700">${nombreCompleto || "—"}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-gray-700">${u.correo || "—"}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-gray-700">${u.telefono || "—"}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-gray-700">${u.direccion || "—"}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-gray-500 text-sm">${formatFechaRegistro(u.fecha_registro)}</td>
+                <td class="px-6 py-4 whitespace-nowrap">${estadoBadge}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-2">
+                  <button class="edit-btn text-blue-600 hover:text-blue-900 font-semibold" data-id="${u.id_usuario}">
+                    Editar
+                  </button>
+                  <button class="estado-btn text-yellow-600 hover:text-yellow-800 font-semibold" data-id="${u.id_usuario}" data-estado="${u.estado}">
+                    ${labelEstadoBtn}
+                  </button>
+                </td>
+              </tr>
+            `;
+            tableBody.innerHTML += fila;
+          });
+        }
+
+        // -------- backend: GET todos --------
+        async function fetchUsuarios() {
+          try {
+            const res = await fetch("http://localhost:3000/usuarios");
+            const data = await res.json();
+
+            if (!res.ok) {
+              lblErrores.textContent = "Error cargando usuarios.";
+              tableBody.innerHTML =
+                '<tr><td colspan="9" class="text-center p-8 text-red-500">Error cargando usuarios.</td></tr>';
+              return;
+            }
+
+            if (!Array.isArray(data) || data.length === 0) {
+              usuariosRaw = [];
+              renderTabla();
+              return;
+            }
+
+            usuariosRaw = data;
+            lblErrores.textContent = "";
+            renderTabla();
+          } catch (err) {
+            console.error("Error fetchUsuarios:", err);
+            lblErrores.textContent = "No se pudo conectar al servidor.";
+            tableBody.innerHTML =
+              '<tr><td colspan="9" class="text-center p-8 text-red-500">No se pudo conectar al servidor.</td></tr>';
+          }
+        }
+
+        // -------- backend: GET uno --------
+        async function cargarUsuario(id) {
+          try {
+            const res = await fetch("http://localhost:3000/usuarios/" + id);
+            const data = await res.json();
+
+            if (!res.ok) {
+              alert(
+                "No se pudo cargar el usuario: " +
+                  (data.message || "Error")
+              );
+              return null;
+            }
+
+            return data;
+          } catch (err) {
+            alert("Error de conexión al cargar usuario.");
+            return null;
+          }
+        }
+
+        // -------- modal editar --------
+        async function openModal(idUsuario) {
+          currentUsuarioId = idUsuario;
+          form.reset();
+          modalTitle.textContent = "Editar Usuario #" + idUsuario;
+
+          const data = await cargarUsuario(idUsuario);
+          if (!data) return;
+
+          fCedula.value = data.cedula || "";
+          fCorreo.value = data.correo || "";
+          fPNombre.value = data.p_nombre || "";
+          fSNombre.value = data.s_nombre || "";
+          fPApellido.value = data.p_apellido || "";
+          fSApellido.value = data.s_apellido || "";
+          fTelefono.value = data.telefono || "";
+          fDireccion.value = data.direccion || "";
+
+          // mostrar estado pero no permitir edición
+          fEstado.value = data.estado || "";
+
+          fFechaRegistro.value = formatFechaRegistro(data.fecha_registro);
+
+          modal.classList.remove("hidden");
+        }
+
+        function closeModal() {
+          modal.classList.add("hidden");
+        }
+
+        cancelButton.addEventListener("click", closeModal);
+        closeModalButton.addEventListener("click", closeModal);
+
+        // -------- PUT editar datos básicos (NO estado) --------
+        form.addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          if (!currentUsuarioId) return;
+
+          const payload = {
+            cedula: fCedula.value.trim(),
+            p_nombre: fPNombre.value.trim(),
+            s_nombre: fSNombre.value.trim(),
+            p_apellido: fPApellido.value.trim(),
+            s_apellido: fSApellido.value.trim(),
+            correo: fCorreo.value.trim(),
+            telefono: fTelefono.value.trim(),
+            direccion: fDireccion.value.trim(),
+          };
+
+          try {
+            const res = await fetch(
+              "http://localhost:3000/usuarios/" + currentUsuarioId,
+              {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload),
+              }
+            );
+
+            const data = await res.json();
+
+            if (!res.ok) {
+              alert("Error al actualizar: " + (data.message || "Error"));
+              return;
+            }
+
+            alert("✅ Usuario actualizado correctamente.");
+            closeModal();
+            await fetchUsuarios(); // refrescar lista en memoria y re-render
+          } catch (err) {
+            console.error("Error update usuario:", err);
+            alert("No se pudo conectar al servidor.");
+          }
+        });
+
+        // -------- PUT cambiar estado (toggle) --------
+        async function toggleEstado(idUsuario, estadoActual) {
+          const nuevoEstado =
+            estadoActual === "Activo" ? "Inactivo" : "Activo";
+
+          if (
+            !confirm(
+              `¿Seguro que deseas poner al usuario #${idUsuario} en estado "${nuevoEstado}"?`
+            )
+          ) {
+            return;
+          }
+
+          try {
+            const res = await fetch(
+              "http://localhost:3000/usuarios/" +
+                idUsuario +
+                "/estado",
+              {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ estado: nuevoEstado }),
+              }
+            );
+            const data = await res.json();
+
+            if (!res.ok) {
+              alert(
+                "Error al cambiar estado: " +
+                  (data.message || "Error")
+              );
+              return;
+            }
+
+            await fetchUsuarios(); // recargar lista y volver a filtrar/ordenar
+          } catch (err) {
+            console.error("Error toggle estado:", err);
+            alert("No se pudo conectar al servidor.");
+          }
+        }
+
+        // -------- listeners tabla (botones Editar / Activar|Desactivar) --------
+        tableBody.addEventListener("click", (e) => {
+          const btn = e.target;
+          if (!(btn instanceof HTMLElement)) return;
+
+          if (btn.classList.contains("edit-btn")) {
+            const id = btn.dataset.id;
+            openModal(id);
+          }
+
+          if (btn.classList.contains("estado-btn")) {
+            const id = btn.dataset.id;
+            const estado = btn.dataset.estado;
+            toggleEstado(id, estado);
+          }
+        });
+
+        // -------- filtros UI listeners --------
+        scopeBtns.forEach((b) => {
+          b.addEventListener("click", () => {
+            // actualizar visual tabs
+            scopeBtns.forEach((x) => {
+              x.className =
+                "tab-scope bg-gray-100 text-gray-700 px-4 py-2 rounded-lg font-semibold hover:bg-gray-200";
+            });
+            b.className =
+              "tab-scope bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold";
+
+            scope = b.getAttribute("data-scope") || "all";
+            renderTabla();
+          });
+        });
+
+        txtBuscar.addEventListener("input", renderTabla);
+        ordenSelect.addEventListener("change", renderTabla);
+
+        // -------- init --------
+        fetchUsuarios();
+
+        // navbar/footer sync (Mis Reservas / login / user menu / admin panel)
+        (function syncSessionUI() {
+          let u = null;
+          try {
+            const raw = localStorage.getItem("currentUser");
+            if (raw) u = JSON.parse(raw);
+          } catch (e) {}
+
+          const navMisReservas = document.getElementById("nav-mis-reservas");
+          const footerMisReservas = document.getElementById(
+            "footer-mis-reservas"
+          );
+          const loginBtn = document.getElementById("login-button");
+          const userMenu = document.getElementById("user-menu");
+          const adminPanel = document.getElementById("admin-panel");
+
+          if (u && u.id_usuario) {
+            if (navMisReservas) navMisReservas.classList.remove("hidden");
+            if (footerMisReservas)
+              footerMisReservas.classList.remove("hidden");
+            if (loginBtn) loginBtn.classList.add("hidden");
+            if (userMenu) userMenu.classList.remove("hidden");
+            if (adminPanel && u.rol === "Administrador")
+              adminPanel.classList.remove("hidden");
+          } else {
+            if (navMisReservas) navMisReservas.classList.add("hidden");
+            if (footerMisReservas)
+              footerMisReservas.classList.add("hidden");
+            if (loginBtn) loginBtn.classList.remove("hidden");
+            if (userMenu) userMenu.classList.add("hidden");
+          }
+        })();
+      });
+    </script>
+  </body>
+</html>
