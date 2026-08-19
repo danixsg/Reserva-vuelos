@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recuperar cuenta - AereoSky</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+
+  <body
+    class="bg-gradient-to-br from-blue-50 to-blue-200 flex items-center justify-center min-h-screen font-sans"
+  >
+    <div class="bg-white shadow-xl rounded-2xl p-8 w-full max-w-md">
+      <!-- Encabezado -->
+      <div class="text-center mb-6">
+        <img
+          src="http://www.w3.org/2000/svg"
+          alt="AereoSky"
+          class="mx-auto w-16 h-16 mb-2"
+        />
+        <h1 class="text-2xl font-bold text-blue-700">AereoSky</h1>
+        <p class="text-gray-600 mt-1">Restablecer contraseña</p>
+      </div>
+
+      <!-- Formulario -->
+      <form id="formRecuperar" class="space-y-4">
+        <div>
+          <label
+            for="nueva_contraseña"
+            class="block text-gray-700 text-sm mb-1"
+          >
+            Nueva contraseña
+          </label>
+          <input
+            id="nueva_contraseña"
+            name="nueva_contraseña"
+            type="password"
+            placeholder="Ingresa tu nueva contraseña"
+            class="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-400"
+            required
+          />
+        </div>
+
+        <div>
+          <label
+            for="confirmar_contraseña"
+            class="block text-gray-700 text-sm mb-1"
+          >
+            Confirmar contraseña
+          </label>
+          <input
+            id="confirmar_contraseña"
+            name="confirmar_contraseña"
+            type="password"
+            placeholder="Confirma tu nueva contraseña"
+            class="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-400"
+            required
+          />
+        </div>
+
+        <button
+          type="submit"
+          class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-md transition duration-200"
+        >
+          Actualizar contraseña
+        </button>
+      </form>
+
+      <!-- Mensaje -->
+      <p id="mensaje" class="text-center mt-4 text-sm"></p>
+    </div>
+
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const tokenId = params.get("id");
+      const idUsuario = tokenId ? atob(tokenId) : null;
+
+      // Validar existencia de ID
+      if (!idUsuario) {
+        document.body.innerHTML = `
+    <div class="text-center text-red-600 font-semibold mt-20">
+      ⚠️ Enlace de recuperación inválido o expirado.
+    </div>`;
+        throw new Error("Enlace inválido");
+      }
+
+      document
+        .getElementById("formRecuperar")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          const nueva_contraseña =
+            document.getElementById("nueva_contraseña").value;
+          const confirmar_contraseña = document.getElementById(
+            "confirmar_contraseña"
+          ).value;
+          const mensajeEl = document.getElementById("mensaje");
+
+          if (nueva_contraseña !== confirmar_contraseña) {
+            mensajeEl.textContent = "⚠️ Las contraseñas no coinciden";
+            mensajeEl.className = "text-center mt-4 text-red-600 font-medium";
+            return;
+          }
+
+          try {
+            mensajeEl.textContent = "⏳ Actualizando contraseña...";
+            mensajeEl.className = "text-center mt-4 text-blue-600 font-medium";
+
+            const res = await fetch(
+              `http://localhost:3000/update-password-rec/${idUsuario}`,
+              {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ nueva_contraseña }),
+              }
+            );
+
+            const data = await res.json();
+
+            if (res.ok) {
+              mensajeEl.textContent = "✅ Contraseña actualizada correctamente";
+              mensajeEl.className =
+                "text-center mt-4 text-green-600 font-medium";
+              document.getElementById("formRecuperar").reset();
+            } else {
+              mensajeEl.textContent = `⚠️ ${
+                data.message || "Error al actualizar la contraseña"
+              }`;
+              mensajeEl.className = "text-center mt-4 text-red-600 font-medium";
+            }
+          } catch (error) {
+            console.error("Error:", error);
+            mensajeEl.textContent = "⚠️ Error de conexión con el servidor";
+            mensajeEl.className = "text-center mt-4 text-red-600 font-medium";
+          }
+        });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AereoSky Reservations - Tu Próximo Vuelo Te Espera</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/src/services/auth.js" defer></script>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+      }
+      .hero-bg-gradient {
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100 text-gray-800">
+  <!-- NAVBAR -->
+    <nav class="bg-white shadow-sm fixed w-full z-20 top-0 border-b border-gray-100">
+      <div class="container mx-auto px-6 py-4">
+        <div class="flex items-center justify-between">
+          
+          <!-- 1. LOGO -->
+          <div class="flex items-center">
+            <svg class="h-8 w-8 text-blue-600 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+            </svg>
+            <a href="/src/views/home.html" class="text-2xl font-bold text-gray-800 tracking-tight">AereoSky</a>
+          </div>
+
+          <!-- 2. ENLACES PRINCIPALES -->
+          <div class="hidden md:flex items-center space-x-8 text-sm font-medium">
+            <a href="/src/views/home.html" class="text-gray-600 hover:text-blue-600 transition-colors duration-200">Explorar</a>
+            <a href="/src/views/consulta-vuelos.html" class="text-gray-600 hover:text-blue-600 transition-colors duration-200">Vuelos</a>
+            <a href="/src/views/mis-reservas.html" id="nav-mis-reservas" class="hidden text-gray-600 hover:text-blue-600 transition-colors duration-200">Mis Reservas</a>
+            <a href="/src/views/contacto.html" class="text-gray-600 hover:text-blue-600 transition-colors duration-200">Contacto</a>
+          </div>
+
+          <!-- 3. ADMIN Y SESIÓN -->
+          <div class="hidden md:flex items-center space-x-6 text-sm">
+            
+          <!-- Admin Panel Desktop -->
+          <div id="admin-panel" class="hidden relative">
+
+            <button
+              type="button"
+              id="admin-panel-button"
+              class="flex items-center text-gray-600 font-medium hover:text-blue-600 transition-colors duration-200"
+            >
+              <span>Administración</span>
+              <svg class="h-4 w-4 ml-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+              </svg>
+            </button>
+
+            <div id="admin-panel-menu"
+              class="hidden absolute right-0 top-full mt-3 w-48 bg-white rounded-md shadow-lg border border-gray-100 z-50 py-1">
+              <a href="/src/views/aviones.html"
+                class="block px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-blue-600"> Aviones </a>
+
+              <a href="/src/views/aerolineas.html"
+                class="block px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-blue-600"> Aerolíneas </a>
+
+              <a href="/src/views/fabricantes.html"
+                class="block px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-blue-600"> Fabricantes </a>
+
+              <a href="/src/views/usuarios.html"
+                class="block px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-blue-600"> Usuarios </a>
+
+              <a href="/src/views/reservas.html"
+                class="block px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-blue-600"> Reservas </a>
+            </div>
+          </div>
+
+            <!-- Botón Iniciar Sesión Desktop -->
+            <a href="/src/views/login.html" id="login-button" class="bg-blue-600 text-white px-5 py-2 rounded-md hover:bg-blue-700 transition-colors duration-200 font-medium">Iniciar Sesión</a>
+            
+            <!-- Menú de Usuario Logueado (Minimalista) -->
+            <div id="user-menu" class="hidden items-center space-x-6">
+              <a href="/src/views/perfil.html" class="flex items-center text-gray-600 hover:text-blue-600 font-medium transition-colors duration-200">
+                Mi Perfil
+              </a>
+              <!-- Línea sutil -->
+              <span class="w-px h-4 bg-gray-300"></span>
+              <button id="logout-button" class="flex items-center text-red-800 hover:text-red-600 font-medium transition-colors duration-200 group">
+                Cerrar Sesión
+                <svg class="h-4 w-4 ml-1.5 text-red-800 group-hover:text-red-500 transition-colors duration-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- BOTÓN MENÚ MÓVIL -->
+          <div class="md:hidden flex items-center">
+            <button id="mobile-menu-button" class="text-gray-600 hover:text-blue-600 focus:outline-none transition-colors">
+              <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path id="menu-icon-path" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- MENÚ MÓVIL DESPLEGABLE -->
+      <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 shadow-lg">
+        <div class="px-6 py-5 flex flex-col space-y-4 text-sm font-medium">
+          <a href="/src/views/home.html" class="text-gray-600 hover:text-blue-600">Explorar</a>
+          <a href="/src/views/consulta-vuelos.html" class="text-gray-600 hover:text-blue-600">Vuelos</a>
+          <a href="/src/views/mis-reservas.html" id="mobile-nav-mis-reservas" class="hidden text-gray-600 hover:text-blue-600">Mis Reservas</a>
+          <a href="/src/views/contacto.html" class="text-gray-600 hover:text-blue-600">Contacto</a>
+
+          <!-- Admin Panel Móvil -->
+          <div id="mobile-admin-panel" class="hidden flex-col space-y-3 pt-4 border-t border-gray-100">
+            <span class="text-gray-400 uppercase tracking-wider text-xs font-semibold">Administración</span>
+            <a href="/src/views/aviones.html" class="text-gray-600 hover:text-blue-600">Aviones</a>
+            <a href="/src/views/aerolineas.html" class="text-gray-600 hover:text-blue-600">Aerolíneas</a>
+            <a href="/src/views/fabricantes.html" class="text-gray-600 hover:text-blue-600">Fabricantes</a>
+            <a href="/src/views/usuarios.html" class="text-gray-600 hover:text-blue-600">Usuarios</a>
+            <a href="/src/views/reservas.html" class="text-gray-600 hover:text-blue-600">Reservas</a>
+          </div>
+
+          <!-- Botones Sesión Móvil -->
+          <div class="pt-4 border-t border-gray-100 flex flex-col space-y-4">
+            <!-- Iniciar Sesión Móvil -->
+            <a href="/src/views/login.html" id="mobile-login-button" class="bg-blue-600 text-white text-center px-5 py-2.5 rounded-md hover:bg-blue-700 transition-colors">Iniciar Sesión</a>
+            
+            <!-- Menú Logueado Móvil -->
+            <div id="mobile-user-menu" class="hidden flex-col space-y-4">
+              <a href="/src/views/perfil.html" class="text-gray-600 hover:text-blue-600">Mi Perfil</a>
+              <button id="mobile-logout-button" class="flex items-center text-gray-600 hover:text-red-600 transition-colors text-left">
+                Cerrar Sesión
+                <svg class="h-4 w-4 ml-1.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- JavaScript para manejar la interfaz -->
+    <script>
+      // 1. MENU MÓVIL
+      const btnMobileMenu = document.getElementById('mobile-menu-button');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const iconPath = document.getElementById('menu-icon-path');
+
+      btnMobileMenu.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+        if (mobileMenu.classList.contains('hidden')) {
+          iconPath.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
+        } else {
+          iconPath.setAttribute('d', 'M6 18L18 6M6 6l12 12');
+        }
+      });
+
+      // 2. LÓGICA DE SESIÓN
+      function setUIStatus(isLoggedIn, isAdmin = false) {
+        const loginBtn = document.getElementById('login-button');
+        const userMenu = document.getElementById('user-menu');
+        const navMisReservas = document.getElementById('nav-mis-reservas');
+        const adminPanel = document.getElementById('admin-panel');
+
+        const mobileLoginBtn = document.getElementById('mobile-login-button');
+        const mobileUserMenu = document.getElementById('mobile-user-menu');
+        const mobileNavMisReservas = document.getElementById('mobile-nav-mis-reservas');
+        const mobileAdminPanel = document.getElementById('mobile-admin-panel');
+
+        if (isLoggedIn) {
+          loginBtn.classList.add('hidden');
+          mobileLoginBtn.classList.add('hidden');
+          
+          userMenu.classList.remove('hidden');
+          userMenu.classList.add('flex');
+          mobileUserMenu.classList.remove('hidden');
+          mobileUserMenu.classList.add('flex');
+
+          navMisReservas.classList.remove('hidden');
+          mobileNavMisReservas.classList.remove('hidden');
+
+          if (isAdmin) {
+            adminPanel.classList.remove('hidden');
+            mobileAdminPanel.classList.remove('hidden');
+            mobileAdminPanel.classList.add('flex');
+          }
+        } else {
+          userMenu.classList.add('hidden');
+          userMenu.classList.remove('flex');
+          mobileUserMenu.classList.add('hidden');
+          mobileUserMenu.classList.remove('flex');
+          
+          loginBtn.classList.remove('hidden');
+          mobileLoginBtn.classList.remove('hidden');
+
+          navMisReservas.classList.add('hidden');
+          mobileNavMisReservas.classList.add('hidden');
+          adminPanel.classList.add('hidden');
+          mobileAdminPanel.classList.add('hidden');
+          mobileAdminPanel.classList.remove('flex');
+        }
+      }
+
+      setUIStatus(true, true); 
+    </script>
+
+    <header
+      class="relative h-screen bg-cover bg-center"
+      style="
+        background-image: url('https://cdn.pixabay.com/video/2024/03/28/205873_tiny.jpg');
+      "
+    >
+      <div class="absolute inset-0 bg-black opacity-50"></div>
+      <div
+        class="container mx-auto px-6 h-full flex flex-col items-center justify-center text-center text-white relative z-1"
+      >
+        <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-4">
+          Encuentra Tu Próximo Destino
+        </h1>
+        <p class="text-lg md:text-xl mb-8 max-w-2xl">
+          Reserva vuelos baratos a cientos de destinos en todo el mundo. El
+          viaje de tus sueños está a solo un clic de distancia.
+        </p>
+
+        <!-- Botón central que lleva a consulta-vuelos -->
+        <a
+          href="/src/views/consulta-vuelos.html"
+          class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-lg shadow-lg text-lg transition duration-300"
+        >
+          Buscar vuelos
+        </a>
+      </div>
+    </header>
+
+    <main class="py-16">
+      <div class="container mx-auto px-6">
+        <h2 class="text-3xl font-bold text-center mb-2">Destinos Populares</h2>
+        <p class="text-center text-gray-600 mb-12">
+          Explora lugares increíbles con nuestras mejores ofertas.
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div
+            class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300"
+          >
+            <img
+              src="https://www.viajabonito.mx/wp-content/uploads/2021/07/Lugares-turisticos-Paris-Subportada.jpg"
+              alt="París, Francia"
+              class="w-full h-56 object-cover"
+            />
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-2">París, Francia</h3>
+              <p class="text-gray-600 mb-4">
+                La ciudad del amor te espera con su icónica arquitectura y
+                cultura.
+              </p>
+              <div class="flex justify-between items-center">
+                <span class="text-2xl font-bold text-blue-600">$599</span>
+                <a
+                  href="/src/views/consulta-vuelos.html"
+                  class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold hover:bg-blue-200 transition duration-300"
+                  >Ver Vuelos</a
+                >
+              </div>
+            </div>
+          </div>
+          <div
+            class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1506929562872-bb421503ef21?q=80&w=1968&auto=format&fit=crop"
+              alt="Bali, Indonesia"
+              class="w-full h-56 object-cover"
+            />
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-2">Bali, Indonesia</h3>
+              <p class="text-gray-600 mb-4">
+                Relájate en playas paradisíacas y explora templos ancestrales.
+              </p>
+              <div class="flex justify-between items-center">
+                <span class="text-2xl font-bold text-blue-600">$750</span>
+                <a
+                  href="/src/views/consulta-vuelos.html"
+                  class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold hover:bg-blue-200 transition duration-300"
+                  >Ver Vuelos</a
+                >
+              </div>
+            </div>
+          </div>
+          <div
+            class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1548013146-72479768bada?q=80&w=1776&auto=format&fit=crop"
+              alt="Agra, India"
+              class="w-full h-56 object-cover"
+            />
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-2">Agra, India</h3>
+              <p class="text-gray-600 mb-4">
+                Descubre la majestuosidad del Taj Mahal y la rica historia
+                mogol.
+              </p>
+              <div class="flex justify-between items-center">
+                <span class="text-2xl font-bold text-blue-600">$820</span>
+                <a
+                  href="/src/views/consulta-vuelos.html"
+                  class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold hover:bg-blue-200 transition duration-300"
+                  >Ver Vuelos</a
+                >
+              </div>
+            </div>
+          </div>
+          <div
+            class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300"
+          >
+            <img
+              src="https://img2.rtve.es/i/?w=1600&i=1695120582959.jpg"
+              alt="París, Francia"
+              class="w-full h-56 object-cover"
+            />
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-2">Nueva York, EE.UU</h3>
+              <p class="text-gray-600 mb-4">
+                Vive la vibrante energía de la Gran Manzana y sus icónicos
+                rascacielos.
+              </p>
+              <div class="flex justify-between items-center">
+                <span class="text-2xl font-bold text-blue-600">$550</span>
+                <a
+                  href="/src/views/consulta-vuelos.html"
+                  class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold hover:bg-blue-200 transition duration-300"
+                  >Ver Vuelos</a
+                >
+              </div>
+            </div>
+          </div>
+          <div
+            class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300"
+          >
+            <img
+              src="https://www.travelsafe-abroad.com/wp-content/uploads/Shanghai-Skyline-Night-Big-Bus-Tours-01-2017-1.jpg"
+              alt="Bali, Indonesia"
+              class="w-full h-56 object-cover"
+            />
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-2">Shangái, China</h3>
+              <p class="text-gray-600 mb-4">
+                Descubre la mezcla de tradición y modernidad en la ciudad más
+                dinámica de China.
+              </p>
+              <div class="flex justify-between items-center">
+                <span class="text-2xl font-bold text-blue-600">$950</span>
+                <a
+                  href="/src/views/consulta-vuelos.html"
+                  class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold hover:bg-blue-200 transition duration-300"
+                  >Ver Vuelos</a
+                >
+              </div>
+            </div>
+          </div>
+          <div
+            class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300"
+          >
+            <img
+              src="https://blog.vivaaerobus.com/wp-content/uploads/2019/12/Mejores-Playas-de-Canc%C3%BAn.jpg"
+              alt="Agra, India"
+              class="w-full h-56 object-cover"
+            />
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-2">Cancún, México</h3>
+              <p class="text-gray-600 mb-4">
+                Explora las hermosas playas de arena blanca y sumérgete en la
+                cultura maya.
+              </p>
+              <div class="flex justify-between items-center">
+                <span class="text-2xl font-bold text-blue-600">$620</span>
+                <a
+                  href="/src/views/consulta-vuelos.html"
+                  class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold hover:bg-blue-200 transition duration-300"
+                  >Ver Vuelos</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- SECCIÓN: CÓMO FUNCIONA -->
+        <div class="container mx-auto px-6 max-w-5xl my-24">
+          <div class="text-center mb-20">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4 tracking-tight">
+              Reserva en 3 simples pasos
+            </h2>
+            <p class="text-gray-500 text-base max-w-2xl mx-auto">
+              Una experiencia ágil, transparente y diseñada exclusivamente para ti.
+            </p>
+          </div>
+          <div class="relative">
+            <div class="hidden md:block absolute top-[3rem] left-[16%] right-[16%] h-[2px] bg-gray-200 z-0 transition-all duration-500"></div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 relative z-10">
+              
+              <!-- Paso 1 -->
+              <div class="group flex flex-col items-center text-center cursor-default">
+                <div class="w-24 h-24 bg-blue-800 border-2 border-blue-900 text-white rounded-full flex items-center justify-center mb-8 relative z-10 group-hover:border-blue-600 group-hover:bg-blue-600 group-hover:text-white group-hover:-translate-y-2 group-hover:shadow-xl transition-all duration-500">
+                  <svg class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  </svg>
+                </div>
+                <div class="transform group-hover:-translate-y-1 transition-all duration-500">
+                  <span class="block text-4xl font-black text-gray-900 mb-3 tracking-tighter">01</span>
+                  <h3 class="text-xl font-bold text-gray-900 mb-3">Busca tu destino</h3>
+                  <p class="text-gray-500 text-sm leading-relaxed px-2">
+                    Ingresa tu ruta y fechas. Nuestro sistema filtrará instantáneamente las mejores opciones de vuelo global.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Paso 2 -->
+              <div class="group flex flex-col items-center text-center cursor-default">
+                <div class="w-24 h-24 bg-blue-800 border-2 border-blue-900 text-white rounded-full flex items-center justify-center mb-8 relative z-10 group-hover:border-blue-600 group-hover:bg-blue-600 group-hover:text-white group-hover:-translate-y-2 group-hover:shadow-xl transition-all duration-500">
+                  <svg class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <div class="transform group-hover:-translate-y-1 transition-all duration-500">
+                  <span class="block text-4xl font-black text-gray-900 mb-3 tracking-tighter">02</span>
+                  <h3 class="text-xl font-bold text-gray-900 mb-3">Compara y elige</h3>
+                  <p class="text-gray-500 text-sm leading-relaxed px-2">
+                    Analiza tarifas, aerolíneas y equipaje incluido con total transparencia, sin cargos ocultos de última hora.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Paso 3 -->
+              <div class="group flex flex-col items-center text-center cursor-default">
+                <div class="w-24 h-24 bg-blue-800 border-2 border-blue-900 text-white rounded-full flex items-center justify-center mb-8 relative z-10 group-hover:border-blue-600 group-hover:bg-blue-600 group-hover:text-white group-hover:-translate-y-2 group-hover:shadow-xl transition-all duration-500">
+                  <svg class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <div class="transform group-hover:-translate-y-1 transition-all duration-500">
+                  <span class="block text-4xl font-black text-gray-900 mb-3 tracking-tighter">03</span>
+                  <h3 class="text-xl font-bold text-gray-900 mb-3">Reserva segura</h3>
+                  <p class="text-gray-500 text-sm leading-relaxed px-2">
+                    Finaliza tu pago en un entorno cifrado. Tus boletos electrónicos llegarán directamente a tu correo en segundos.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 text-white py-12 border-t border-slate-800">
+      <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+          <div>
+            <div class="flex items-center mb-4">
+              <svg class="h-6 w-6 text-blue-500 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+              </svg>
+              <h4 class="text-xl font-bold tracking-tight">AereoSky</h4>
+            </div>
+            <p class="text-gray-400 text-sm leading-relaxed">
+              Tu compañero de viaje ideal. Hacemos que la reserva de vuelos sea
+              simple, rápida y asequible.
+            </p>
+          </div>
+
+          <div>
+            <h4 class="text-lg font-semibold mb-4 text-gray-100">Enlaces Rápidos</h4>
+            <ul class="space-y-3 text-sm text-gray-400">
+              <li><a href="/src/views/home.html" class="hover:text-blue-400 transition-colors">Inicio</a></li>
+              <li><a href="/src/views/consulta-vuelos.html" class="hover:text-blue-400 transition-colors">Vuelos</a></li>
+              <li id="footer-mis-reservas" class="hidden"><a href="/src/views/mis-reservas.html" class="hover:text-blue-400 transition-colors">Mis Reservas</a></li>
+              <li><a href="/src/views/contacto.html" class="hover:text-blue-400 transition-colors">Contacto</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="text-lg font-semibold mb-4 text-gray-100">Contacto</h4>
+            <ul class="space-y-3 text-sm text-gray-400">
+              <li>Email: soporte@aereosky.com</li>
+              <li>Teléfono: +593 985 514 590</li>
+              <li>Dirección: Machala, Ecuador</li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="text-lg font-semibold mb-4 text-gray-100">Síguenos</h4>
+            <div class="flex space-x-4">
+              <a href="#" class="bg-slate-800 p-2 rounded-full text-gray-400 hover:text-white hover:bg-blue-600 transition-colors">
+                <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M22.46,6C21.69,6.35 20.86,6.58 20,6.69C20.88,6.16 21.56,5.32 21.88,4.31C21.05,4.81 20.13,5.16 19.16,5.36C18.37,4.5 17.26,4 16,4C13.65,4 11.73,5.92 11.73,8.29C11.73,8.63 11.77,8.96 11.84,9.28C8.28,9.09 5.11,7.38 2.9,4.79C2.53,5.42 2.33,6.16 2.33,6.94C2.33,8.43 3.08,9.75 4.18,10.53C3.49,10.51 2.82,10.31 2.22,10V10.06C2.22,12.23 3.78,14.05 5.9,14.45C5.55,14.54 5.18,14.59 4.8,14.59C4.54,14.59 4.28,14.56 4.03,14.51C4.6,16.28 6.26,17.56 8.24,17.6C6.68,18.81 4.77,19.53 2.72,19.53C2.38,19.53 2.05,19.51 1.72,19.46C3.72,20.78 6.11,21.56 8.75,21.56C16.01,21.56 20.24,15.71 20.24,10.65C20.24,10.46 20.24,10.27 20.23,10.08C21.02,9.49 21.8,8.78 22.46,7.92V6Z"/></svg>
+              </a>
+              <a href="#" class="bg-slate-800 p-2 rounded-full text-gray-400 hover:text-white hover:bg-blue-600 transition-colors">
+                <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.32 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96C18.34 21.21 22 17.06 22 12.06C22 6.53 17.5 2.04 12 2.04Z"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="border-t border-slate-800 pt-6 text-center text-gray-500 text-sm flex flex-col md:flex-row justify-between items-center">
+          <p>&copy; 2026 AereoSky. Todos los derechos reservados.</p>
+          <div class="mt-4 md:mt-0 space-x-4">
+            <a href="#" class="hover:text-gray-300">Términos</a>
+            <a href="#" class="hover:text-gray-300">Privacidad</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Mostrar/ocultar "Mis Reservas" y sincronizar navbar/footer según si hay sesión
+      (function () {
+        let user = null;
+        try {
+          const raw = localStorage.getItem("currentUser");
+          if (raw) user = JSON.parse(raw);
+        } catch (e) {}
+
+        const navMisReservas = document.getElementById("nav-mis-reservas");
+        const footerMisReservas = document.getElementById("footer-mis-reservas");
+        const loginBtn = document.getElementById("login-button");
+        const userMenu = document.getElementById("user-menu");
+
+        if (user && user.id_usuario) {
+          // usuario autenticado
+          if (navMisReservas) navMisReservas.classList.remove("hidden");
+          if (footerMisReservas) footerMisReservas.classList.remove("hidden");
+
+          if (loginBtn) loginBtn.classList.add("hidden");
+          if (userMenu) userMenu.classList.remove("hidden");
+        } else {
+          // usuario NO autenticado
+          if (navMisReservas) navMisReservas.classList.add("hidden");
+          if (footerMisReservas) footerMisReservas.classList.add("hidden");
+
+          if (loginBtn) loginBtn.classList.remove("hidden");
+          if (userMenu) userMenu.classList.add("hidden");
+        }
+      })();
+    </script>
+  </body>
+</html>
