@@ -216,8 +216,6 @@
           mobileAdminPanel.classList.remove('flex');
         }
       }
-
-      setUIStatus(true, true); 
     </script>
 
     <!-- CONTENIDO PRINCIPAL (SIN CAMBIOS) -->
@@ -395,7 +393,7 @@
 
       async function cargarVuelo(id) {
         try {
-          var res = await fetch("http://localhost:3000/vuelo/" + id + "/detalle");
+          var res = await fetch("https://reserva-vuelos-backend.onrender.com/vuelo/" + id + "/detalle");
           var data = await res.json();
 
           if (!res.ok) {

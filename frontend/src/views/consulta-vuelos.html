@@ -217,8 +217,6 @@
           mobileAdminPanel.classList.remove('flex');
         }
       }
-
-      setUIStatus(true, true); 
     </script>
 
     <!-- MAIN -->
@@ -720,7 +718,7 @@
       // ======================
       async function cargarCiudades() {
         try {
-          var res = await fetch("http://localhost:3000/ciudades");
+          var res = await fetch("https://reserva-vuelos-backend.onrender.com/ciudades");
           var data = await res.json();
 
           if (!res.ok) {
@@ -756,7 +754,7 @@
 
       async function cargarCategorias() {
         try {
-          var res = await fetch("http://localhost:3000/categorias-asiento");
+          var res = await fetch("https://reserva-vuelos-backend.onrender.com/categorias-asiento");
           var data = await res.json();
           if (!res.ok) return;
 
@@ -779,7 +777,7 @@
       // Aerolíneas para checkboxes
       async function cargarAerolineas() {
         try {
-          var res = await fetch("http://localhost:3000/aerolineas");
+          var res = await fetch("https://reserva-vuelos-backend.onrender.com/aerolineas");
           var data = await res.json();
           if (!res.ok) return;
 
@@ -970,7 +968,7 @@
           params.append("fecha", baseCriteria.fecha);
         }
 
-        var url = "http://localhost:3000/vuelos";
+        var url = "https://reserva-vuelos-backend.onrender.com/vuelos";
         if (params.toString().length > 0) {
           url += "?" + params.toString();
         }

@@ -18,4 +18,4 @@ app.use('/', require('./routes'));
 
 
 // Servidor
-app.listen(3000, () => console.log('Server up on http://localhost:3000'));
+app.listen(3000, () => console.log('`Server running on https://reserva-vuelos-backend.onrender.com'));
