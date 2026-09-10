@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,39 +10,43 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
 
     <style>
-      body {
-        font-family: "Poppins", sans-serif;
+      @keyframes heroFadeUp {
+        from { opacity: 0; transform: translateY(16px); }
+        to { opacity: 1; transform: translateY(0); }
       }
-      .hero-bg-gradient {
-        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+      @keyframes scrollCue {
+        0%, 100% { transform: translateY(0); opacity: 0.6; }
+        50% { transform: translateY(6px); opacity: 1; }
       }
+      .hide-scrollbar::-webkit-scrollbar { display: none; }
+      .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
   </head>
-  <body class="bg-gray-100 text-gray-800">
+  <body class="bg-gray-100 text-gray-800" style="font-family: 'Poppins', sans-serif;">
   <!-- NAVBAR -->
-    <nav class="bg-white shadow-sm fixed w-full z-20 top-0 border-b border-gray-100">
+    <nav class="bg-zinc-950 shadow-sm fixed w-full z-20 top-0 left-0 border-b border-gray-800">
       <div class="container mx-auto px-6 py-4">
         <div class="flex items-center justify-between">
-          
+                   
           <!-- 1. LOGO -->
           <div class="flex items-center">
             <svg class="h-8 w-8 text-blue-600 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
             </svg>
-            <a href="/src/views/home.html" class="text-2xl font-bold text-gray-800 tracking-tight">AereoSky</a>
+            <a href="/src/views/home.html" class="text-2xl font-bold text-white tracking-tight">AereoSky</a>
           </div>
 
           <!-- 2. ENLACES PRINCIPALES -->
           <div class="hidden md:flex items-center space-x-8 text-sm font-medium">
-            <a href="/src/views/home.html" class="text-gray-600 hover:text-blue-600 transition-colors duration-200">Explorar</a>
-            <a href="/src/views/consulta-vuelos.html" class="text-gray-600 hover:text-blue-600 transition-colors duration-200">Vuelos</a>
-            <a href="/src/views/mis-reservas.html" id="nav-mis-reservas" class="hidden text-gray-600 hover:text-blue-600 transition-colors duration-200">Mis Reservas</a>
-            <a href="/src/views/contacto.html" class="text-gray-600 hover:text-blue-600 transition-colors duration-200">Contacto</a>
+            <a href="/src/views/home.html" class="text-white hover:text-blue-600 transition-colors duration-200">Explorar</a>
+            <a href="/src/views/consulta-vuelos.html" class="text-white hover:text-blue-600 transition-colors duration-200">Vuelos</a>
+            <a href="/src/views/mis-reservas.html" id="nav-mis-reservas" class="hidden text-white hover:text-blue-600 transition-colors duration-200">Mis Reservas</a>
+            <a href="/src/views/contacto.html" class="text-white hover:text-blue-600 transition-colors duration-200">Contacto</a>
           </div>
 
           <!-- 3. ADMIN Y SESIÓN -->
@@ -54,7 +58,7 @@
             <button
               type="button"
               id="admin-panel-button"
-              class="flex items-center text-gray-600 font-medium hover:text-blue-600 transition-colors duration-200"
+              class="flex items-center text-white font-medium hover:text-blue-600 transition-colors duration-200"
             >
               <span>Administración</span>
               <svg class="h-4 w-4 ml-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -63,35 +67,35 @@
             </button>
 
             <div id="admin-panel-menu"
-              class="hidden absolute right-0 top-full mt-3 w-48 bg-white rounded-md shadow-lg border border-gray-100 z-50 py-1">
+              class="hidden absolute right-0 top-full mt-3 w-48 bg-gray-900 rounded-md shadow-lg">
               <a href="/src/views/aviones.html"
-                class="block px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-blue-600"> Aviones </a>
+                class="block px-4 py-2 text-white hover:text-blue-300"> Aviones </a>
 
               <a href="/src/views/aerolineas.html"
-                class="block px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-blue-600"> Aerolíneas </a>
+                class="block px-4 py-2 text-white hover:text-blue-300"> Aerolíneas </a>
 
               <a href="/src/views/fabricantes.html"
-                class="block px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-blue-600"> Fabricantes </a>
+                class="block px-4 py-2 text-white hover:text-blue-300"> Fabricantes </a>
 
               <a href="/src/views/usuarios.html"
-                class="block px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-blue-600"> Usuarios </a>
+                class="block px-4 py-2 text-white hover:text-blue-300"> Usuarios </a>
 
               <a href="/src/views/reservas.html"
-                class="block px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-blue-600"> Reservas </a>
+                class="block px-4 py-2 text-white hover:text-blue-300"> Reservas </a>
             </div>
           </div>
 
             <!-- Botón Iniciar Sesión Desktop -->
-            <a href="/src/views/login.html" id="login-button" class="bg-blue-600 text-white px-5 py-2 rounded-md hover:bg-blue-700 transition-colors duration-200 font-medium">Iniciar Sesión</a>
+            <a href="/src/views/login.html" id="login-button" class="bg-blue-900 text-white px-5 py-2 rounded-md hover:bg-blue-700 transition-colors duration-200 font-medium">Iniciar Sesión</a>
             
             <!-- Menú de Usuario Logueado (Minimalista) -->
             <div id="user-menu" class="hidden items-center space-x-6">
-              <a href="/src/views/perfil.html" class="flex items-center text-gray-600 hover:text-blue-600 font-medium transition-colors duration-200">
+              <a href="/src/views/perfil.html" class="flex items-center text-white hover:text-blue-600 font-medium transition-colors duration-200">
                 Mi Perfil
               </a>
               <!-- Línea sutil -->
               <span class="w-px h-4 bg-gray-300"></span>
-              <button id="logout-button" class="flex items-center text-red-800 hover:text-red-600 font-medium transition-colors duration-200 group">
+              <button id="logout-button" class="flex items-center text-red-200 hover:text-red-600 font-medium transition-colors duration-200 group">
                 Cerrar Sesión
                 <svg class="h-4 w-4 ml-1.5 text-red-800 group-hover:text-red-500 transition-colors duration-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
@@ -132,12 +136,12 @@
           <!-- Botones Sesión Móvil -->
           <div class="pt-4 border-t border-gray-100 flex flex-col space-y-4">
             <!-- Iniciar Sesión Móvil -->
-            <a href="/src/views/login.html" id="mobile-login-button" class="bg-blue-600 text-white text-center px-5 py-2.5 rounded-md hover:bg-blue-700 transition-colors">Iniciar Sesión</a>
+            <a href="/src/views/login.html" id="mobile-login-button" class="bg-blue-800 text-white text-center px-5 py-2.5 rounded-md hover:bg-blue-700 transition-colors">Iniciar Sesión</a>
             
             <!-- Menú Logueado Móvil -->
             <div id="mobile-user-menu" class="hidden flex-col space-y-4">
               <a href="/src/views/perfil.html" class="text-gray-600 hover:text-blue-600">Mi Perfil</a>
-              <button id="mobile-logout-button" class="flex items-center text-gray-600 hover:text-red-600 transition-colors text-left">
+              <button id="mobile-logout-button" class="flex items-center text-red-800 hover:text-red-600 transition-colors text-left">
                 Cerrar Sesión
                 <svg class="h-4 w-4 ml-1.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
@@ -149,246 +153,272 @@
       </div>
     </nav>
 
-    <!-- JavaScript para manejar la interfaz -->
-    <script>
-      // 1. MENU MÓVIL (Convertido a función directa a prueba de fallos)
-      function toggleMobileMenu() {
-        const mobileMenu = document.getElementById('mobile-menu');
-        const iconPath = document.getElementById('menu-icon-path');
-
-        if (mobileMenu) {
-          mobileMenu.classList.toggle('hidden');
-          if (mobileMenu.classList.contains('hidden')) {
-            iconPath.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
-          } else {
-            iconPath.setAttribute('d', 'M6 18L18 6M6 6l12 12');
-          }
-        }
-      }
-
-      // 2. LÓGICA DE SESIÓN
-      function setUIStatus(isLoggedIn, isAdmin = false) {
-        const loginBtn = document.getElementById('login-button');
-        const userMenu = document.getElementById('user-menu');
-        const navMisReservas = document.getElementById('nav-mis-reservas');
-        const adminPanel = document.getElementById('admin-panel');
-
-        const mobileLoginBtn = document.getElementById('mobile-login-button');
-        const mobileUserMenu = document.getElementById('mobile-user-menu');
-        const mobileNavMisReservas = document.getElementById('mobile-nav-mis-reservas');
-        const mobileAdminPanel = document.getElementById('mobile-admin-panel');
-
-        if (isLoggedIn) {
-          loginBtn.classList.add('hidden');
-          mobileLoginBtn.classList.add('hidden');
-          
-          userMenu.classList.remove('hidden');
-          userMenu.classList.add('flex');
-          mobileUserMenu.classList.remove('hidden');
-          mobileUserMenu.classList.add('flex');
-
-          navMisReservas.classList.remove('hidden');
-          mobileNavMisReservas.classList.remove('hidden');
-
-          if (isAdmin) {
-            adminPanel.classList.remove('hidden');
-            mobileAdminPanel.classList.remove('hidden');
-            mobileAdminPanel.classList.add('flex');
-          }
-        } else {
-          userMenu.classList.add('hidden');
-          userMenu.classList.remove('flex');
-          mobileUserMenu.classList.add('hidden');
-          mobileUserMenu.classList.remove('flex');
-          
-          loginBtn.classList.remove('hidden');
-          mobileLoginBtn.classList.remove('hidden');
-
-          navMisReservas.classList.add('hidden');
-          mobileNavMisReservas.classList.add('hidden');
-          adminPanel.classList.add('hidden');
-          mobileAdminPanel.classList.add('hidden');
-          mobileAdminPanel.classList.remove('flex');
-        }
-      }
-    </script>
-
     <header
-      class="relative h-screen bg-cover bg-center"
-      style="
-        background-image: url('https://cdn.pixabay.com/video/2024/03/28/205873_tiny.jpg');
-      "
+      class="relative min-h-screen bg-cover bg-center overflow-hidden"
+      style="background-image: url('https://cdn.pixabay.com/video/2024/03/28/205873_tiny.jpg');"
     >
-      <div class="absolute inset-0 bg-black opacity-50"></div>
-      <div
-        class="container mx-auto px-6 h-full flex flex-col items-center justify-center text-center text-white relative z-1"
-      >
-        <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-4">
-          Encuentra Tu Próximo Destino
+      <div class="absolute inset-0 bg-black/40 bg-gradient-to-b from-black/60 via-transparent to-black/70 backdrop-blur-[2px]"></div>
+      <div class="container mx-auto px-6 min-h-screen flex flex-col items-center justify-center text-center text-white relative z-10 pt-28 pb-16">
+        <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.08] tracking-tight mb-6 max-w-4xl opacity-0" style="animation: heroFadeUp 0.8s ease-out 0.1s forwards;">
+          Encuentra tu próximo destino
         </h1>
-        <p class="text-lg md:text-xl mb-8 max-w-2xl">
-          Reserva vuelos baratos a cientos de destinos en todo el mundo. El
-          viaje de tus sueños está a solo un clic de distancia.
+        <p class="text-base sm:text-lg md:text-xl mb-10 max-w-xl text-blue-50/90 leading-relaxed opacity-0" style="animation: heroFadeUp 0.8s ease-out 0.25s forwards;">
+          Compara tarifas de las mejores aerolíneas y reserva tu vuelo ideal
+          en minutos, sin sorpresas ni cargos ocultos.
         </p>
 
-        <!-- Botón central que lleva a consulta-vuelos -->
-        <a
-          href="/src/views/consulta-vuelos.html"
-          class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-lg shadow-lg text-lg transition duration-300"
-        >
-          Buscar vuelos
+        <!-- Llamados a la acción -->
+        <div class="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto mb-14 opacity-0" style="animation: heroFadeUp 0.8s ease-out 0.4s forwards;">
+          <a
+            href="/src/views/consulta-vuelos.html"
+            class="group inline-flex items-center justify-center gap-2 w-full sm:w-auto text-white font-semibold py-4 px-9 rounded-xl text-base sm:text-lg transition-all duration-300 bg-[linear-gradient(135deg,#2563eb_0%,#1d4ed8_100%)] shadow-[0_10px_30px_-8px_rgba(29,78,216,0.65)] hover:bg-[linear-gradient(135deg,#3b82f6_0%,#1e40af_100%)] hover:shadow-[0_14px_34px_-8px_rgba(29,78,216,0.8)]"
+          >
+            Buscar vuelos
+            <svg class="h-5 w-5 transition-transform duration-[350ms] ease-[ease] group-hover:translate-x-[3px] group-hover:-translate-y-[3px]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+          <a
+            href="#destinos-populares"
+            class="inline-flex items-center justify-center w-full sm:w-auto text-white font-medium py-4 px-9 rounded-xl text-base sm:text-lg transition-all duration-300 bg-[rgba(255,255,255,0.06)] border border-[rgba(255,255,255,0.35)] backdrop-blur-[6px] hover:bg-[rgba(255,255,255,0.14)] hover:border-[rgba(255,255,255,0.6)]"
+          >
+            Ver destinos
+          </a>
+        </div>
+
+        <!-- Indicadores de confianza -->
+        <div class="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 text-sm sm:text-base text-blue-50/90 opacity-0" style="animation: heroFadeUp 0.8s ease-out 0.55s forwards;">
+          <div class="flex items-center gap-2 pl-0">
+            <svg class="h-5 w-5 text-blue-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span>120+ destinos</span>
+          </div>
+          <div class="flex items-center gap-2 pl-8 border-l border-[rgba(255,255,255,0.2)]">
+            <svg class="h-5 w-5 text-blue-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span>Reserva en 2 minutos</span>
+          </div>
+          <div class="flex items-center gap-2 pl-8 border-l border-[rgba(255,255,255,0.2)]">
+            <svg class="h-5 w-5 text-blue-300" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.958a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.368 2.447a1 1 0 00-.363 1.118l1.287 3.957c.3.922-.755 1.688-1.538 1.118l-3.367-2.446a1 1 0 00-1.176 0l-3.367 2.446c-.783.57-1.838-.196-1.538-1.118l1.287-3.957a1 1 0 00-.363-1.118L2.813 9.385c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.286-3.958z" />
+            </svg>
+            <span>4.8/5 en satisfacción</span>
+          </div>
+        </div>
+
+        <!-- Indicador de scroll -->
+        <a href="#destinos-populares" class="absolute bottom-8 left-1/2 -translate-x-1/2 text-blue-50/80 hover:text-white transition-colors" aria-label="Ver destinos populares" style="animation: scrollCue 2s ease-in-out infinite;">
+          <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7" />
+          </svg>
         </a>
       </div>
     </header>
 
     <main class="py-16">
-      <div class="container mx-auto px-6">
-        <h2 class="text-3xl font-bold text-center mb-2">Destinos Populares</h2>
-        <p class="text-center text-gray-600 mb-12">
+      <div id="destinos-populares" class="container mx-auto px-6 scroll-mt-24">
+        <h2 class="text-3xl font-bold text-center mb-2" data-reveal style="opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease;">Destinos Populares</h2>
+        <p class="text-center text-gray-600 mb-12" data-reveal style="opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease; transition-delay:80ms;">
           Explora lugares increíbles con nuestras mejores ofertas.
         </p>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           <div
-            class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300"
+            class="group bg-white rounded-2xl shadow-md hover:shadow-2xl overflow-hidden transition-shadow duration-300" data-reveal style="opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease;"
           >
-            <img
-              src="https://www.viajabonito.mx/wp-content/uploads/2021/07/Lugares-turisticos-Paris-Subportada.jpg"
-              alt="París, Francia"
-              class="w-full h-56 object-cover"
-            />
+            <div class="relative h-56 overflow-hidden">
+              <img
+                src="https://www.viajabonito.mx/wp-content/uploads/2021/07/Lugares-turisticos-Paris-Subportada.jpg"
+                alt="París, Francia"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/5 to-transparent"></div>
+              <span class="absolute top-3 right-3 bg-white/90 text-blue-900 text-[11px] font-semibold uppercase tracking-wide px-3 py-1 rounded-full shadow-sm">Romántico</span>
+              <div class="absolute bottom-3 left-4 right-4 flex items-center gap-1.5 text-white">
+                <svg class="h-4 w-4 flex-shrink-0 drop-shadow" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                <h3 class="text-lg font-semibold drop-shadow">París, Francia</h3>
+              </div>
+            </div>
             <div class="p-6">
-              <h3 class="text-xl font-semibold mb-2">París, Francia</h3>
-              <p class="text-gray-600 mb-4">
+              <p class="text-gray-600 mb-5 text-sm leading-relaxed">
                 La ciudad del amor te espera con su icónica arquitectura y
                 cultura.
               </p>
               <div class="flex justify-between items-center">
-                <span class="text-2xl font-bold text-blue-600">$599</span>
+                <div class="flex flex-col">
+                  <span class="text-[11px] text-gray-400 font-medium tracking-wide uppercase">Desde</span>
+                  <span class="text-2xl font-bold text-blue-900 leading-none">$599<span class="text-xs font-medium text-gray-400 ml-1">/persona</span></span>
+                </div>
                 <a
                   href="/src/views/consulta-vuelos.html"
-                  class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold hover:bg-blue-200 transition duration-300"
-                  >Ver Vuelos</a
-                >
+                  class="inline-flex items-center gap-1.5 bg-gradient-to-r from-blue-800 to-blue-700 hover:from-blue-500 hover:to-blue-800 text-white text-sm font-semibold pl-4 pr-3.5 py-2 rounded-full shadow-md hover:shadow-lg transition-all duration-300 active:scale-95"
+                >Ver Vuelos<svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg></a>
               </div>
             </div>
           </div>
           <div
-            class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300"
+            class="group bg-white rounded-2xl shadow-md hover:shadow-2xl overflow-hidden transition-shadow duration-300" data-reveal style="opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease; transition-delay:80ms;"
           >
-            <img
-              src="https://images.unsplash.com/photo-1506929562872-bb421503ef21?q=80&w=1968&auto=format&fit=crop"
-              alt="Bali, Indonesia"
-              class="w-full h-56 object-cover"
-            />
+            <div class="relative h-56 overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1506929562872-bb421503ef21?q=80&w=1968&auto=format&fit=crop"
+                alt="Bali, Indonesia"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/5 to-transparent"></div>
+              <span class="absolute top-3 right-3 bg-white/90 text-blue-900 text-[11px] font-semibold uppercase tracking-wide px-3 py-1 rounded-full shadow-sm">Playas</span>
+              <div class="absolute bottom-3 left-4 right-4 flex items-center gap-1.5 text-white">
+                <svg class="h-4 w-4 flex-shrink-0 drop-shadow" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                <h3 class="text-lg font-semibold drop-shadow">Bali, Indonesia</h3>
+              </div>
+            </div>
             <div class="p-6">
-              <h3 class="text-xl font-semibold mb-2">Bali, Indonesia</h3>
-              <p class="text-gray-600 mb-4">
+              <p class="text-gray-600 mb-5 text-sm leading-relaxed">
                 Relájate en playas paradisíacas y explora templos ancestrales.
               </p>
               <div class="flex justify-between items-center">
-                <span class="text-2xl font-bold text-blue-600">$750</span>
+                <div class="flex flex-col">
+                  <span class="text-[11px] text-gray-400 font-medium tracking-wide uppercase">Desde</span>
+                  <span class="text-2xl font-bold text-blue-900 leading-none">$750<span class="text-xs font-medium text-gray-400 ml-1">/persona</span></span>
+                </div>
                 <a
                   href="/src/views/consulta-vuelos.html"
-                  class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold hover:bg-blue-200 transition duration-300"
-                  >Ver Vuelos</a
-                >
+                  class="inline-flex items-center gap-1.5 bg-gradient-to-r from-blue-800 to-blue-700 hover:from-blue-500 hover:to-blue-800 text-white text-sm font-semibold pl-4 pr-3.5 py-2 rounded-full shadow-md hover:shadow-lg transition-all duration-300 active:scale-95"
+                  >Ver Vuelos<svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg></a>
               </div>
             </div>
           </div>
           <div
-            class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300"
+            class="group bg-white rounded-2xl shadow-md hover:shadow-2xl overflow-hidden transition-shadow duration-300" data-reveal style="opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease; transition-delay:160ms;"
           >
-            <img
-              src="https://images.unsplash.com/photo-1548013146-72479768bada?q=80&w=1776&auto=format&fit=crop"
-              alt="Agra, India"
-              class="w-full h-56 object-cover"
-            />
+            <div class="relative h-56 overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1548013146-72479768bada?q=80&w=1776&auto=format&fit=crop"
+                alt="Agra, India"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/5 to-transparent"></div>
+              <span class="absolute top-3 right-3 bg-white/90 text-blue-900 text-[11px] font-semibold uppercase tracking-wide px-3 py-1 rounded-full shadow-sm">Patrimonio</span>
+              <div class="absolute bottom-3 left-4 right-4 flex items-center gap-1.5 text-white">
+                <svg class="h-4 w-4 flex-shrink-0 drop-shadow" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                <h3 class="text-lg font-semibold drop-shadow">Agra, India</h3>
+              </div>
+            </div>
             <div class="p-6">
-              <h3 class="text-xl font-semibold mb-2">Agra, India</h3>
-              <p class="text-gray-600 mb-4">
+              <p class="text-gray-600 mb-5 text-sm leading-relaxed">
                 Descubre la majestuosidad del Taj Mahal y la rica historia
                 mogol.
               </p>
               <div class="flex justify-between items-center">
-                <span class="text-2xl font-bold text-blue-600">$820</span>
+                <div class="flex flex-col">
+                  <span class="text-[11px] text-gray-400 font-medium tracking-wide uppercase">Desde</span>
+                  <span class="text-2xl font-bold text-blue-900 leading-none">$820<span class="text-xs font-medium text-gray-400 ml-1">/persona</span></span>
+                </div>
                 <a
                   href="/src/views/consulta-vuelos.html"
-                  class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold hover:bg-blue-200 transition duration-300"
-                  >Ver Vuelos</a
-                >
+                  class="inline-flex items-center gap-1.5 bg-gradient-to-r from-blue-800 to-blue-700 hover:from-blue-500 hover:to-blue-800 text-white text-sm font-semibold pl-4 pr-3.5 py-2 rounded-full shadow-md hover:shadow-lg transition-all duration-300 active:scale-95"
+                >Ver Vuelos<svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg></a>
               </div>
             </div>
           </div>
           <div
-            class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300"
+            class="group bg-white rounded-2xl shadow-md hover:shadow-2xl overflow-hidden transition-shadow duration-300" data-reveal style="opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease;"
           >
-            <img
-              src="https://img2.rtve.es/i/?w=1600&i=1695120582959.jpg"
-              alt="París, Francia"
-              class="w-full h-56 object-cover"
-            />
+            <div class="relative h-56 overflow-hidden">
+              <img
+                src="https://img2.rtve.es/i/?w=1600&i=1695120582959.jpg"
+                alt="París, Francia"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/5 to-transparent"></div>
+              <span class="absolute top-3 right-3 bg-white/90 text-blue-900 text-[11px] font-semibold uppercase tracking-wide px-3 py-1 rounded-full shadow-sm">Urbano</span>
+              <div class="absolute bottom-3 left-4 right-4 flex items-center gap-1.5 text-white">
+                <svg class="h-4 w-4 flex-shrink-0 drop-shadow" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                <h3 class="text-lg font-semibold drop-shadow">Nueva York, EE.UU</h3>
+              </div>
+            </div>
             <div class="p-6">
-              <h3 class="text-xl font-semibold mb-2">Nueva York, EE.UU</h3>
-              <p class="text-gray-600 mb-4">
+              <p class="text-gray-600 mb-5 text-sm leading-relaxed">
                 Vive la vibrante energía de la Gran Manzana y sus icónicos
                 rascacielos.
               </p>
               <div class="flex justify-between items-center">
-                <span class="text-2xl font-bold text-blue-600">$550</span>
+                <div class="flex flex-col">
+                  <span class="text-[11px] text-gray-400 font-medium tracking-wide uppercase">Desde</span>
+                  <span class="text-2xl font-bold text-blue-900 leading-none">$550<span class="text-xs font-medium text-gray-400 ml-1">/persona</span></span>
+                </div>
                 <a
                   href="/src/views/consulta-vuelos.html"
-                  class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold hover:bg-blue-200 transition duration-300"
-                  >Ver Vuelos</a
-                >
+                  class="inline-flex items-center gap-1.5 bg-gradient-to-r from-blue-800 to-blue-700 hover:from-blue-500 hover:to-blue-800 text-white text-sm font-semibold pl-4 pr-3.5 py-2 rounded-full shadow-md hover:shadow-lg transition-all duration-300 active:scale-95"
+                >Ver Vuelos<svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg></a>
               </div>
             </div>
           </div>
           <div
-            class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300"
+            class="group bg-white rounded-2xl shadow-md hover:shadow-2xl overflow-hidden transition-shadow duration-300" data-reveal style="opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease; transition-delay:80ms;"
           >
-            <img
-              src="https://www.travelsafe-abroad.com/wp-content/uploads/Shanghai-Skyline-Night-Big-Bus-Tours-01-2017-1.jpg"
-              alt="Bali, Indonesia"
-              class="w-full h-56 object-cover"
-            />
+            <div class="relative h-56 overflow-hidden">
+              <img
+                src="https://www.travelsafe-abroad.com/wp-content/uploads/Shanghai-Skyline-Night-Big-Bus-Tours-01-2017-1.jpg"
+                alt="Bali, Indonesia"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/5 to-transparent"></div>
+              <span class="absolute top-3 right-3 bg-white/90 text-blue-900 text-[11px] font-semibold uppercase tracking-wide px-3 py-1 rounded-full shadow-sm">Moderno</span>
+              <div class="absolute bottom-3 left-4 right-4 flex items-center gap-1.5 text-white">
+                <svg class="h-4 w-4 flex-shrink-0 drop-shadow" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                <h3 class="text-lg font-semibold drop-shadow">Shangái, China</h3>
+              </div>
+            </div>
             <div class="p-6">
-              <h3 class="text-xl font-semibold mb-2">Shangái, China</h3>
-              <p class="text-gray-600 mb-4">
+              <p class="text-gray-600 mb-5 text-sm leading-relaxed">
                 Descubre la mezcla de tradición y modernidad en la ciudad más
                 dinámica de China.
               </p>
               <div class="flex justify-between items-center">
-                <span class="text-2xl font-bold text-blue-600">$950</span>
+                <div class="flex flex-col">
+                  <span class="text-[11px] text-gray-400 font-medium tracking-wide uppercase">Desde</span>
+                  <span class="text-2xl font-bold text-blue-900 leading-none">$950<span class="text-xs font-medium text-gray-400 ml-1">/persona</span></span>
+                </div>
                 <a
                   href="/src/views/consulta-vuelos.html"
-                  class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold hover:bg-blue-200 transition duration-300"
-                  >Ver Vuelos</a
-                >
+                  class="inline-flex items-center gap-1.5 bg-gradient-to-r from-blue-800 to-blue-700 hover:from-blue-500 hover:to-blue-800 text-white text-sm font-semibold pl-4 pr-3.5 py-2 rounded-full shadow-md hover:shadow-lg transition-all duration-300 active:scale-95"
+                >Ver Vuelos<svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg></a>
               </div>
             </div>
           </div>
           <div
-            class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300"
+            class="group bg-white rounded-2xl shadow-md hover:shadow-2xl overflow-hidden transition-shadow duration-300" data-reveal style="opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease; transition-delay:160ms;"
           >
-            <img
-              src="https://blog.vivaaerobus.com/wp-content/uploads/2019/12/Mejores-Playas-de-Canc%C3%BAn.jpg"
-              alt="Agra, India"
-              class="w-full h-56 object-cover"
-            />
+            <div class="relative h-56 overflow-hidden">
+              <img
+                src="https://blog.vivaaerobus.com/wp-content/uploads/2019/12/Mejores-Playas-de-Canc%C3%BAn.jpg"
+                alt="Agra, India"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/5 to-transparent"></div>
+              <span class="absolute top-3 right-3 bg-white/90 text-blue-900 text-[11px] font-semibold uppercase tracking-wide px-3 py-1 rounded-full shadow-sm">Playas</span>
+              <div class="absolute bottom-3 left-4 right-4 flex items-center gap-1.5 text-white">
+                <svg class="h-4 w-4 flex-shrink-0 drop-shadow" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                <h3 class="text-lg font-semibold drop-shadow">Cancún, México</h3>
+              </div>
+            </div>
             <div class="p-6">
-              <h3 class="text-xl font-semibold mb-2">Cancún, México</h3>
-              <p class="text-gray-600 mb-4">
+              <p class="text-gray-600 mb-5 text-sm leading-relaxed">
                 Explora las hermosas playas de arena blanca y sumérgete en la
                 cultura maya.
               </p>
               <div class="flex justify-between items-center">
-                <span class="text-2xl font-bold text-blue-600">$620</span>
+                <div class="flex flex-col">
+                  <span class="text-[11px] text-gray-400 font-medium tracking-wide uppercase">Desde</span>
+                  <span class="text-2xl font-bold text-blue-900 leading-none">$620<span class="text-xs font-medium text-gray-400 ml-1">/persona</span></span>
+                </div>
                 <a
                   href="/src/views/consulta-vuelos.html"
-                  class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold hover:bg-blue-200 transition duration-300"
-                  >Ver Vuelos</a
-                >
+                  class="inline-flex items-center gap-1.5 bg-gradient-to-r from-blue-800 to-blue-700 hover:from-blue-500 hover:to-blue-800 text-white text-sm font-semibold pl-4 pr-3.5 py-2 rounded-full shadow-md hover:shadow-lg transition-all duration-300 active:scale-95"
+                >Ver Vuelos<svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg></a>
               </div>
             </div>
           </div>
@@ -397,10 +427,10 @@
       <!-- SECCIÓN: CÓMO FUNCIONA -->
         <div class="container mx-auto px-6 max-w-5xl my-24">
           <div class="text-center mb-20">
-            <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4 tracking-tight">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4 tracking-tight" data-reveal style="opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease;">
               Reserva en 3 simples pasos
             </h2>
-            <p class="text-gray-500 text-base max-w-2xl mx-auto">
+            <p class="text-gray-500 text-base max-w-2xl mx-auto" data-reveal style="opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease; transition-delay:80ms;">
               Una experiencia ágil, transparente y diseñada exclusivamente para ti.
             </p>
           </div>
@@ -409,7 +439,7 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-10 relative z-10">
               
               <!-- Paso 1 -->
-              <div class="group flex flex-col items-center text-center cursor-default">
+              <div class="group flex flex-col items-center text-center cursor-default" data-reveal style="opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease;">
                 <div class="w-24 h-24 bg-blue-800 border-2 border-blue-900 text-white rounded-full flex items-center justify-center mb-8 relative z-10 group-hover:border-blue-600 group-hover:bg-blue-600 group-hover:text-white group-hover:-translate-y-2 group-hover:shadow-xl transition-all duration-500">
                   <svg class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -425,7 +455,7 @@
               </div>
 
               <!-- Paso 2 -->
-              <div class="group flex flex-col items-center text-center cursor-default">
+              <div class="group flex flex-col items-center text-center cursor-default" data-reveal style="opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease; transition-delay:120ms;">
                 <div class="w-24 h-24 bg-blue-800 border-2 border-blue-900 text-white rounded-full flex items-center justify-center mb-8 relative z-10 group-hover:border-blue-600 group-hover:bg-blue-600 group-hover:text-white group-hover:-translate-y-2 group-hover:shadow-xl transition-all duration-500">
                   <svg class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -441,7 +471,7 @@
               </div>
 
               <!-- Paso 3 -->
-              <div class="group flex flex-col items-center text-center cursor-default">
+              <div class="group flex flex-col items-center text-center cursor-default" data-reveal style="opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease; transition-delay:240ms;">
                 <div class="w-24 h-24 bg-blue-800 border-2 border-blue-900 text-white rounded-full flex items-center justify-center mb-8 relative z-10 group-hover:border-blue-600 group-hover:bg-blue-600 group-hover:text-white group-hover:-translate-y-2 group-hover:shadow-xl transition-all duration-500">
                   <svg class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -458,6 +488,111 @@
             </div>
           </div>
         </div>
+        <div class="container mx-auto px-6 max-w-30xl mt-30 mb-6 overflow-hidden relative">
+        <div class="text-center mb-8">
+          <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4 tracking-tight" data-reveal style="opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease;">
+            Lo que dicen nuestros viajeros
+          </h2>
+          <p class="text-gray-500 text-base max-w-2xl mx-auto" data-reveal style="opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease; transition-delay:80ms;">
+            Experiencias reales de personas que ya volaron con AereoSky.
+          </p>
+        </div>
+
+        <div class="relative group" data-reveal style="opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease; transition-delay:160ms;">
+          
+          <button id="prev-review" class="absolute left-0 top-1/2 -translate-y-1/2 -ml-5 z-10 bg-white shadow-xl border border-slate-100 p-3 rounded-full text-blue-900 hover:bg-blue-800 hover:text-white transition-all duration-300 focus:outline-none opacity-0 group-hover:opacity-100 hidden md:block">
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" /></svg>
+          </button>
+
+          <div id="reviews-container" class="flex gap-6 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-8 pt-4 px-2 scroll-smooth">
+            
+            <div class="snap-center shrink-0 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] bg-white p-8 rounded-2xl shadow-sm border border-slate-200/80 hover:shadow-xl hover:border-slate-300 transition-all duration-300 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <div class="flex text-amber-400 gap-0.5">
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                  </div>
+                  <span class="text-blue-200 font-serif text-4xl leading-none select-none">“</span>
+                </div>
+                <p class="text-slate-600 mb-6 text-sm leading-relaxed font-normal">"Excelente servicio. Encontré el vuelo más barato en minutos y el proceso de compra fue súper seguro. Definitivamente volveré a usar AereoSky."</p>
+              </div>
+              <div class="border-t border-slate-100 pt-4">
+                <h4 class="font-bold text-slate-900 text-sm">Grace Herrera</h4>
+                <span class="inline-block text-[11px] font-medium text-blue-800 bg-slate-50 px-2.5 py-0.5 rounded-full mt-1">Turista</span>
+              </div>
+            </div>
+
+            <div class="snap-center shrink-0 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] bg-white p-8 rounded-2xl shadow-sm border border-slate-200/80 hover:shadow-xl hover:border-slate-300 transition-all duration-300 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <div class="flex text-amber-400 gap-0.5">
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    <svg class="w-4 h-4 fill-current text-slate-200" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                  </div>
+                  <span class="text-blue-200 font-serif text-4xl leading-none select-none">“</span>
+                </div>
+                <p class="text-slate-600 mb-6 text-sm leading-relaxed font-normal">"Muy transparente con los costos. Viajo constantemente por negocios y tener mis facturas y reservas a la mano es un gran alivio."</p>
+              </div>
+              <div class="border-t border-slate-100 pt-4">
+                <h4 class="font-bold text-slate-900 text-sm">Juan Pablo H.</h4>
+                <span class="inline-block text-[11px] font-medium text-blue-800 bg-slate-50 px-2.5 py-0.5 rounded-full mt-1">Viajero de Negocios</span>
+              </div>
+            </div>
+
+            <div class="snap-center shrink-0 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] bg-white p-8 rounded-2xl shadow-sm border border-slate-200/80 hover:shadow-xl hover:border-slate-300 transition-all duration-300 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <div class="flex text-amber-400 gap-0.5">
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                  </div>
+                  <span class="text-blue-200 font-serif text-4xl leading-none select-none">“</span>
+                </div>
+                <p class="text-slate-600 mb-6 text-sm leading-relaxed font-normal">"La plataforma es muy intuitiva y no tuve ningún problema para gestionar mi viaje a Cancún con mi familia. ¡Súper recomendados!"</p>
+              </div>
+              <div class="border-t border-slate-100 pt-4">
+                <h4 class="font-bold text-slate-900 text-sm">Eurídice Sophie</h4>
+                <span class="inline-block text-[11px] font-medium text-blue-800 bg-slate-50 px-2.5 py-0.5 rounded-full mt-1">Familia y Ocio</span>
+              </div>
+            </div>
+
+            <div class="snap-center shrink-0 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] bg-white p-8 rounded-2xl shadow-sm border border-slate-200/80 hover:shadow-xl hover:border-slate-300 transition-all duration-300 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <div class="flex text-amber-400 gap-0.5">
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    <svg class="w-4 h-4 fill-current text-slate-200" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                  </div>
+                  <span class="text-blue-200 font-serif text-4xl leading-none select-none">“</span>
+                </div>
+                <p class="text-slate-600 mb-6 text-sm leading-relaxed font-normal">"Buena experiencia en general. Me gustó poder comparar los horarios tan rápido. El único detalle es que me gustaría ver más opciones de aerolíneas."</p>
+              </div>
+              <div class="border-t border-slate-200 pt-4">
+                <h4 class="font-bold text-slate-900 text-sm">Saulo Araujo</h4>
+                <span class="inline-block text-[11px] font-medium text-blue-800 bg-slate-50 px-2.5 py-0.5 rounded-full mt-1">Mochilero</span>
+              </div>
+            </div>
+            
+          </div>
+
+          <button id="next-review" class="absolute right-0 top-1/2 -translate-y-1/2 -mr-5 z-10 bg-white shadow-xl border border-slate-100 p-3 rounded-full text-blue-800 hover:bg-blue-800 hover:text-white transition-all duration-300 focus:outline-none opacity-0 group-hover:opacity-100 hidden md:block">
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" /></svg>
+          </button>
+        </div>
+      </div>
     </main>
 
     <!-- FOOTER -->
@@ -518,36 +653,147 @@
       </div>
     </footer>
 
+    <!-- JavaScript para manejar la interfaz -->
     <script>
-      // Mostrar/ocultar "Mis Reservas" y sincronizar navbar/footer según si hay sesión
+      // 1. MENU MÓVIL 
+      function toggleMobileMenu() {
+        const mobileMenu = document.getElementById('mobile-menu');
+        const iconPath = document.getElementById('menu-icon-path');
+
+        if (mobileMenu) {
+          mobileMenu.classList.toggle('hidden');
+          if (mobileMenu.classList.contains('hidden')) {
+            iconPath.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
+          } else {
+            iconPath.setAttribute('d', 'M6 18L18 6M6 6l12 12');
+          }
+        }
+      }
+
+      // 2. LÓGICA DE SESIÓN Y RENDERIZADO 
       (function () {
         let user = null;
         try {
           const raw = localStorage.getItem("currentUser");
           if (raw) user = JSON.parse(raw);
-        } catch (e) {}
+        } catch (e) {
+          console.error("Error al leer el usuario del localStorage", e);
+        }
 
+        // Elementos Generales
         const navMisReservas = document.getElementById("nav-mis-reservas");
         const footerMisReservas = document.getElementById("footer-mis-reservas");
+        
+        // Elementos Desktop
         const loginBtn = document.getElementById("login-button");
         const userMenu = document.getElementById("user-menu");
+        const adminPanel = document.getElementById("admin-panel");
+        const logoutBtnDesktop = document.getElementById("logout-button");
+        
+        // Elementos Móvil
+        const mobileNavMisReservas = document.getElementById("mobile-nav-mis-reservas");
+        const mobileLoginBtn = document.getElementById("mobile-login-button");
+        const mobileUserMenu = document.getElementById("mobile-user-menu");
+        const mobileAdminPanel = document.getElementById("mobile-admin-panel");
+        const logoutBtnMobile = document.getElementById("mobile-logout-button");
 
         if (user && user.id_usuario) {
-          // usuario autenticado
+          // Usuario autenticado
           if (navMisReservas) navMisReservas.classList.remove("hidden");
           if (footerMisReservas) footerMisReservas.classList.remove("hidden");
 
           if (loginBtn) loginBtn.classList.add("hidden");
-          if (userMenu) userMenu.classList.remove("hidden");
+          if (userMenu) { userMenu.classList.remove("hidden"); userMenu.classList.add("flex"); }
+
+          if (mobileNavMisReservas) mobileNavMisReservas.classList.remove("hidden");
+          if (mobileLoginBtn) mobileLoginBtn.classList.add("hidden");
+          if (mobileUserMenu) { mobileUserMenu.classList.remove("hidden"); mobileUserMenu.classList.add("flex"); }
+
+          // Lógica administrador
+          const datosPersonales = user.usuario || user.user || user.data || user;
+          const rolDetectado = datosPersonales.id_rol || datosPersonales.rol || datosPersonales.rol_id || datosPersonales.idRol;
+          const isAdmin = (rolDetectado == 2 || rolDetectado === 'admin' || rolDetectado === 'Administrador'); 
+
+          if (isAdmin) {
+            if (adminPanel) adminPanel.classList.remove("hidden");
+            if (mobileAdminPanel) { 
+                mobileAdminPanel.classList.remove("hidden"); 
+                mobileAdminPanel.classList.add("flex"); 
+            }
+          }
         } else {
-          // usuario NO autenticado
+          // Usuario no autenticado
           if (navMisReservas) navMisReservas.classList.add("hidden");
           if (footerMisReservas) footerMisReservas.classList.add("hidden");
 
           if (loginBtn) loginBtn.classList.remove("hidden");
-          if (userMenu) userMenu.classList.add("hidden");
+          if (userMenu) { userMenu.classList.add("hidden"); userMenu.classList.remove("flex"); }
+
+          if (mobileNavMisReservas) mobileNavMisReservas.classList.add("hidden");
+          if (mobileLoginBtn) mobileLoginBtn.classList.remove("hidden");
+          if (mobileUserMenu) { mobileUserMenu.classList.add("hidden"); mobileUserMenu.classList.remove("flex"); }
+          
+          if (adminPanel) adminPanel.classList.add("hidden");
+          if (mobileAdminPanel) { mobileAdminPanel.classList.add("hidden"); mobileAdminPanel.classList.remove("flex"); }
+        }
+
+
+
+        // Cerrar Sesión
+        const handleLogout = function(e) {
+            e.preventDefault(); 
+            localStorage.removeItem("currentUser"); 
+            localStorage.removeItem("token"); 
+            window.location.href = "/src/views/home.html"; 
+        };
+        if (logoutBtnDesktop) logoutBtnDesktop.addEventListener("click", handleLogout);
+        if (logoutBtnMobile) logoutBtnMobile.addEventListener("click", handleLogout);
+
+      })();
+
+      // 3. ANIMACIONES AL HACER SCROLL
+      (function () {
+        const revealEls = document.querySelectorAll('[data-reveal]');
+        if (!revealEls.length) return;
+
+        const observer = new IntersectionObserver(function (entries, obs) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.style.opacity = '1';
+              entry.target.style.transform = 'translateY(0)';
+              obs.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+
+        revealEls.forEach(function (el) { observer.observe(el); });
+
+        //Comentarios
+        const reviewsContainer = document.getElementById('reviews-container');
+        const prevReview = document.getElementById('prev-review');
+        const nextReview = document.getElementById('next-review');
+
+        if (reviewsContainer && prevReview && nextReview) {
+          prevReview.addEventListener('click', () => {
+            const step = 340;
+            if (reviewsContainer.scrollLeft <= 10) {
+              reviewsContainer.scrollTo({ left: reviewsContainer.scrollWidth, behavior: 'smooth' });
+            } else {
+              reviewsContainer.scrollBy({ left: -step, behavior: 'smooth' });
+            }
+          });
+          nextReview.addEventListener('click', () => {
+            const step = 340;
+            const maxScroll = reviewsContainer.scrollWidth - reviewsContainer.clientWidth;
+            if (reviewsContainer.scrollLeft >= maxScroll - 10) {
+              reviewsContainer.scrollTo({ left: 0, behavior: 'smooth' });
+            } else {
+              reviewsContainer.scrollBy({ left: step, behavior: 'smooth' });
+            }
+          });
         }
       })();
+
     </script>
   </body>
 </html>

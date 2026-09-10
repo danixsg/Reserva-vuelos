@@ -12,18 +12,31 @@
       rel="stylesheet"
     />
 
-    <!-- Script de autenticación -->
     <script src="/src/services/auth.js" defer></script>
 
     <style>
       body {
         font-family: "Poppins", sans-serif;
       }
+      
+      /* Animaciones */
+      .fade-up {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      }
+      .fade-up.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .delay-100 { transition-delay: 100ms; }
+      .delay-200 { transition-delay: 200ms; }
+      .delay-300 { transition-delay: 300ms; }
     </style>
   </head>
   <body class="bg-gray-50">
-    <!-- NAVBAR (Intacto con funcionalidad CSS+JS minimalista) -->
-    <nav class="bg-white shadow-sm fixed w-full z-50 top-0 border-b border-gray-100">
+      <!-- NAVBAR -->
+    <nav class="bg-zinc-950 shadow-sm fixed w-full z-20 top-0 border-b border-gray-800">
       <div class="container mx-auto px-6 py-4">
         <div class="flex items-center justify-between">
           
@@ -32,49 +45,43 @@
             <svg class="h-8 w-8 text-blue-600 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
             </svg>
-            <a href="/src/views/home.html" class="text-2xl font-bold text-gray-800 tracking-tight">AereoSky</a>
+            <a href="/src/views/home.html" class="text-2xl font-bold text-white tracking-tight">AereoSky</a>
           </div>
 
           <!-- 2. ENLACES PRINCIPALES -->
           <div class="hidden md:flex items-center space-x-8 text-sm font-medium">
-            <a href="/src/views/home.html" class="text-gray-600 hover:text-blue-600 transition-colors duration-200">Explorar</a>
-            <a href="/src/views/consulta-vuelos.html" class="text-gray-600 hover:text-blue-600 transition-colors duration-200">Vuelos</a>
-            <a href="/src/views/mis-reservas.html" id="nav-mis-reservas" class="hidden text-gray-600 hover:text-blue-600 transition-colors duration-200">Mis Reservas</a>
-            <a href="/src/views/contacto.html" class="text-gray-600 hover:text-blue-600 transition-colors duration-200">Contacto</a>
+            <a href="/src/views/home.html" class="text-white hover:text-blue-600 transition-colors duration-200">Explorar</a>
+            <a href="/src/views/consulta-vuelos.html" class="text-white hover:text-blue-600 transition-colors duration-200">Vuelos</a>
+            <a href="/src/views/mis-reservas.html" id="nav-mis-reservas" class="hidden text-white hover:text-blue-600 transition-colors duration-200">Mis Reservas</a>
+            <a href="/src/views/contacto.html" class="text-white hover:text-blue-600 transition-colors duration-200">Contacto</a>
           </div>
-
-          <!-- 3. ADMIN Y SESIÓN -->
           <div class="hidden md:flex items-center space-x-6 text-sm">
             
-            <!-- Admin Panel Desktop -->
             <div id="admin-panel" class="hidden group relative py-2 cursor-pointer">
-              <div class="flex items-center text-gray-600 font-medium group-hover:text-blue-600 transition-colors duration-200">
+              <div class="flex items-center text-white font-medium group-hover:text-blue-600 transition-colors duration-200">
                 <span>Administración</span>
                 <svg class="h-4 w-4 ml-1 transform group-hover:rotate-180 transition-transform duration-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                 </svg>
               </div>
               
-              <!-- Dropdown Admin Desktop -->
-              <div class="absolute right-0 top-full mt-1 w-48 bg-white rounded-md shadow-xl border border-gray-100 z-50 py-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 translate-y-2 group-hover:translate-y-0">
-                <a href="/src/views/aviones.html" class="block px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-blue-600">Aviones</a>
-                <a href="/src/views/aerolineas.html" class="block px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-blue-600">Aerolíneas</a>
-                <a href="/src/views/fabricantes.html" class="block px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-blue-600">Fabricantes</a>
-                <a href="/src/views/usuarios.html" class="block px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-blue-600">Usuarios</a>
-                <a href="/src/views/reservas.html" class="block px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-blue-600">Reservas</a>
+              <div class="absolute right-0 top-full mt-1 w-48 bg-gray-900 rounded-md shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 translate-y-2 group-hover:translate-y-0">
+                <a href="/src/views/aviones.html" class="block px-4 py-2 text-white hover:text-blue-300">Aviones</a>
+                <a href="/src/views/aerolineas.html" class="block px-4 py-2 text-white hover:text-blue-300">Aerolíneas</a>
+                <a href="/src/views/fabricantes.html" class="block px-4 py-2 text-white hover:text-blue-300">Fabricantes</a>
+                <a href="/src/views/usuarios.html" class="block px-4 py-2 text-white hover:text-blue-300">Usuarios</a>
+                <a href="/src/views/reservas.html" class="block px-4 py-2 text-white hover:text-blue-300">Reservas</a>
               </div>
             </div>
 
-            <!-- Botón Iniciar Sesión Desktop -->
-            <a href="/src/views/login.html" id="login-button" class="bg-blue-600 text-white px-5 py-2 rounded-md hover:bg-blue-700 transition-colors duration-200 font-medium">Iniciar Sesión</a>
+            <a href="/src/views/login.html" id="login-button" class="bg-blue-900 text-white px-5 py-2 rounded-md hover:bg-blue-700 transition-colors duration-200 font-medium">Iniciar Sesión</a>
             
-            <!-- Menú de Usuario Logueado -->
             <div id="user-menu" class="hidden items-center space-x-6">
-              <a href="/src/views/perfil.html" class="flex items-center text-gray-600 hover:text-blue-600 font-medium transition-colors duration-200">
+              <a href="/src/views/perfil.html" class="flex items-center text-white hover:text-blue-600 font-medium transition-colors duration-200">
                 Mi Perfil
               </a>
               <span class="w-px h-4 bg-gray-300"></span>
-              <button id="logout-button" type="button" class="flex items-center text-red-800 hover:text-red-600 font-medium transition-colors duration-200 group">
+              <button id="logout-button" type="button" class="flex items-center text-red-300 hover:text-red-600 font-medium transition-colors duration-200 group">
                 Cerrar Sesión
                 <svg class="h-4 w-4 ml-1.5 text-red-800 group-hover:text-red-500 transition-colors duration-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
@@ -83,7 +90,6 @@
             </div>
           </div>
 
-          <!-- BOTÓN MENÚ MÓVIL -->
           <div class="md:hidden flex items-center">
             <button id="mobile-menu-button" type="button" class="text-gray-600 hover:text-blue-600 focus:outline-none transition-colors">
               <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -91,11 +97,9 @@
               </svg>
             </button>
           </div>
-
         </div>
       </div>
 
-      <!-- MENÚ MÓVIL DESPLEGABLE -->
       <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 shadow-lg">
         <div class="px-6 py-5 flex flex-col space-y-4 text-sm font-medium">
           <a href="/src/views/home.html" class="text-gray-600 hover:text-blue-600">Explorar</a>
@@ -103,7 +107,6 @@
           <a href="/src/views/mis-reservas.html" id="mobile-nav-mis-reservas" class="hidden text-gray-600 hover:text-blue-600">Mis Reservas</a>
           <a href="/src/views/contacto.html" class="text-gray-600 hover:text-blue-600">Contacto</a>
 
-          <!-- Admin Panel Móvil -->
           <div id="mobile-admin-panel" class="hidden flex-col space-y-3 pt-4 border-t border-gray-100">
             <span class="text-gray-400 uppercase tracking-wider text-xs font-semibold">Administración</span>
             <a href="/src/views/aviones.html" class="text-gray-600 hover:text-blue-600">Aviones</a>
@@ -113,13 +116,12 @@
             <a href="/src/views/reservas.html" class="text-gray-600 hover:text-blue-600">Reservas</a>
           </div>
 
-          <!-- Botones Sesión Móvil -->
           <div class="pt-4 border-t border-gray-100 flex flex-col space-y-4">
-            <a href="/src/views/login.html" id="mobile-login-button" class="bg-blue-600 text-white text-center px-5 py-2.5 rounded-md hover:bg-blue-700 transition-colors">Iniciar Sesión</a>
+            <a href="/src/views/login.html" id="mobile-login-button" class="bg-blue-900 text-white text-center px-5 py-2.5 rounded-md hover:bg-blue-700 transition-colors">Iniciar Sesión</a>
             
             <div id="mobile-user-menu" class="hidden flex-col space-y-4">
               <a href="/src/views/perfil.html" class="text-gray-600 hover:text-blue-600">Mi Perfil</a>
-              <button id="mobile-logout-button" type="button" class="flex items-center text-gray-600 hover:text-red-600 transition-colors text-left">
+              <button id="mobile-logout-button" type="button" class="flex items-center text-red-800 hover:text-red-600 transition-colors text-left">
                 Cerrar Sesión
                 <svg class="h-4 w-4 ml-1.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
@@ -131,7 +133,6 @@
       </div>
     </nav>
 
-    <!-- HEADER PRINCIPAL -->
     <header
       class="relative bg-cover bg-center pt-20"
       style="
@@ -140,7 +141,7 @@
       "
     >
       <div class="absolute inset-0 bg-black bg-opacity-30"></div>
-      <div class="container mx-auto h-full flex flex-col justify-center items-center text-center text-white relative z-10">
+      <div class="container mx-auto h-full flex flex-col justify-center items-center text-center text-white relative z-10 fade-up">
         <h1 class="text-5xl md:text-6xl font-extrabold leading-tight">
           Sobre Nosotros
         </h1>
@@ -151,13 +152,11 @@
       </div>
     </header>
 
-    <!-- CONTENIDO PRINCIPAL -->
     <main class="py-16 space-y-24">
       
-      <!-- SECCIÓN 1: NUESTRA MISIÓN -->
       <div class="container mx-auto px-6">
         <section class="grid lg:grid-cols-2 gap-12 items-center">
-          <div class="order-2 lg:order-1">
+          <div class="order-2 lg:order-1 fade-up">
             <h2 class="text-3xl font-bold text-gray-800 mb-6 relative inline-block">
               Nuestra Misión
               <span class="absolute -bottom-2 left-0 w-12 h-1 bg-blue-600 rounded"></span>
@@ -176,7 +175,7 @@
               recuerdos inolvidables.
             </p>
           </div>
-          <div class="order-1 lg:order-2">
+          <div class="order-1 lg:order-2 fade-up delay-200">
             <img
               src="https://www.shutterstock.com/image-illustration/empty-airport-terminal-lounge-airplane-600nw-758602234.jpg"
               alt="aeropuerto"
@@ -186,61 +185,124 @@
         </section>
       </div>
 
-      <!-- SECCIÓN 2: LO QUE NOS MUEVE -->
-      <section class="relative bg-cover bg-center bg-fixed py-24" style="background-image: url('https://us.123rf.com/450wm/aapsky/aapsky1803/aapsky180300205/98597399-avi%C3%B3n-de-pasajeros-volando-a-nivel-de-vuelo-alto-en-el-cielo-sobre-las-nubes-y-el-cielo-azul.jpg?ver=6');">
-        <div class="absolute inset-0 bg-slate-800/50 backdrop-blur-[3px]"></div>
+      <section
+        class="relative bg-cover bg-center py-24 overflow-hidden"
+        style="
+          background-image: url('https://us.123rf.com/450wm/aapsky/aapsky1803/aapsky180300205/98597399-avi%C3%B3n-de-pasajeros-volando-a-nivel-de-vuelo-alto-en-el-cielo-sobre-las-nubes-y-el-cielo-azul.jpg?ver=6');
+          background-attachment: fixed;
+        "
+      >
+        <div class="absolute inset-0 bg-slate-900/50"> </div>
+
         <div class="container mx-auto px-6 relative z-10 text-center">
-          <h2 class="text-3xl font-bold text-white mb-16">
+          <h2 class="text-3xl font-bold text-white mb-16 fade-up">
             Lo Que Nos Mueve
           </h2>
-          
+
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- Tarjeta 1 -->
-            <div class="bg-white/95 backdrop-blur-md p-10 rounded-2xl shadow-2xl transform hover:-translate-y-2 hover:shadow-blue-900/20 transition-all duration-300">
-              <div class="bg-blue-50 text-blue-600 rounded-2xl h-16 w-16 flex items-center justify-center mx-auto mb-6">
-                <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 20.417l.090.090a12.02 12.02 0 0017.82 0l.090-.090A12.02 12.02 0 0021.562 6.002z" />
+            <!-- Seguridad Primero -->
+            <div
+              class="bg-white/95 backdrop-blur-md p-10 rounded-2xl shadow-2xl transform hover:-translate-y-2 hover:shadow-blue-900/20 transition-all duration-300 fade-up delay-100"
+            >
+              <div
+                class="bg-blue-50 text-blue-600 rounded-2xl h-16 w-16 flex items-center justify-center mx-auto mb-6"
+              >
+                <svg
+                  class="h-8 w-8"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 20.417l.09.09a12.02 12.02 0 0017.82 0l.09-.09A12.02 12.02 0 0021.562 6.002z"
+                  />
                 </svg>
               </div>
-              <h3 class="text-xl font-bold text-gray-800 mb-3">Seguridad Primero</h3>
+
+              <h3 class="text-xl font-bold text-gray-800 mb-3">
+                Seguridad Primero
+              </h3>
+
               <p class="text-gray-600 text-sm leading-relaxed">
-                Tu tranquilidad es nuestra prioridad. Trabajamos exclusivamente con las aerolíneas más rigurosas y confiables del mundo.
+                Tu tranquilidad es nuestra prioridad. Trabajamos exclusivamente con
+                las aerolíneas más rigurosas y confiables del mundo.
               </p>
             </div>
-            
-            <!-- Tarjeta 2 -->
-            <div class="bg-white/95 backdrop-blur-md p-10 rounded-2xl shadow-2xl transform hover:-translate-y-2 hover:shadow-blue-900/20 transition-all duration-300">
-              <div class="bg-blue-50 text-blue-600 rounded-2xl h-16 w-16 flex items-center justify-center mx-auto mb-6">
-                <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v.01M12 6v-1m0-1V4m0 2.01V8m0 11v-1m0-1.01V12m0 7v-1m0-1V15" />
+
+            <!-- Precios Justos -->
+            <div
+              class="bg-white/95 backdrop-blur-md p-10 rounded-2xl shadow-2xl transform hover:-translate-y-2 hover:shadow-blue-900/20 transition-all duration-300 fade-up delay-200"
+            >
+              <div
+                class="bg-blue-50 text-blue-600 rounded-2xl h-16 w-16 flex items-center justify-center mx-auto mb-6"
+              >
+                <svg
+                  class="h-8 w-8"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v.01M12 6V5m0-1V4m0 2.01V8m0 11v-1m0-1.01V12m0 7v-1m0-1V15"
+                  />
                 </svg>
               </div>
-              <h3 class="text-xl font-bold text-gray-800 mb-3">Precios Justos</h3>
+
+              <h3 class="text-xl font-bold text-gray-800 mb-3">
+                Precios Justos
+              </h3>
+
               <p class="text-gray-600 text-sm leading-relaxed">
-                Nuestros algoritmos buscan las mejores ofertas en tiempo real para que puedas viajar más, sin sacrificar tu presupuesto.
+                Nuestros algoritmos buscan las mejores ofertas en tiempo real para
+                que puedas viajar más, sin sacrificar tu presupuesto.
               </p>
             </div>
-            
-            <!-- Tarjeta 3 -->
-            <div class="bg-white/95 backdrop-blur-md p-10 rounded-2xl shadow-2xl transform hover:-translate-y-2 hover:shadow-blue-900/20 transition-all duration-300">
-              <div class="bg-blue-50 text-blue-600 rounded-2xl h-16 w-16 flex items-center justify-center mx-auto mb-6">
-                <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
+
+            <!-- Soporte 24/7 -->
+            <div
+              class="bg-white/95 backdrop-blur-md p-10 rounded-2xl shadow-2xl transform hover:-translate-y-2 hover:shadow-blue-900/20 transition-all duration-300 fade-up delay-300"
+            >
+              <div
+                class="bg-blue-50 text-blue-600 rounded-2xl h-16 w-16 flex items-center justify-center mx-auto mb-6"
+              >
+                <svg
+                  class="h-8 w-8"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"
+                  />
                 </svg>
               </div>
-              <h3 class="text-xl font-bold text-gray-800 mb-3">Soporte 24/7</h3>
+
+              <h3 class="text-xl font-bold text-gray-800 mb-3">
+                Soporte 24/7
+              </h3>
+
               <p class="text-gray-600 text-sm leading-relaxed">
-                Desde antes de despegar hasta después de aterrizar, nuestro equipo de expertos está disponible en cada etapa de tu viaje.
+                Desde antes de despegar hasta después de aterrizar, nuestro equipo
+                de expertos está disponible en cada etapa de tu viaje.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- SECCIÓN 3: CONTACTO -->
+
       <div class="container mx-auto px-6">
         <section id="contact">
-          <div class="text-center mb-12">
+          <div class="text-center mb-12 fade-up">
             <h2 class="text-3xl font-bold text-gray-800 relative inline-block">
               Ponte en Contacto
               <span class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-12 h-1 bg-blue-600 rounded"></span>
@@ -249,7 +311,7 @@
               ¿Tienes preguntas o necesitas ayuda? Estamos aquí para ti.
             </p>
           </div>
-          <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden grid lg:grid-cols-2">
+          <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden grid lg:grid-cols-2 fade-up delay-100">
             <div class="p-8 md:p-12">
               <h3 class="text-2xl font-semibold text-gray-800 mb-6">
                 Envíanos un Mensaje
@@ -322,7 +384,6 @@
       </div>
     </main>
 
-    <!-- FOOTER -->
     <footer class="bg-slate-900 text-white py-12 border-t border-slate-800">
       <div class="container mx-auto px-6">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
@@ -380,9 +441,7 @@
       </div>
     </footer>
 
-    <!-- JavaScript para manejar la interfaz -->
     <script>
-      // Menú Móvil
       const btnMobileMenu = document.getElementById('mobile-menu-button');
       const mobileMenu = document.getElementById('mobile-menu');
       const iconPath = document.getElementById('menu-icon-path');
@@ -398,37 +457,67 @@
         });
       }
 
-      // Autenticación (Manteniendo tu script)
       document.addEventListener("DOMContentLoaded", function () {
         let currentUser = null;
         try {
           const raw = localStorage.getItem("currentUser");
           if (raw) currentUser = JSON.parse(raw);
-        } catch (e) {
-          currentUser = null;
-        }
+        } catch (e) {}
 
         const loginBtn = document.getElementById("login-button");
         const userMenu = document.getElementById("user-menu");
         const navMisReservas = document.getElementById("nav-mis-reservas");
         const footerMisReservas = document.getElementById("footer-mis-reservas");
         const adminPanel = document.getElementById("admin-panel");
+        const mobileLoginBtn = document.getElementById("mobile-login-button");
+        const mobileUserMenu = document.getElementById("mobile-user-menu");
+        const mobileAdminPanel = document.getElementById("mobile-admin-panel");
+        const logoutBtn = document.getElementById("logout-button");
+        const mobileLogoutBtn = document.getElementById("mobile-logout-button");
 
-        if (currentUser) {
+        if (currentUser && currentUser.id_usuario) {
           if (loginBtn) loginBtn.classList.add("hidden");
-          if (userMenu) userMenu.classList.remove("hidden");
-          if (userMenu) userMenu.classList.add("flex");
-
+          if (mobileLoginBtn) mobileLoginBtn.classList.add("hidden");
+          if (userMenu) { userMenu.classList.remove("hidden"); userMenu.classList.add("flex"); }
+          if (mobileUserMenu) { mobileUserMenu.classList.remove("hidden"); mobileUserMenu.classList.add("flex"); }
           if (navMisReservas) navMisReservas.classList.remove("hidden");
           if (footerMisReservas) footerMisReservas.classList.remove("hidden");
 
-          if (currentUser.rol && currentUser.rol.toLowerCase() === "administrador") {
+          const datosPersonales = currentUser.usuario || currentUser.user || currentUser.data || currentUser;
+          const rolDetectado = datosPersonales.id_rol || datosPersonales.rol || datosPersonales.rol_id || datosPersonales.idRol;
+          const isAdmin = (rolDetectado == 2 || String(rolDetectado).toLowerCase() === 'admin' || String(rolDetectado).toLowerCase() === 'administrador');
+
+          if (isAdmin) {
             if (adminPanel) {
               adminPanel.classList.remove("hidden");
-              adminPanel.classList.add("block");
+            }
+            if (mobileAdminPanel) {
+              mobileAdminPanel.classList.remove("hidden");
+              mobileAdminPanel.classList.add("flex");
             }
           }
         }
+
+        const handleLogout = function(e) {
+            e.preventDefault(); 
+            localStorage.removeItem("currentUser"); 
+            localStorage.removeItem("token"); 
+            window.location.href = "/src/views/home.html"; 
+        };
+        if (logoutBtn) logoutBtn.addEventListener("click", handleLogout);
+        if (mobileLogoutBtn) mobileLogoutBtn.addEventListener("click", handleLogout);
+
+        // Animaciones
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
       });
     </script>
   </body>

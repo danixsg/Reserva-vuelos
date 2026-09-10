@@ -24,7 +24,7 @@
 </head>
 <body class="bg-gray-100 text-gray-800">
   <!-- NAVBAR -->
-    <nav class="bg-white shadow-sm fixed w-full z-20 top-0 border-b border-gray-100">
+    <nav class="bg-zinc-950 shadow-sm fixed w-full z-20 top-0 border-b border-gray-800">
       <div class="container mx-auto px-6 py-4">
         <div class="flex items-center justify-between">
           
@@ -33,15 +33,15 @@
             <svg class="h-8 w-8 text-blue-600 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
             </svg>
-            <a href="/src/views/home.html" class="text-2xl font-bold text-gray-800 tracking-tight">AereoSky</a>
+            <a href="/src/views/home.html" class="text-2xl font-bold text-white tracking-tight">AereoSky</a>
           </div>
 
           <!-- 2. ENLACES PRINCIPALES -->
           <div class="hidden md:flex items-center space-x-8 text-sm font-medium">
-            <a href="/src/views/home.html" class="text-gray-600 hover:text-blue-600 transition-colors duration-200">Explorar</a>
-            <a href="/src/views/consulta-vuelos.html" class="text-gray-600 hover:text-blue-600 transition-colors duration-200">Vuelos</a>
-            <a href="/src/views/mis-reservas.html" id="nav-mis-reservas" class="hidden text-gray-600 hover:text-blue-600 transition-colors duration-200">Mis Reservas</a>
-            <a href="/src/views/contacto.html" class="text-gray-600 hover:text-blue-600 transition-colors duration-200">Contacto</a>
+            <a href="/src/views/home.html" class="text-white hover:text-blue-600 transition-colors duration-200">Explorar</a>
+            <a href="/src/views/consulta-vuelos.html" class="text-white hover:text-blue-600 transition-colors duration-200">Vuelos</a>
+            <a href="/src/views/mis-reservas.html" id="nav-mis-reservas" class="hidden text-white hover:text-blue-600 transition-colors duration-200">Mis Reservas</a>
+            <a href="/src/views/contacto.html" class="text-white hover:text-blue-600 transition-colors duration-200">Contacto</a>
           </div>
 
           <!-- 3. ADMIN Y SESIÓN -->
@@ -53,7 +53,7 @@
             <button
               type="button"
               id="admin-panel-button"
-              class="flex items-center text-gray-600 font-medium hover:text-blue-600 transition-colors duration-200">
+              class="flex items-center text-white font-medium hover:text-blue-600 transition-colors duration-200">
               <span>Administración</span>
               <svg class="h-4 w-4 ml-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -61,35 +61,35 @@
             </button>
 
             <div id="admin-panel-menu"
-              class="hidden absolute right-0 top-full mt-3 w-48 bg-white rounded-md shadow-lg border border-gray-100 z-50 py-1">
+              class="hidden absolute right-0 top-full mt-3 w-48 bg-gray-900 rounded-md shadow-lg">
               <a href="/src/views/aviones.html"
-                class="block px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-blue-600"> Aviones </a>
+                class="block px-4 py-2 text-white hover:text-blue-300"> Aviones </a>
 
               <a href="/src/views/aerolineas.html"
-                class="block px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-blue-600"> Aerolíneas </a>
+                class="block px-4 py-2 text-white hover:text-blue-300"> Aerolíneas </a>
 
               <a href="/src/views/fabricantes.html"
-                class="block px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-blue-600"> Fabricantes </a>
+                class="block px-4 py-2 text-white hover:text-blue-300"> Fabricantes </a>
 
               <a href="/src/views/usuarios.html"
-                class="block px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-blue-600"> Usuarios </a>
+                class="block px-4 py-2 text-white hover:text-blue-300"> Usuarios </a>
 
               <a href="/src/views/reservas.html"
-                class="block px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-blue-600"> Reservas </a>
+                class="block px-4 py-2 text-white hover:text-blue-300"> Reservas </a>
             </div>
           </div>
 
             <!-- Botón Iniciar Sesión Desktop -->
             <a href="/src/views/login.html" id="login-button" class="bg-blue-600 text-white px-5 py-2 rounded-md hover:bg-blue-700 transition-colors duration-200 font-medium">Iniciar Sesión</a>
             
-            <!-- Menú de Usuario Logueado (Minimalista) -->
+            <!-- Menú de Usuario Logueado -->
             <div id="user-menu" class="hidden items-center space-x-6">
-              <a href="/src/views/perfil.html" class="flex items-center text-gray-600 hover:text-blue-600 font-medium transition-colors duration-200">
+              <a href="/src/views/perfil.html" class="flex items-center text-white hover:text-blue-600 font-medium transition-colors duration-200">
                 Mi Perfil
               </a>
               <!-- Línea sutil -->
               <span class="w-px h-4 bg-gray-300"></span>
-              <button id="logout-button" class="flex items-center text-red-800 hover:text-red-600 font-medium transition-colors duration-200 group">
+              <button id="logout-button" class="flex items-center text-red-300 hover:text-red-600 font-medium transition-colors duration-200 group">
                 Cerrar Sesión
                 <svg class="h-4 w-4 ml-1.5 text-red-800 group-hover:text-red-500 transition-colors duration-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
@@ -136,7 +136,7 @@
             <!-- Menú Logueado Móvil -->
             <div id="mobile-user-menu" class="hidden flex-col space-y-4">
               <a href="/src/views/perfil.html" class="text-gray-600 hover:text-blue-600">Mi Perfil</a>
-              <button id="mobile-logout-button" class="flex items-center text-gray-600 hover:text-red-600 transition-colors text-left">
+              <button id="mobile-logout-button" class="flex items-center text-red-800 hover:text-red-600 transition-colors text-left">
                 Cerrar Sesión
                 <svg class="h-4 w-4 ml-1.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
@@ -212,147 +212,186 @@
     </script>
 
     <!-- SECCIÓN PERFIL -->
-    <main class="pt-24 pb-12">
-        <div class="container mx-auto px-6">
-            <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden">
-                <div class="p-8 bg-gray-50 border-b">
-                    <h1 class="text-3xl font-bold text-gray-800">Mi Perfil</h1>
-                    <p class="mt-1 text-gray-600">Actualiza tu información personal y de contacto.</p>
+    <main class="pt-24 pb-16 min-h-screen bg-slate-50/50">
+        <div class="container mx-auto px-6 max-w-4xl space-y-8">
+            
+            <!-- Encabezado de la página -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 sm:p-8 rounded-2xl border border-slate-200/80 shadow-sm">
+                <div class="flex items-center gap-4">
+                    <div class="w-14 h-14 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-800 flex-shrink-0">
+                        <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Mi Perfil</h1>
+                        <p class="text-sm text-slate-500 mt-0.5">Gestiona tu información personal y métodos de pago.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Formulario Perfil -->
+            <div class="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden">
+                <div class="px-6 py-5 sm:px-8 border-b border-slate-100 bg-slate-50/50 flex items-center justify-between">
+                    <h2 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-blue-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 012-2h2a2 2 0 012 2v1m-4 0h4" />
+                        </svg>
+                        Información Personal
+                    </h2>
                 </div>
 
-                <form id="profileForm" class="p-8 space-y-6">
+                <form id="profileForm" class="p-6 sm:p-8 space-y-6">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <label for="nombres" class="block text-sm font-medium text-gray-700">Nombres</label>
-                            <input type="text" id="nombres" readonly class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <label for="nombres" class="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-2">Nombres</label>
+                            <input type="text" id="nombres" readonly class="w-full px-4 py-3 rounded-xl border border-slate-200 text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-all duration-200">
                         </div>
                         <div>
-                            <label for="apellidos" class="block text-sm font-medium text-gray-700">Apellidos</label>
-                            <input type="text" id="apellidos" readonly class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <label for="apellidos" class="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-2">Apellidos</label>
+                            <input type="text" id="apellidos" readonly class="w-full px-4 py-3 rounded-xl border border-slate-200 text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-all duration-200">
                         </div>
                     </div>
+
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <label for="cedula" class="block text-sm font-medium text-gray-700">Cédula</label>
-                            <input type="text" id="cedula" readonly class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <label for="cedula" class="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-2">Cédula / Identificación</label>
+                            <input type="text" id="cedula" readonly class="w-full px-4 py-3 rounded-xl border border-slate-200 text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-all duration-200">
                         </div>
                         <div>
-                            <label for="correo" class="block text-sm font-medium text-gray-700">Correo Electrónico</label>
-                            <input type="email" id="correo" readonly class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <label for="correo" class="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-2">Correo Electrónico</label>
+                            <input type="email" id="correo" readonly class="w-full px-4 py-3 rounded-xl border border-slate-200 text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-all duration-200">
                         </div>
                     </div>
+
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <label for="telefono" class="block text-sm font-medium text-gray-700">Teléfono</label>
-                            <input type="tel" id="telefono" readonly class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <label for="telefono" class="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-2">Teléfono</label>
+                            <input type="tel" id="telefono" readonly class="w-full px-4 py-3 rounded-xl border border-slate-200 text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-all duration-200">
                         </div>
                         <div>
-                            <label for="direccion" class="block text-sm font-medium text-gray-700">Dirección</label>
-                            <input type="text" id="direccion" readonly class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <label for="direccion" class="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-2">Dirección</label>
+                            <input type="text" id="direccion" readonly class="w-full px-4 py-3 rounded-xl border border-slate-200 text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-all duration-200">
                         </div>
                     </div>
-                    <div class="pt-6 flex flex-wrap justify-end items-center gap-4 border-t border-gray-200">
-                        <button type="button" id="change-password-button" class="bg-blue-800 text-white font-bold px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300 shadow-md">
+
+                    <div class="pt-6 flex flex-wrap justify-end items-center gap-3 border-t border-slate-100">
+                        <button type="button" id="change-password-button" class="inline-flex items-center gap-2 bg-slate-800 hover:bg-slate-900 text-white text-xs font-semibold px-5 py-3 rounded-xl transition-all duration-200 shadow-sm active:scale-95">
+                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                            </svg>
                             Cambiar Contraseña
                         </button>
-                        <button type="button" id="edit-button" class="bg-blue-600 text-white font-bold px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300 shadow-md">
+                        <button type="button" id="edit-button" class="inline-flex items-center gap-2 bg-blue-800 hover:bg-blue-700 text-white text-xs font-semibold px-5 py-3 rounded-xl transition-all duration-200 shadow-sm active:scale-95">
+                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                            </svg>
                             Editar Perfil
                         </button>
-                        <button type="submit" id="save-button" class="hidden bg-green-600 text-white font-bold px-6 py-3 rounded-lg hover:bg-green-700 transition duration-300 shadow-md">
+                        <button type="submit" id="save-button" class="hidden inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold px-5 py-3 rounded-xl transition-all duration-200 shadow-sm active:scale-95">
+                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
                             Guardar Cambios
                         </button>
                     </div>
                 </form>
             </div>
+
+            <!-- MODAL CAMBIO DE CONTRASEÑA -->
+            <div id="password-modal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+                <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-2xl w-full max-w-md relative">
+                    <button id="close-password-modal" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 transition-colors">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                    </button>
+                    <h2 class="text-xl font-bold text-slate-900 mb-5">Cambiar Contraseña</h2>
+                    <form id="passwordForm" class="space-y-4">
+                        <div>
+                            <label for="current-password" class="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5">Contraseña Actual</label>
+                            <input type="password" id="current-password" required class="w-full px-4 py-3 rounded-xl border border-slate-200 text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-all">
+                        </div>
+                        <div>
+                            <label for="new-password" class="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5">Nueva Contraseña</label>
+                            <input type="password" id="new-password" required class="w-full px-4 py-3 rounded-xl border border-slate-200 text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-all">
+                        </div>
+                        <div>
+                            <label for="confirm-password" class="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5">Confirmar Nueva Contraseña</label>
+                            <input type="password" id="confirm-password" required class="w-full px-4 py-3 rounded-xl border border-slate-200 text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-all">
+                        </div>
+                        <div class="pt-3">
+                            <button type="submit" class="w-full bg-blue-800 hover:bg-blue-700 text-white font-bold py-3 rounded-xl transition-all shadow-sm">Guardar Contraseña</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Métodos de Pago Card -->
+            <div class="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden">
+                <div class="px-6 py-5 sm:px-8 border-b border-slate-100 bg-slate-50/50 flex justify-between items-center flex-wrap gap-4">
+                    <div>
+                        <h2 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                            <svg class="w-5 h-5 text-blue-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                            Métodos de Pago
+                        </h2>
+                        <p class="text-xs text-slate-500 mt-0.5">Tarjetas asociadas a tu cuenta.</p>
+                    </div>
+                    <button id="add-tarjeta-button" class="inline-flex items-center gap-1.5 bg-blue-800 hover:bg-blue-700 text-white text-xs font-semibold px-4 py-2.5 rounded-xl transition-all duration-200 shadow-sm active:scale-95">
+                        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
+                        Agregar Tarjeta
+                    </button>
+                </div>
+                <div id="tarjetas-container" class="p-6 sm:p-8 space-y-4">
+                    <p class="text-center text-slate-400 text-sm">Cargando métodos de pago...</p>
+                </div>
+            </div>
+
+            <!-- MODAL TARJETA -->
+            <div id="tarjeta-modal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+                <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-2xl w-full max-w-lg relative">
+                    <button id="close-tarjeta-modal" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 transition-colors">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                    </button>
+                    <h2 id="tarjeta-modal-title" class="text-xl font-bold text-slate-900 mb-6">Agregar Nueva Tarjeta</h2>
+                    <form id="tarjeta-form" class="space-y-4">
+                        <div>
+                            <label for="numero_tarjeta" class="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5">Número de Tarjeta</label>
+                            <input type="text" id="numero_tarjeta" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600" maxlength="16" placeholder="0000 0000 0000 0000">
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="md:col-span-2">
+                                <label for="fecha_mes" class="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5">Vencimiento (MM/YY)</label>
+                                <div class="flex items-center px-4 py-2.5 rounded-xl border border-slate-200 focus-within:ring-2 focus-within:ring-blue-600 bg-white">
+                                    <input type="text" id="fecha_mes" placeholder="MM" required class="w-8 border-none p-0 focus:ring-0 text-center text-sm" maxlength="2">
+                                    <span class="text-slate-400">/</span>
+                                    <input type="text" id="fecha_anio" placeholder="YY" required class="w-8 border-none p-0 focus:ring-0 text-center text-sm" maxlength="2">
+                                </div>
+                            </div>
+                            <div>
+                                <label for="codigo_seguridad" class="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5">CVV</label>
+                                <input type="text" id="codigo_seguridad" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600" maxlength="3" placeholder="123">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="tipo_tarjeta" class="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5">Tipo de Tarjeta</label>
+                            <select id="tipo_tarjeta" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600">
+                                <option value="">Seleccione un tipo</option>
+                                <option value="Visa">Visa</option>
+                                <option value="Mastercard">Mastercard</option>
+                                <option value="American Express">American Express</option>
+                            </select>
+                        </div>
+                        <div class="pt-4 flex justify-end gap-3">
+                            <button type="button" id="cancel-tarjeta-button" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold px-5 py-2.5 rounded-xl text-xs transition-colors">Cancelar</button>
+                            <button type="submit" class="bg-blue-800 hover:bg-blue-700 text-white font-semibold px-5 py-2.5 rounded-xl text-xs transition-colors shadow-sm">Guardar Tarjeta</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
         </div>
     </main>
-
-    <!-- MODAL CAMBIO DE CONTRASEÑA -->
-    <div id="password-modal" class="hidden fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 z-50">
-        <div class="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-md relative animate-fade-in-up">
-            <button id="close-password-modal" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
-                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
-            </button>
-            <h2 class="text-2xl font-bold text-gray-800 mb-4">Cambiar Contraseña</h2>
-            <form id="passwordForm" class="space-y-4">
-                <div>
-                    <label for="current-password" class="block text-sm font-medium text-gray-700">Contraseña Actual</label>
-                    <input type="password" id="current-password" required class="mt-1 w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-                </div>
-                <div>
-                    <label for="new-password" class="block text-sm font-medium text-gray-700">Nueva Contraseña</label>
-                    <input type="password" id="new-password" required class="mt-1 w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-                </div>
-                <div>
-                    <label for="confirm-password" class="block text-sm font-medium text-gray-700">Confirmar Nueva Contraseña</label>
-                    <input type="password" id="confirm-password" required class="mt-1 w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-                </div>
-                <div class="pt-4">
-                    <button type="submit" class="w-full bg-blue-600 text-white font-bold p-3 rounded-lg hover:bg-blue-700 transition">Guardar Contraseña</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- MÉTODOS DE PAGO -->
-    <div class="max-w-4xl mx-auto mb-20 bg-white rounded-2xl shadow-2xl overflow-hidden">
-        <div class="p-8 bg-gray-50 border-b flex justify-between items-center">
-            <div>
-                <h2 class="text-2xl font-bold text-gray-800">Métodos de Pago</h2>
-                <p class="mt-1 text-gray-600">Administra tus tarjetas guardadas.</p>
-            </div>
-            <button id="add-tarjeta-button" class="bg-blue-600 text-white font-bold px-5 py-2.5 rounded-lg hover:bg-blue-700 flex items-center">
-                <svg class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
-                Agregar Tarjeta
-            </button>
-        </div>
-        <div id="tarjetas-container" class="p-8 space-y-4">
-            <p class="text-center text-gray-500">Cargando métodos de pago...</p>
-        </div>
-    </div>
-
-    <!-- MODAL TARJETA -->
-    <div id="tarjeta-modal" class="hidden fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 z-50">
-        <div class="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-lg relative">
-            <button id="close-tarjeta-modal" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
-                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
-            </button>
-            <h2 id="tarjeta-modal-title" class="text-2xl font-bold text-gray-800 mb-6">Agregar Nueva Tarjeta</h2>
-            <form id="tarjeta-form" class="space-y-4">
-                <div>
-                    <label for="numero_tarjeta" class="block text-sm font-medium text-gray-700">Número de Tarjeta</label>
-                    <input type="text" id="numero_tarjeta" required class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg" maxlength="16" placeholder="0000 0000 0000 0000">
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div class="md:col-span-2">
-                        <label for="fecha_mes" class="block text-sm font-medium text-gray-700">Vencimiento (MM/YY)</label>
-                        <div class="mt-1 flex items-center px-4 py-2 border border-gray-300 rounded-lg focus-within:ring-2 focus-within:ring-blue-500 bg-white">
-                            <input type="text" id="fecha_mes" placeholder="MM" required class="w-8 border-none p-0 focus:ring-0 text-center" maxlength="2">
-                            <span class="text-gray-400">/</span>
-                            <input type="text" id="fecha_anio" placeholder="YY" required class="w-8 border-none p-0 focus:ring-0 text-center" maxlength="2">
-                        </div>
-                    </div>
-                    <div>
-                        <label for="codigo_seguridad" class="block text-sm font-medium text-gray-700">CVV</label>
-                        <input type="text" id="codigo_seguridad" required class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg" maxlength="3" placeholder="123">
-                    </div>
-                </div>
-                <div>
-                    <label for="tipo_tarjeta" class="block text-sm font-medium text-gray-700">Tipo de Tarjeta</label>
-                    <select id="tipo_tarjeta" required class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg">
-                        <option value="">Seleccione un tipo</option>
-                        <option value="Visa">Visa</option>
-                        <option value="Mastercard">Mastercard</option>
-                        <option value="American Express">American Express</option>
-                    </select>
-                </div>
-                <div class="pt-4 flex justify-end gap-4">
-                    <button type="button" id="cancel-tarjeta-button" class="bg-gray-200 text-gray-800 font-bold px-6 py-2 rounded-lg">Cancelar</button>
-                    <button type="submit" class="bg-blue-600 text-white font-bold px-6 py-2 rounded-lg">Guardar Tarjeta</button>
-                </div>
-            </form>
-        </div>
-    </div>
 
     <!-- FOOTER -->
     <footer class="bg-slate-900 text-white py-12 border-t border-slate-800">
@@ -614,8 +653,6 @@
         numeroTarjetaInput.addEventListener('keydown', allowOnlyNumbers);
         codigoSeguridadInput.addEventListener('keydown', allowOnlyNumbers);
         fechaAnioInput.addEventListener('keydown', allowOnlyNumbers);
-
-        // MM válido (01-12)
         fechaMesInput.addEventListener('keydown', (e) => {
             const currentValue = e.target.value;
             const key = e.key;
@@ -645,8 +682,7 @@
                 }
             }
         });
-        
-        // autocompletar 0X si dejan solo 1 dígito
+    
         fechaMesInput.addEventListener('blur', (e) => {
             if (e.target.value.length === 1) {
                 e.target.value = '0' + e.target.value;
@@ -774,36 +810,27 @@
         fetchAndDisplayUser();
 
         // --- SINCRONIZAR NAVBAR/FOOTER CON SESIÓN Y ROL ---
-        (function syncSessionUI() {
-          let u = null;
-          try {
-            const raw = localStorage.getItem("currentUser");
-            if (raw) u = JSON.parse(raw);
-          } catch (e) {}
+        const datosPersonales = user ? (user.usuario || user.user || user.data || user) : null;
+        const rolDetectado = datosPersonales ? (datosPersonales.id_rol || datosPersonales.rol || datosPersonales.rol_id || datosPersonales.idRol) : null;
+        const isAdmin = (rolDetectado == 2 || rolDetectado === 'admin' || rolDetectado === 'Administrador'); 
+        
+        setUIStatus(true, isAdmin);
+        
+        const footerMisReservas = document.getElementById("footer-mis-reservas");
+        if (footerMisReservas) footerMisReservas.classList.remove("hidden");
 
-          const navMisReservas = document.getElementById("nav-mis-reservas");
-          const footerMisReservas = document.getElementById("footer-mis-reservas");
-          const loginBtn = document.getElementById("login-button");
-          const userMenu = document.getElementById("user-menu");
-          const adminPanel = document.getElementById("admin-panel");
+        const handleLogout = function(e) {
+            if (e) e.preventDefault(); 
+            localStorage.removeItem("currentUser"); 
+            localStorage.removeItem("token"); 
+            window.location.href = "/src/views/home.html"; 
+        };
+        const logoutBtnDesktop = document.getElementById("logout-button");
+        const logoutBtnMobile = document.getElementById("mobile-logout-button");
+        if (logoutBtnDesktop) logoutBtnDesktop.addEventListener("click", handleLogout);
+        if (logoutBtnMobile) logoutBtnMobile.addEventListener("click", handleLogout);
 
-          if (u && u.id_usuario) {
-            if (navMisReservas) navMisReservas.classList.remove("hidden");
-            if (footerMisReservas) footerMisReservas.classList.remove("hidden");
-            if (loginBtn) loginBtn.classList.add("hidden");
-            if (userMenu) userMenu.classList.remove("hidden");
-            if (adminPanel && u.rol === "Administrador") {
-              adminPanel.classList.remove("hidden");
-            }
-          } else {
-            if (navMisReservas) navMisReservas.classList.add("hidden");
-            if (footerMisReservas) footerMisReservas.classList.add("hidden");
-            if (loginBtn) loginBtn.classList.remove("hidden");
-            if (userMenu) userMenu.classList.add("hidden");
-          }
-        })();
-
-    }); // DOMContentLoaded
+    }); 
     </script>
 </body>
 </html>

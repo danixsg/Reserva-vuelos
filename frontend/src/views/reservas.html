@@ -15,7 +15,7 @@
 </head>
 <body class="bg-gray-100 text-gray-800">
   <!-- NAVBAR -->
-    <nav class="bg-white shadow-sm fixed w-full z-20 top-0 border-b border-gray-100">
+    <nav class="bg-zinc-950 shadow-sm fixed w-full z-20 top-0 border-b border-gray-800">
       <div class="container mx-auto px-6 py-4">
         <div class="flex items-center justify-between">
           
@@ -24,15 +24,15 @@
             <svg class="h-8 w-8 text-blue-600 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
             </svg>
-            <a href="/src/views/home.html" class="text-2xl font-bold text-gray-800 tracking-tight">AereoSky</a>
+            <a href="/src/views/home.html" class="text-2xl font-bold text-white tracking-tight">AereoSky</a>
           </div>
 
           <!-- 2. ENLACES PRINCIPALES -->
           <div class="hidden md:flex items-center space-x-8 text-sm font-medium">
-            <a href="/src/views/home.html" class="text-gray-600 hover:text-blue-600 transition-colors duration-200">Explorar</a>
-            <a href="/src/views/consulta-vuelos.html" class="text-gray-600 hover:text-blue-600 transition-colors duration-200">Vuelos</a>
-            <a href="/src/views/mis-reservas.html" id="nav-mis-reservas" class="hidden text-gray-600 hover:text-blue-600 transition-colors duration-200">Mis Reservas</a>
-            <a href="/src/views/contacto.html" class="text-gray-600 hover:text-blue-600 transition-colors duration-200">Contacto</a>
+            <a href="/src/views/home.html" class="text-white hover:text-blue-600 transition-colors duration-200">Explorar</a>
+            <a href="/src/views/consulta-vuelos.html" class="text-white hover:text-blue-600 transition-colors duration-200">Vuelos</a>
+            <a href="/src/views/mis-reservas.html" id="nav-mis-reservas" class="hidden text-white hover:text-blue-600 transition-colors duration-200">Mis Reservas</a>
+            <a href="/src/views/contacto.html" class="text-white hover:text-blue-600 transition-colors duration-200">Contacto</a>
           </div>
 
           <!-- 3. ADMIN Y SESIÓN -->
@@ -44,7 +44,7 @@
             <button
               type="button"
               id="admin-panel-button"
-              class="flex items-center text-gray-600 font-medium hover:text-blue-600 transition-colors duration-200">
+              class="flex items-center text-white font-medium hover:text-blue-600 transition-colors duration-200">
               <span>Administración</span>
               <svg class="h-4 w-4 ml-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -52,35 +52,35 @@
             </button>
 
             <div id="admin-panel-menu"
-              class="hidden absolute right-0 top-full mt-3 w-48 bg-white rounded-md shadow-lg border border-gray-100 z-50 py-1">
+              class="hidden absolute right-0 top-full mt-3 w-48 bg-zinc-900 rounded-md shadow-lg">
               <a href="/src/views/aviones.html"
-                class="block px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-blue-600"> Aviones </a>
+                class="block px-4 py-2 text-white hover:text-blue-300"> Aviones </a>
 
               <a href="/src/views/aerolineas.html"
-                class="block px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-blue-600"> Aerolíneas </a>
+                class="block px-4 py-2 text-white hover:text-blue-300"> Aerolíneas </a>
 
               <a href="/src/views/fabricantes.html"
-                class="block px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-blue-600"> Fabricantes </a>
+                class="block px-4 py-2 text-white hover:text-blue-300"> Fabricantes </a>
 
               <a href="/src/views/usuarios.html"
-                class="block px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-blue-600"> Usuarios </a>
+                class="block px-4 py-2 text-white hover:text-blue-300"> Usuarios </a>
 
               <a href="/src/views/reservas.html"
-                class="block px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-blue-600"> Reservas </a>
+                class="block px-4 py-2 text-white hover:text-blue-300"> Reservas </a>
             </div>
           </div>
 
             <!-- Botón Iniciar Sesión Desktop -->
             <a href="/src/views/login.html" id="login-button" class="bg-blue-600 text-white px-5 py-2 rounded-md hover:bg-blue-700 transition-colors duration-200 font-medium">Iniciar Sesión</a>
             
-            <!-- Menú de Usuario Logueado (Minimalista) -->
+            <!-- Menú de Usuario Logueado -->
             <div id="user-menu" class="hidden items-center space-x-6">
-              <a href="/src/views/perfil.html" class="flex items-center text-gray-600 hover:text-blue-600 font-medium transition-colors duration-200">
+              <a href="/src/views/perfil.html" class="flex items-center text-white hover:text-blue-600 font-medium transition-colors duration-200">
                 Mi Perfil
               </a>
               <!-- Línea sutil -->
               <span class="w-px h-4 bg-gray-300"></span>
-              <button id="logout-button" class="flex items-center text-red-800 hover:text-red-600 font-medium transition-colors duration-200 group">
+              <button id="logout-button" class="flex items-center text-red-300 hover:text-red-600 font-medium transition-colors duration-200 group">
                 Cerrar Sesión
                 <svg class="h-4 w-4 ml-1.5 text-red-800 group-hover:text-red-500 transition-colors duration-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
@@ -127,7 +127,7 @@
             <!-- Menú Logueado Móvil -->
             <div id="mobile-user-menu" class="hidden flex-col space-y-4">
               <a href="/src/views/perfil.html" class="text-gray-600 hover:text-blue-600">Mi Perfil</a>
-              <button id="mobile-logout-button" class="flex items-center text-gray-600 hover:text-red-600 transition-colors text-left">
+              <button id="mobile-logout-button" class="flex items-center text-red-800 hover:text-red-600 transition-colors text-left">
                 Cerrar Sesión
                 <svg class="h-4 w-4 ml-1.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
@@ -146,59 +146,15 @@
       const mobileMenu = document.getElementById('mobile-menu');
       const iconPath = document.getElementById('menu-icon-path');
 
-      btnMobileMenu.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
-        if (mobileMenu.classList.contains('hidden')) {
-          iconPath.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
-        } else {
-          iconPath.setAttribute('d', 'M6 18L18 6M6 6l12 12');
-        }
-      });
-
-      // 2. LÓGICA DE SESIÓN
-      function setUIStatus(isLoggedIn, isAdmin = false) {
-        const loginBtn = document.getElementById('login-button');
-        const userMenu = document.getElementById('user-menu');
-        const navMisReservas = document.getElementById('nav-mis-reservas');
-        const adminPanel = document.getElementById('admin-panel');
-
-        const mobileLoginBtn = document.getElementById('mobile-login-button');
-        const mobileUserMenu = document.getElementById('mobile-user-menu');
-        const mobileNavMisReservas = document.getElementById('mobile-nav-mis-reservas');
-        const mobileAdminPanel = document.getElementById('mobile-admin-panel');
-
-        if (isLoggedIn) {
-          loginBtn.classList.add('hidden');
-          mobileLoginBtn.classList.add('hidden');
-          
-          userMenu.classList.remove('hidden');
-          userMenu.classList.add('flex');
-          mobileUserMenu.classList.remove('hidden');
-          mobileUserMenu.classList.add('flex');
-
-          navMisReservas.classList.remove('hidden');
-          mobileNavMisReservas.classList.remove('hidden');
-
-          if (isAdmin) {
-            adminPanel.classList.remove('hidden');
-            mobileAdminPanel.classList.remove('hidden');
-            mobileAdminPanel.classList.add('flex');
+      if(btnMobileMenu) {
+        btnMobileMenu.addEventListener('click', () => {
+          mobileMenu.classList.toggle('hidden');
+          if (mobileMenu.classList.contains('hidden')) {
+            iconPath.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
+          } else {
+            iconPath.setAttribute('d', 'M6 18L18 6M6 6l12 12');
           }
-        } else {
-          userMenu.classList.add('hidden');
-          userMenu.classList.remove('flex');
-          mobileUserMenu.classList.add('hidden');
-          mobileUserMenu.classList.remove('flex');
-          
-          loginBtn.classList.remove('hidden');
-          mobileLoginBtn.classList.remove('hidden');
-
-          navMisReservas.classList.add('hidden');
-          mobileNavMisReservas.classList.add('hidden');
-          adminPanel.classList.add('hidden');
-          mobileAdminPanel.classList.add('hidden');
-          mobileAdminPanel.classList.remove('flex');
-        }
+        });
       }
     </script>
 
@@ -316,12 +272,71 @@
     <!-- SCRIPT PRINCIPAL -->
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    const user = JSON.parse(localStorage.getItem('currentUser'));
-    if (!user || user.rol !== "Administrador") {
+    let user = null;
+    try {
+      const raw = localStorage.getItem("currentUser");
+      if (raw) user = JSON.parse(raw);
+    } catch (e) {}
+
+    const datosPersonales = user ? (user.usuario || user.user || user.data || user) : null;
+    const rolDetectado = datosPersonales ? (datosPersonales.id_rol || datosPersonales.rol || datosPersonales.rol_id || datosPersonales.idRol) : null;
+    const isAdmin = (rolDetectado == 2 || rolDetectado === 'admin' || rolDetectado === 'Administrador'); 
+
+    if (!isAdmin) {
         alert('Acceso denegado. Esta sección es solo para administradores.');
         window.location.href = '/src/views/home.html';
         return;
     }
+
+    const navMisReservas = document.getElementById("nav-mis-reservas");
+    const footerMisReservas = document.getElementById("footer-mis-reservas");
+    const loginBtn = document.getElementById("login-button");
+    const userMenu = document.getElementById("user-menu");
+    const adminPanel = document.getElementById("admin-panel");
+    const logoutBtnDesktop = document.getElementById("logout-button");
+
+    const mobileNavMisReservas = document.getElementById("mobile-nav-mis-reservas");
+    const mobileLoginBtn = document.getElementById("mobile-login-button");
+    const mobileUserMenu = document.getElementById("mobile-user-menu");
+    const mobileAdminPanel = document.getElementById("mobile-admin-panel");
+    const logoutBtnMobile = document.getElementById("mobile-logout-button");
+
+    if (user && user.id_usuario) {
+      if (navMisReservas) navMisReservas.classList.remove("hidden");
+      if (footerMisReservas) footerMisReservas.classList.remove("hidden");
+      if (loginBtn) loginBtn.classList.add("hidden");
+      if (userMenu) { userMenu.classList.remove("hidden"); userMenu.classList.add("flex"); }
+      if (mobileNavMisReservas) mobileNavMisReservas.classList.remove("hidden");
+      if (mobileLoginBtn) mobileLoginBtn.classList.add("hidden");
+      if (mobileUserMenu) { mobileUserMenu.classList.remove("hidden"); mobileUserMenu.classList.add("flex"); }
+
+      if (adminPanel) adminPanel.classList.remove("hidden");
+      if (mobileAdminPanel) { 
+          mobileAdminPanel.classList.remove("hidden"); 
+          mobileAdminPanel.classList.add("flex"); 
+      }
+    } else {
+      if (navMisReservas) navMisReservas.classList.add("hidden");
+      if (footerMisReservas) footerMisReservas.classList.add("hidden");
+      if (loginBtn) loginBtn.classList.remove("hidden");
+      if (userMenu) { userMenu.classList.add("hidden"); userMenu.classList.remove("flex"); }
+      if (mobileNavMisReservas) mobileNavMisReservas.classList.add("hidden");
+      if (mobileLoginBtn) mobileLoginBtn.classList.remove("hidden");
+      if (mobileUserMenu) { mobileUserMenu.classList.add("hidden"); mobileUserMenu.classList.remove("flex"); }
+      if (adminPanel) adminPanel.classList.add("hidden");
+      if (mobileAdminPanel) { mobileAdminPanel.classList.add("hidden"); mobileAdminPanel.classList.remove("flex"); }
+    }
+
+
+
+    const handleLogout = function(e) {
+        e.preventDefault(); 
+        localStorage.removeItem("currentUser"); 
+        localStorage.removeItem("token"); 
+        window.location.href = "/src/views/home.html"; 
+    };
+    if (logoutBtnDesktop) logoutBtnDesktop.addEventListener("click", handleLogout);
+    if (logoutBtnMobile) logoutBtnMobile.addEventListener("click", handleLogout);
 
     const tableBody = document.getElementById('reservas-table-body');
     const filterButtons = document.querySelectorAll('.tab-scope');
@@ -490,41 +505,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // cargar info inicial
     fetchReservas();
-
-    // ------ sincronizar navbar/footer con sesión y rol admin ------
-    (function syncSessionUI() {
-        let u = null;
-        try {
-          const raw = localStorage.getItem("currentUser");
-          if (raw) u = JSON.parse(raw);
-        } catch (e) {}
-
-        const navMisReservas = document.getElementById("nav-mis-reservas");
-        const footerMisReservas = document.getElementById("footer-mis-reservas");
-        const loginBtn = document.getElementById("login-button");
-        const userMenu = document.getElementById("user-menu");
-        const adminPanel = document.getElementById("admin-panel");
-
-        if (u && u.id_usuario) {
-          // usuario autenticado
-          if (navMisReservas) navMisReservas.classList.remove("hidden");
-          if (footerMisReservas) footerMisReservas.classList.remove("hidden");
-
-          if (loginBtn) loginBtn.classList.add("hidden");
-          if (userMenu) userMenu.classList.remove("hidden");
-
-          if (adminPanel && u.rol === "Administrador") {
-            adminPanel.classList.remove("hidden");
-          }
-        } else {
-          // usuario NO autenticado
-          if (navMisReservas) navMisReservas.classList.add("hidden");
-          if (footerMisReservas) footerMisReservas.classList.add("hidden");
-
-          if (loginBtn) loginBtn.classList.remove("hidden");
-          if (userMenu) userMenu.classList.add("hidden");
-        }
-    })();
 });
 </script>
 

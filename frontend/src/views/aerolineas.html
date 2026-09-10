@@ -15,7 +15,7 @@
 </head>
 <body class="bg-gray-100 text-gray-800">
   <!-- NAVBAR -->
-    <nav class="bg-white shadow-sm fixed w-full z-20 top-0 border-b border-gray-100">
+    <nav class="bg-zinc-950 shadow-sm fixed w-full z-20 top-0 border-b border-gray-800">
       <div class="container mx-auto px-6 py-4">
         <div class="flex items-center justify-between">
           
@@ -24,15 +24,15 @@
             <svg class="h-8 w-8 text-blue-600 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
             </svg>
-            <a href="/src/views/home.html" class="text-2xl font-bold text-gray-800 tracking-tight">AereoSky</a>
+            <a href="/src/views/home.html" class="text-2xl font-bold text-white tracking-tight">AereoSky</a>
           </div>
 
           <!-- 2. ENLACES PRINCIPALES -->
           <div class="hidden md:flex items-center space-x-8 text-sm font-medium">
-            <a href="/src/views/home.html" class="text-gray-600 hover:text-blue-600 transition-colors duration-200">Explorar</a>
-            <a href="/src/views/consulta-vuelos.html" class="text-gray-600 hover:text-blue-600 transition-colors duration-200">Vuelos</a>
-            <a href="/src/views/mis-reservas.html" id="nav-mis-reservas" class="hidden text-gray-600 hover:text-blue-600 transition-colors duration-200">Mis Reservas</a>
-            <a href="/src/views/contacto.html" class="text-gray-600 hover:text-blue-600 transition-colors duration-200">Contacto</a>
+            <a href="/src/views/home.html" class="text-white hover:text-blue-600 transition-colors duration-200">Explorar</a>
+            <a href="/src/views/consulta-vuelos.html" class="text-white hover:text-blue-600 transition-colors duration-200">Vuelos</a>
+            <a href="/src/views/mis-reservas.html" id="nav-mis-reservas" class="hidden text-white hover:text-blue-600 transition-colors duration-200">Mis Reservas</a>
+            <a href="/src/views/contacto.html" class="text-white hover:text-blue-600 transition-colors duration-200">Contacto</a>
           </div>
 
           <!-- 3. ADMIN Y SESIÓN -->
@@ -44,7 +44,7 @@
             <button
               type="button"
               id="admin-panel-button"
-              class="flex items-center text-gray-600 font-medium hover:text-blue-600 transition-colors duration-200"
+              class="flex items-center text-white font-medium hover:text-blue-600 transition-colors duration-200"
             >
               <span>Administración</span>
               <svg class="h-4 w-4 ml-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -53,35 +53,35 @@
             </button>
 
             <div id="admin-panel-menu"
-              class="hidden absolute right-0 top-full mt-3 w-48 bg-white rounded-md shadow-lg border border-gray-100 z-50 py-1">
+              class="hidden absolute right-0 top-full mt-3 w-48 bg-gray-900 rounded-md shadow-lg">
               <a href="/src/views/aviones.html"
-                class="block px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-blue-600"> Aviones </a>
+                class="block px-4 py-2 text-white hover:text-blue-300"> Aviones </a>
 
               <a href="/src/views/aerolineas.html"
-                class="block px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-blue-600"> Aerolíneas </a>
+                class="block px-4 py-2 text-white hover:text-blue-300"> Aerolíneas </a>
 
               <a href="/src/views/fabricantes.html"
-                class="block px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-blue-600"> Fabricantes </a>
+                class="block px-4 py-2 text-white hover:text-blue-300"> Fabricantes </a>
 
               <a href="/src/views/usuarios.html"
-                class="block px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-blue-600"> Usuarios </a>
+                class="block px-4 py-2 text-white hover:text-blue-300"> Usuarios </a>
 
               <a href="/src/views/reservas.html"
-                class="block px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-blue-600"> Reservas </a>
+                class="block px-4 py-2 text-white hover:text-blue-300"> Reservas </a>
             </div>
           </div>
 
             <!-- Botón Iniciar Sesión Desktop -->
             <a href="/src/views/login.html" id="login-button" class="bg-blue-600 text-white px-5 py-2 rounded-md hover:bg-blue-700 transition-colors duration-200 font-medium">Iniciar Sesión</a>
             
-            <!-- Menú de Usuario Logueado (Minimalista) -->
+            <!-- Menú de Usuario Logueado -->
             <div id="user-menu" class="hidden items-center space-x-6">
-              <a href="/src/views/perfil.html" class="flex items-center text-gray-600 hover:text-blue-600 font-medium transition-colors duration-200">
+              <a href="/src/views/perfil.html" class="flex items-center text-white hover:text-blue-600 font-medium transition-colors duration-200">
                 Mi Perfil
               </a>
               <!-- Línea sutil -->
               <span class="w-px h-4 bg-gray-300"></span>
-              <button id="logout-button" class="flex items-center text-red-800 hover:text-red-600 font-medium transition-colors duration-200 group">
+              <button id="logout-button" class="flex items-center text-red-300 hover:text-red-600 font-medium transition-colors duration-200 group">
                 Cerrar Sesión
                 <svg class="h-4 w-4 ml-1.5 text-red-800 group-hover:text-red-500 transition-colors duration-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
@@ -92,7 +92,7 @@
 
           <!-- BOTÓN MENÚ MÓVIL -->
           <div class="md:hidden flex items-center">
-            <button id="mobile-menu-button" class="text-gray-600 hover:text-blue-600 focus:outline-none transition-colors">
+            <button id="mobile-menu-button" class="text-gray-600 hover:text-blue-600 focus:outline-none transition-colors" onclick="toggleMobileMenu()">
               <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path id="menu-icon-path" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
               </svg>
@@ -128,7 +128,7 @@
             <!-- Menú Logueado Móvil -->
             <div id="mobile-user-menu" class="hidden flex-col space-y-4">
               <a href="/src/views/perfil.html" class="text-gray-600 hover:text-blue-600">Mi Perfil</a>
-              <button id="mobile-logout-button" class="flex items-center text-gray-600 hover:text-red-600 transition-colors text-left">
+              <button id="mobile-logout-button" class="flex items-center text-red-800 hover:text-red-600 transition-colors text-left">
                 Cerrar Sesión
                 <svg class="h-4 w-4 ml-1.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
@@ -139,69 +139,6 @@
         </div>
       </div>
     </nav>
-
-    <!-- JavaScript para manejar la interfaz -->
-    <script>
-      // 1. MENU MÓVIL
-      const btnMobileMenu = document.getElementById('mobile-menu-button');
-      const mobileMenu = document.getElementById('mobile-menu');
-      const iconPath = document.getElementById('menu-icon-path');
-
-      btnMobileMenu.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
-        if (mobileMenu.classList.contains('hidden')) {
-          iconPath.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
-        } else {
-          iconPath.setAttribute('d', 'M6 18L18 6M6 6l12 12');
-        }
-      });
-
-      // 2. LÓGICA DE SESIÓN
-      function setUIStatus(isLoggedIn, isAdmin = false) {
-        const loginBtn = document.getElementById('login-button');
-        const userMenu = document.getElementById('user-menu');
-        const navMisReservas = document.getElementById('nav-mis-reservas');
-        const adminPanel = document.getElementById('admin-panel');
-
-        const mobileLoginBtn = document.getElementById('mobile-login-button');
-        const mobileUserMenu = document.getElementById('mobile-user-menu');
-        const mobileNavMisReservas = document.getElementById('mobile-nav-mis-reservas');
-        const mobileAdminPanel = document.getElementById('mobile-admin-panel');
-
-        if (isLoggedIn) {
-          loginBtn.classList.add('hidden');
-          mobileLoginBtn.classList.add('hidden');
-          
-          userMenu.classList.remove('hidden');
-          userMenu.classList.add('flex');
-          mobileUserMenu.classList.remove('hidden');
-          mobileUserMenu.classList.add('flex');
-
-          navMisReservas.classList.remove('hidden');
-          mobileNavMisReservas.classList.remove('hidden');
-
-          if (isAdmin) {
-            adminPanel.classList.remove('hidden');
-            mobileAdminPanel.classList.remove('hidden');
-            mobileAdminPanel.classList.add('flex');
-          }
-        } else {
-          userMenu.classList.add('hidden');
-          userMenu.classList.remove('flex');
-          mobileUserMenu.classList.add('hidden');
-          mobileUserMenu.classList.remove('flex');
-          
-          loginBtn.classList.remove('hidden');
-          mobileLoginBtn.classList.remove('hidden');
-
-          navMisReservas.classList.add('hidden');
-          mobileNavMisReservas.classList.add('hidden');
-          adminPanel.classList.add('hidden');
-          mobileAdminPanel.classList.add('hidden');
-          mobileAdminPanel.classList.remove('flex');
-        }
-      }
-    </script>
 
     <!-- CONTENIDO DE AEROLÍNEAS -->
     <main class="pt-24 pb-12">
@@ -346,191 +283,249 @@
       </div>
     </footer>
 
-    <!-- LÓGICA DE LA PÁGINA -->
+    <!-- LÓGICA DE SESIÓN Y LÓGICA DE LA PÁGINA (TODO UNIFICADO) -->
     <script>
-document.addEventListener('DOMContentLoaded', () => {
-    const user = JSON.parse(localStorage.getItem('currentUser'));
-    if (!user || user.rol !== "Administrador") { 
-        alert('Acceso denegado. Esta sección es solo para administradores.');
-        window.location.href = '/src/views/home.html';
-        return;
-    }
+      // 1. MENU MÓVIL 
+      function toggleMobileMenu() {
+        const mobileMenu = document.getElementById('mobile-menu');
+        const iconPath = document.getElementById('menu-icon-path');
 
-    const tableBody = document.getElementById('table-body');
-    const addButton = document.getElementById('add-button');
-    const modal = document.getElementById('modal');
-    const closeModalButton = document.getElementById('close-modal-button');
-    const cancelButton = document.getElementById('cancel-button');
-    const modalTitle = document.getElementById('modal-title');
-    const form = document.getElementById('modal-form');
-    
-    let isEditMode = false;
-    let currentId = null;
-
-    // READ - listar aerolíneas
-    const fetchData = async () => {
-        try {
-            const response = await fetch('https://reserva-vuelos-backend.onrender.com/aerolineas');
-            const data = await response.json();
-            
-            tableBody.innerHTML = '';
-            if (!response.ok || data.length === 0) {
-                 tableBody.innerHTML = `<tr><td colspan="6" class="text-center p-8 text-gray-500">No hay aerolíneas activas registradas.</td></tr>`;
-                 return;
-            }
-
-            data.forEach(item => {
-                const row = `
-                    <tr class="hover:bg-gray-50">
-                        <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">${item.nombre_aerolinea}</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-gray-600">${item.codigo_aerolinea}</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-gray-600">${item.correo_aerolinea || 'N/A'}</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-gray-600">${item.telefono_aerolinea || 'N/A'}</td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">${item.estado}</span>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-2">
-                            <button class="edit-btn text-blue-600 hover:text-blue-900 font-semibold" data-id="${item.id_aerolinea}">Editar</button>
-                            <button class="delete-btn text-red-600 hover:text-red-900 font-semibold" data-id="${item.id_aerolinea}">Eliminar</button>
-                        </td>
-                    </tr>
-                `;
-                tableBody.innerHTML += row;
-            });
-        } catch (error) {
-            console.error('Error fetching data:', error);
-            tableBody.innerHTML = `<tr><td colspan="6" class="text-center p-8 text-red-500">No se pudo conectar al servidor.</td></tr>`;
+        if (mobileMenu) {
+          mobileMenu.classList.toggle('hidden');
+          if (mobileMenu.classList.contains('hidden')) {
+            iconPath.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
+          } else {
+            iconPath.setAttribute('d', 'M6 18L18 6M6 6l12 12');
+          }
         }
-    };
-    
-    // abrir modal en modo crear o editar
-    const openModal = async (mode, id = null) => {
-        isEditMode = mode === 'edit';
-        currentId = id;
-        form.reset();
-        modalTitle.textContent = isEditMode ? 'Editar Aerolínea' : 'Agregar Aerolínea';
+      }
 
-        if (isEditMode && id) {
-            try {
-                const res = await fetch(`https://reserva-vuelos-backend.onrender.com/aerolineas/${id}`);
-                const data = await res.json();
-                if (!res.ok) throw new Error(data.message);
-                
-                document.getElementById('nombre_aerolinea').value = data.nombre_aerolinea;
-                document.getElementById('codigo_aerolinea').value = data.codigo_aerolinea;
-                document.getElementById('correo_aerolinea').value = data.correo_aerolinea || '';
-                document.getElementById('telefono_aerolinea').value = data.telefono_aerolinea || '';
-                document.getElementById('direccion_aerolinea').value = data.direccion_aerolinea || '';
-            } catch (error) {
-                alert(`⚠️ Error al cargar datos: ${error.message}`);
-                return;
-            }
-        }
-        modal.classList.remove('hidden');
-    };
-
-    // cerrar modal
-    const closeModal = () => modal.classList.add('hidden');
-
-    // submit crear/editar
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const formData = {
-            nombre_aerolinea: document.getElementById('nombre_aerolinea').value.trim(),
-            codigo_aerolinea: document.getElementById('codigo_aerolinea').value.trim(),
-            correo_aerolinea: document.getElementById('correo_aerolinea').value.trim(),
-            telefono_aerolinea: document.getElementById('telefono_aerolinea').value.trim(),
-            direccion_aerolinea: document.getElementById('direccion_aerolinea').value.trim(),
-        };
-
-        const url = isEditMode
-            ? `https://reserva-vuelos-backend.onrender.com/update-aerolinea/${currentId}`
-            : 'https://reserva-vuelos-backend.onrender.com/create-aerolinea';
-
-        const method = isEditMode ? 'PUT' : 'POST';
-
-        try {
-            const response = await fetch(url, {
-                method,
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData)
-            });
-            const result = await response.json();
-            if (!response.ok) throw new Error(result.message);
-            
-            alert(`✅ ${result.message}`);
-            closeModal();
-            fetchData();
-        } catch (error) {
-            alert(`⚠️ Error: ${error.message}`);
-        }
-    });
-
-    // acciones editar / eliminar (delete = desactivar lógicamente)
-    tableBody.addEventListener('click', async (e) => {
-        const target = e.target;
-        if (target.classList.contains('delete-btn')) {
-            const id = target.dataset.id;
-            if (confirm('¿Estás seguro de que deseas desactivar esta aerolínea?')) {
-                try {
-                    const response = await fetch(`https://reserva-vuelos-backend.onrender.com/delete-aerolinea/${id}`, { method: 'DELETE' });
-                    const result = await response.json();
-                    if (!response.ok) throw new Error(result.message);
-                    
-                    alert(`✅ ${result.message}`);
-                    fetchData();
-                } catch (error) {
-                    alert(`⚠️ Error: ${error.message}`);
-                }
-            }
-        }
-        if (target.classList.contains('edit-btn')) {
-             openModal('edit', target.dataset.id);
-        }
-    });
-
-    addButton.addEventListener('click', () => openModal('create'));
-    closeModalButton.addEventListener('click', closeModal);
-    cancelButton.addEventListener('click', closeModal);
-
-    // inicializar tabla
-    fetchData();
-
-    // ------ sincronizar navbar/footer con sesión y rol admin ------
-    (function syncSessionUI() {
-        let u = null;
+      document.addEventListener('DOMContentLoaded', () => {
+        
+        // ==========================================
+        // PARTE 1: VERIFICACIÓN Y RENDERIZADO DE SESIÓN
+        // ==========================================
+        let user = null;
         try {
           const raw = localStorage.getItem("currentUser");
-          if (raw) u = JSON.parse(raw);
-        } catch (e) {}
+          if (raw) user = JSON.parse(raw);
+        } catch (e) {
+          console.error("Error al leer el usuario del localStorage", e);
+        }
 
+        // Lógica de seguridad súper flexible 
+        const datosPersonales = user ? (user.usuario || user.user || user.data || user) : null;
+        const rolDetectado = datosPersonales ? (datosPersonales.id_rol || datosPersonales.rol || datosPersonales.rol_id || datosPersonales.idRol) : null;
+        const isAdmin = (rolDetectado == 2 || rolDetectado === 'admin' || rolDetectado === 'Administrador'); 
+
+        // Si NO es admin, lo mandamos al home inmediatamente
+        if (!isAdmin) {
+            alert('Acceso denegado. Esta sección es solo para administradores.');
+            window.location.href = '/src/views/home.html';
+            return;
+        }
+
+        // Elementos Generales
         const navMisReservas = document.getElementById("nav-mis-reservas");
         const footerMisReservas = document.getElementById("footer-mis-reservas");
+        
+        // Elementos Desktop
         const loginBtn = document.getElementById("login-button");
         const userMenu = document.getElementById("user-menu");
         const adminPanel = document.getElementById("admin-panel");
+        const logoutBtnDesktop = document.getElementById("logout-button");
+        
+        // Elementos Móvil
+        const mobileNavMisReservas = document.getElementById("mobile-nav-mis-reservas");
+        const mobileLoginBtn = document.getElementById("mobile-login-button");
+        const mobileUserMenu = document.getElementById("mobile-user-menu");
+        const mobileAdminPanel = document.getElementById("mobile-admin-panel");
+        const logoutBtnMobile = document.getElementById("mobile-logout-button");
 
-        if (u && u.id_usuario) {
+        if (user && user.id_usuario) {
+          // Usuario autenticado
           if (navMisReservas) navMisReservas.classList.remove("hidden");
           if (footerMisReservas) footerMisReservas.classList.remove("hidden");
-
           if (loginBtn) loginBtn.classList.add("hidden");
-          if (userMenu) userMenu.classList.remove("hidden");
+          if (userMenu) { userMenu.classList.remove("hidden"); userMenu.classList.add("flex"); }
+          if (mobileNavMisReservas) mobileNavMisReservas.classList.remove("hidden");
+          if (mobileLoginBtn) mobileLoginBtn.classList.add("hidden");
+          if (mobileUserMenu) { mobileUserMenu.classList.remove("hidden"); mobileUserMenu.classList.add("flex"); }
 
-          if (adminPanel && u.rol === "Administrador") {
-            adminPanel.classList.remove("hidden");
+          // Mostrar panel admin 
+          if (adminPanel) adminPanel.classList.remove("hidden");
+          if (mobileAdminPanel) { 
+              mobileAdminPanel.classList.remove("hidden"); 
+              mobileAdminPanel.classList.add("flex"); 
           }
         } else {
+          // Usuario no autenticado 
           if (navMisReservas) navMisReservas.classList.add("hidden");
           if (footerMisReservas) footerMisReservas.classList.add("hidden");
-
           if (loginBtn) loginBtn.classList.remove("hidden");
-          if (userMenu) userMenu.classList.add("hidden");
+          if (userMenu) { userMenu.classList.add("hidden"); userMenu.classList.remove("flex"); }
+          if (mobileNavMisReservas) mobileNavMisReservas.classList.add("hidden");
+          if (mobileLoginBtn) mobileLoginBtn.classList.remove("hidden");
+          if (mobileUserMenu) { mobileUserMenu.classList.add("hidden"); mobileUserMenu.classList.remove("flex"); }
+          if (adminPanel) adminPanel.classList.add("hidden");
+          if (mobileAdminPanel) { mobileAdminPanel.classList.add("hidden"); mobileAdminPanel.classList.remove("flex"); }
         }
-    })();
 
-});
+        // Cerrar Sesión
+        const handleLogout = function(e) {
+            e.preventDefault(); 
+            localStorage.removeItem("currentUser"); 
+            localStorage.removeItem("token"); 
+            window.location.href = "/src/views/home.html"; 
+        };
+        if (logoutBtnDesktop) logoutBtnDesktop.addEventListener("click", handleLogout);
+        if (logoutBtnMobile) logoutBtnMobile.addEventListener("click", handleLogout);
+
+
+        // ==========================================
+        // PARTE 2: LÓGICA CRUD (GESTIÓN DE AEROLÍNEAS)
+        // ==========================================
+        const tableBody = document.getElementById('table-body');
+        const addButton = document.getElementById('add-button');
+        const modal = document.getElementById('modal');
+        const closeModalButton = document.getElementById('close-modal-button');
+        const cancelButton = document.getElementById('cancel-button');
+        const modalTitle = document.getElementById('modal-title');
+        const form = document.getElementById('modal-form');
+        
+        let isEditMode = false;
+        let currentId = null;
+
+        // READ - listar aerolíneas
+        const fetchData = async () => {
+            try {
+                const response = await fetch('https://reserva-vuelos-backend.onrender.com/aerolineas');
+                const data = await response.json();
+                
+                tableBody.innerHTML = '';
+                if (!response.ok || data.length === 0) {
+                     tableBody.innerHTML = `<tr><td colspan="6" class="text-center p-8 text-gray-500">No hay aerolíneas activas registradas.</td></tr>`;
+                     return;
+                }
+
+                data.forEach(item => {
+                    const row = `
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">${item.nombre_aerolinea}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-gray-600">${item.codigo_aerolinea}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-gray-600">${item.correo_aerolinea || 'N/A'}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-gray-600">${item.telefono_aerolinea || 'N/A'}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">${item.estado}</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-2">
+                                <button class="edit-btn text-blue-600 hover:text-blue-900 font-semibold" data-id="${item.id_aerolinea}">Editar</button>
+                                <button class="delete-btn text-red-600 hover:text-red-900 font-semibold" data-id="${item.id_aerolinea}">Eliminar</button>
+                            </td>
+                        </tr>
+                    `;
+                    tableBody.innerHTML += row;
+                });
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                tableBody.innerHTML = `<tr><td colspan="6" class="text-center p-8 text-red-500">No se pudo conectar al servidor.</td></tr>`;
+            }
+        };
+        
+        // abrir modal en modo crear o editar
+        const openModal = async (mode, id = null) => {
+            isEditMode = mode === 'edit';
+            currentId = id;
+            form.reset();
+            modalTitle.textContent = isEditMode ? 'Editar Aerolínea' : 'Agregar Aerolínea';
+
+            if (isEditMode && id) {
+                try {
+                    const res = await fetch(`https://reserva-vuelos-backend.onrender.com/aerolineas/${id}`);
+                    const data = await res.json();
+                    if (!res.ok) throw new Error(data.message);
+                    
+                    document.getElementById('nombre_aerolinea').value = data.nombre_aerolinea;
+                    document.getElementById('codigo_aerolinea').value = data.codigo_aerolinea;
+                    document.getElementById('correo_aerolinea').value = data.correo_aerolinea || '';
+                    document.getElementById('telefono_aerolinea').value = data.telefono_aerolinea || '';
+                    document.getElementById('direccion_aerolinea').value = data.direccion_aerolinea || '';
+                } catch (error) {
+                    alert(`⚠️ Error al cargar datos: ${error.message}`);
+                    return;
+                }
+            }
+            modal.classList.remove('hidden');
+        };
+
+        // cerrar modal
+        const closeModal = () => modal.classList.add('hidden');
+
+        // submit crear/editar
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = {
+                nombre_aerolinea: document.getElementById('nombre_aerolinea').value.trim(),
+                codigo_aerolinea: document.getElementById('codigo_aerolinea').value.trim(),
+                correo_aerolinea: document.getElementById('correo_aerolinea').value.trim(),
+                telefono_aerolinea: document.getElementById('telefono_aerolinea').value.trim(),
+                direccion_aerolinea: document.getElementById('direccion_aerolinea').value.trim(),
+            };
+
+            const url = isEditMode
+                ? `https://reserva-vuelos-backend.onrender.com/update-aerolinea/${currentId}`
+                : 'https://reserva-vuelos-backend.onrender.com/create-aerolinea';
+
+            const method = isEditMode ? 'PUT' : 'POST';
+
+            try {
+                const response = await fetch(url, {
+                    method,
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+                const result = await response.json();
+                if (!response.ok) throw new Error(result.message);
+                
+                alert(`✅ ${result.message}`);
+                closeModal();
+                fetchData();
+            } catch (error) {
+                alert(`⚠️ Error: ${error.message}`);
+            }
+        });
+
+        // acciones editar / eliminar
+        tableBody.addEventListener('click', async (e) => {
+            const target = e.target;
+            if (target.classList.contains('delete-btn')) {
+                const id = target.dataset.id;
+                if (confirm('¿Estás seguro de que deseas desactivar esta aerolínea?')) {
+                    try {
+                        const response = await fetch(`https://reserva-vuelos-backend.onrender.com/delete-aerolinea/${id}`, { method: 'DELETE' });
+                        const result = await response.json();
+                        if (!response.ok) throw new Error(result.message);
+                        
+                        alert(`✅ ${result.message}`);
+                        fetchData();
+                    } catch (error) {
+                        alert(`⚠️ Error: ${error.message}`);
+                    }
+                }
+            }
+            if (target.classList.contains('edit-btn')) {
+                 openModal('edit', target.dataset.id);
+            }
+        });
+
+        addButton.addEventListener('click', () => openModal('create'));
+        closeModalButton.addEventListener('click', closeModal);
+        cancelButton.addEventListener('click', closeModal);
+
+        // inicializar tabla
+        fetchData();
+
+      });
     </script>
-
 </body>
 </html>

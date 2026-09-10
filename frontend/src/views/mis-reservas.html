@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <title>Mis reservas - AereoSky</title>
 
-    <!-- Igual que home.html -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="/src/services/auth.js" defer></script>
     <link
@@ -35,37 +34,32 @@
   </head>
 
   <body class="bg-gray-100 text-gray-800 min-h-screen flex flex-col">
-  <!-- NAVBAR -->
-    <nav class="bg-white shadow-sm fixed w-full z-20 top-0 border-b border-gray-100">
+    <nav class="bg-zinc-950 shadow-sm fixed w-full z-20 top-0 border-b border-gray-800">
       <div class="container mx-auto px-6 py-4">
         <div class="flex items-center justify-between">
           
-          <!-- 1. LOGO -->
           <div class="flex items-center">
             <svg class="h-8 w-8 text-blue-600 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
             </svg>
-            <a href="/src/views/home.html" class="text-2xl font-bold text-gray-800 tracking-tight">AereoSky</a>
+            <a href="/src/views/home.html" class="text-2xl font-bold text-white tracking-tight">AereoSky</a>
           </div>
 
-          <!-- 2. ENLACES PRINCIPALES -->
           <div class="hidden md:flex items-center space-x-8 text-sm font-medium">
-            <a href="/src/views/home.html" class="text-gray-600 hover:text-blue-600 transition-colors duration-200">Explorar</a>
-            <a href="/src/views/consulta-vuelos.html" class="text-gray-600 hover:text-blue-600 transition-colors duration-200">Vuelos</a>
-            <a href="/src/views/mis-reservas.html" id="nav-mis-reservas" class="hidden text-gray-600 hover:text-blue-600 transition-colors duration-200">Mis Reservas</a>
-            <a href="/src/views/contacto.html" class="text-gray-600 hover:text-blue-600 transition-colors duration-200">Contacto</a>
+            <a href="/src/views/home.html" class="text-white hover:text-blue-600 transition-colors duration-200">Explorar</a>
+            <a href="/src/views/consulta-vuelos.html" class="text-white hover:text-blue-600 transition-colors duration-200">Vuelos</a>
+            <a href="/src/views/mis-reservas.html" id="nav-mis-reservas" class="hidden text-white hover:text-blue-600 transition-colors duration-200">Mis Reservas</a>
+            <a href="/src/views/contacto.html" class="text-white hover:text-blue-600 transition-colors duration-200">Contacto</a>
           </div>
 
-          <!-- 3. ADMIN Y SESIÓN -->
           <div class="hidden md:flex items-center space-x-6 text-sm">
             
-          <!-- Admin Panel Desktop -->
           <div id="admin-panel" class="hidden relative">
-
             <button
               type="button"
               id="admin-panel-button"
-              class="flex items-center text-gray-600 font-medium hover:text-blue-600 transition-colors duration-200">
+              class="flex items-center text-white font-medium hover:text-blue-600 transition-colors duration-200"
+            >
               <span>Administración</span>
               <svg class="h-4 w-4 ml-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -73,35 +67,28 @@
             </button>
 
             <div id="admin-panel-menu"
-              class="hidden absolute right-0 top-full mt-3 w-48 bg-white rounded-md shadow-lg border border-gray-100 z-50 py-1">
+              class="hidden absolute right-0 top-full mt-3 w-48 bg-gray-900 rounded-md shadow-lg">
               <a href="/src/views/aviones.html"
-                class="block px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-blue-600"> Aviones </a>
-
+                class="block px-4 py-2 text-white hover:text-blue-300"> Aviones </a>
               <a href="/src/views/aerolineas.html"
-                class="block px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-blue-600"> Aerolíneas </a>
-
+                class="block px-4 py-2 text-white hover:text-blue-300"> Aerolíneas </a>
               <a href="/src/views/fabricantes.html"
-                class="block px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-blue-600"> Fabricantes </a>
-
+                class="block px-4 py-2 text-white hover:text-blue-300"> Fabricantes </a>
               <a href="/src/views/usuarios.html"
-                class="block px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-blue-600"> Usuarios </a>
-
+                class="block px-4 py-2 text-white hover:text-blue-300"> Usuarios </a>
               <a href="/src/views/reservas.html"
-                class="block px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-blue-600"> Reservas </a>
+                class="block px-4 py-2 text-white hover:text-blue-300"> Reservas </a>
             </div>
           </div>
 
-            <!-- Botón Iniciar Sesión Desktop -->
             <a href="/src/views/login.html" id="login-button" class="bg-blue-600 text-white px-5 py-2 rounded-md hover:bg-blue-700 transition-colors duration-200 font-medium">Iniciar Sesión</a>
             
-            <!-- Menú de Usuario Logueado (Minimalista) -->
             <div id="user-menu" class="hidden items-center space-x-6">
-              <a href="/src/views/perfil.html" class="flex items-center text-gray-600 hover:text-blue-600 font-medium transition-colors duration-200">
+              <a href="/src/views/perfil.html" class="flex items-center text-white hover:text-blue-600 font-medium transition-colors duration-200">
                 Mi Perfil
               </a>
-              <!-- Línea sutil -->
               <span class="w-px h-4 bg-gray-300"></span>
-              <button id="logout-button" class="flex items-center text-red-800 hover:text-red-600 font-medium transition-colors duration-200 group">
+              <button id="logout-button" class="flex items-center text-red-200 hover:text-red-600 font-medium transition-colors duration-200 group">
                 Cerrar Sesión
                 <svg class="h-4 w-4 ml-1.5 text-red-800 group-hover:text-red-500 transition-colors duration-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
@@ -110,7 +97,6 @@
             </div>
           </div>
 
-          <!-- BOTÓN MENÚ MÓVIL -->
           <div class="md:hidden flex items-center">
             <button id="mobile-menu-button" class="text-gray-600 hover:text-blue-600 focus:outline-none transition-colors">
               <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -122,7 +108,6 @@
         </div>
       </div>
 
-      <!-- MENÚ MÓVIL DESPLEGABLE -->
       <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 shadow-lg">
         <div class="px-6 py-5 flex flex-col space-y-4 text-sm font-medium">
           <a href="/src/views/home.html" class="text-gray-600 hover:text-blue-600">Explorar</a>
@@ -130,7 +115,6 @@
           <a href="/src/views/mis-reservas.html" id="mobile-nav-mis-reservas" class="hidden text-gray-600 hover:text-blue-600">Mis Reservas</a>
           <a href="/src/views/contacto.html" class="text-gray-600 hover:text-blue-600">Contacto</a>
 
-          <!-- Admin Panel Móvil -->
           <div id="mobile-admin-panel" class="hidden flex-col space-y-3 pt-4 border-t border-gray-100">
             <span class="text-gray-400 uppercase tracking-wider text-xs font-semibold">Administración</span>
             <a href="/src/views/aviones.html" class="text-gray-600 hover:text-blue-600">Aviones</a>
@@ -140,15 +124,12 @@
             <a href="/src/views/reservas.html" class="text-gray-600 hover:text-blue-600">Reservas</a>
           </div>
 
-          <!-- Botones Sesión Móvil -->
           <div class="pt-4 border-t border-gray-100 flex flex-col space-y-4">
-            <!-- Iniciar Sesión Móvil -->
             <a href="/src/views/login.html" id="mobile-login-button" class="bg-blue-600 text-white text-center px-5 py-2.5 rounded-md hover:bg-blue-700 transition-colors">Iniciar Sesión</a>
             
-            <!-- Menú Logueado Móvil -->
             <div id="mobile-user-menu" class="hidden flex-col space-y-4">
               <a href="/src/views/perfil.html" class="text-gray-600 hover:text-blue-600">Mi Perfil</a>
-              <button id="mobile-logout-button" class="flex items-center text-gray-600 hover:text-red-600 transition-colors text-left">
+              <button id="mobile-logout-button" class="flex items-center text-red-800 hover:text-red-600 transition-colors text-left">
                 Cerrar Sesión
                 <svg class="h-4 w-4 ml-1.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
@@ -160,124 +141,57 @@
       </div>
     </nav>
 
-    <!-- JavaScript para manejar la interfaz -->
-    <script>
-      // 1. MENU MÓVIL
-      const btnMobileMenu = document.getElementById('mobile-menu-button');
-      const mobileMenu = document.getElementById('mobile-menu');
-      const iconPath = document.getElementById('menu-icon-path');
-
-      btnMobileMenu.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
-        if (mobileMenu.classList.contains('hidden')) {
-          iconPath.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
-        } else {
-          iconPath.setAttribute('d', 'M6 18L18 6M6 6l12 12');
-        }
-      });
-
-      // 2. LÓGICA DE SESIÓN
-      function setUIStatus(isLoggedIn, isAdmin = false) {
-        const loginBtn = document.getElementById('login-button');
-        const userMenu = document.getElementById('user-menu');
-        const navMisReservas = document.getElementById('nav-mis-reservas');
-        const adminPanel = document.getElementById('admin-panel');
-
-        const mobileLoginBtn = document.getElementById('mobile-login-button');
-        const mobileUserMenu = document.getElementById('mobile-user-menu');
-        const mobileNavMisReservas = document.getElementById('mobile-nav-mis-reservas');
-        const mobileAdminPanel = document.getElementById('mobile-admin-panel');
-
-        if (isLoggedIn) {
-          loginBtn.classList.add('hidden');
-          mobileLoginBtn.classList.add('hidden');
-          
-          userMenu.classList.remove('hidden');
-          userMenu.classList.add('flex');
-          mobileUserMenu.classList.remove('hidden');
-          mobileUserMenu.classList.add('flex');
-
-          navMisReservas.classList.remove('hidden');
-          mobileNavMisReservas.classList.remove('hidden');
-
-          if (isAdmin) {
-            adminPanel.classList.remove('hidden');
-            mobileAdminPanel.classList.remove('hidden');
-            mobileAdminPanel.classList.add('flex');
-          }
-        } else {
-          userMenu.classList.add('hidden');
-          userMenu.classList.remove('flex');
-          mobileUserMenu.classList.add('hidden');
-          mobileUserMenu.classList.remove('flex');
-          
-          loginBtn.classList.remove('hidden');
-          mobileLoginBtn.classList.remove('hidden');
-
-          navMisReservas.classList.add('hidden');
-          mobileNavMisReservas.classList.add('hidden');
-          adminPanel.classList.add('hidden');
-          mobileAdminPanel.classList.add('hidden');
-          mobileAdminPanel.classList.remove('flex');
-        }
-      }
-    </script>
-
-    <!-- CONTENIDO -->
-    <main class="pt-24 pb-16 container mx-auto px-6 max-w-6xl flex-1">
-      <div class="flex items-center justify-between mb-6">
+    <main class="pt-24 pb-16 container mx-auto px-4 sm:px-6 max-w-6xl flex-1 w-full">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-6 gap-2">
         <div>
-          <h1 class="text-2xl font-bold">Mis reservas</h1>
-          <p class="text-sm text-gray-500">
+          <h1 class="text-2xl sm:text-3xl font-bold">Mis reservas</h1>
+          <p class="text-sm text-gray-500 mt-1">
             Administra tus reservas: paga, cancela o solicita reenvío de
             documentos.
           </p>
         </div>
-        <div class="text-xs text-gray-500" id="mini-session"></div>
+        <div class="text-xs text-gray-500 bg-gray-200 px-3 py-1 rounded-md inline-block self-start sm:self-auto font-medium" id="mini-session"></div>
       </div>
 
-      <!-- Filtros locales -->
       <div class="bg-white rounded-xl shadow p-4 mb-6">
-        <div
-          class="flex flex-col md:flex-row md:items-end md:justify-between gap-4"
-        >
-          <div class="flex items-center gap-2">
+        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+          <div class="flex items-center gap-2 flex-wrap">
             <button
               data-scope="all"
-              class="tab-scope bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold"
+              class="tab-scope bg-blue-900 text-white px-4 py-2 rounded-lg font-semibold text-sm sm:text-base"
             >
               Todas
             </button>
             <button
               data-scope="Pendiente"
-              class="tab-scope bg-gray-100 text-gray-700 px-4 py-2 rounded-lg font-semibold hover:bg-gray-200"
+              class="tab-scope bg-gray-100 text-gray-700 px-4 py-2 rounded-lg font-semibold hover:bg-gray-200 text-sm sm:text-base transition-colors"
             >
               Pendientes
             </button>
             <button
               data-scope="Confirmada"
-              class="tab-scope bg-gray-100 text-gray-700 px-4 py-2 rounded-lg font-semibold hover:bg-gray-200"
+              class="tab-scope bg-gray-100 text-gray-700 px-4 py-2 rounded-lg font-semibold hover:bg-gray-200 text-sm sm:text-base transition-colors"
             >
               Confirmadas
             </button>
             <button
               data-scope="Cancelada"
-              class="tab-scope bg-gray-100 text-gray-700 px-4 py-2 rounded-lg font-semibold hover:bg-gray-200"
+              class="tab-scope bg-gray-100 text-gray-700 px-4 py-2 rounded-lg font-semibold hover:bg-gray-200 text-sm sm:text-base transition-colors"
             >
               Canceladas
             </button>
           </div>
 
-          <div class="flex items-center gap-3">
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full lg:w-auto">
             <input
               id="txtBuscar"
               type="text"
-              placeholder="Buscar por ruta, aerolínea o #reserva"
-              class="w-64 border border-gray-300 rounded-md px-3 py-2 focus:ring-blue-500 focus:border-blue-500"
+              placeholder="Buscar ruta, aerolínea o #reserva"
+              class="w-full sm:w-64 border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-blue-500 focus:border-blue-500"
             />
             <select
               id="ordenResultados"
-              class="border border-gray-300 rounded-md px-2 py-2"
+              class="w-full sm:w-auto border border-gray-300 rounded-md px-2 py-2 text-sm"
             >
               <option value="recientes">Más recientes</option>
               <option value="antiguas">Más antiguas</option>
@@ -286,21 +200,16 @@
         </div>
       </div>
 
-      <!-- Contador -->
-      <div class="flex items-center justify-between mb-2">
-        <div class="text-sm text-gray-500" id="lblResumenLista"></div>
-        <div class="text-sm text-gray-500" id="lblErrores"></div>
+      <div class="flex items-center justify-between mb-3 px-1">
+        <div class="text-sm font-medium text-gray-500" id="lblResumenLista"></div>
+        <div class="text-sm font-medium text-red-500" id="lblErrores"></div>
       </div>
 
-      <!-- Lista -->
-      <div id="listaReservas" class="grid gap-4">
-        <!-- tarjetas dinámicas -->
+      <div id="listaReservas" class="grid gap-4 w-full">
       </div>
     </main>
 
-    <!-- FOOTER (copiado de home.html) -->
-    <!-- FOOTER -->
-    <footer class="bg-slate-900 text-white py-12 border-t border-slate-800">
+    <footer class="bg-slate-900 text-white py-12 border-t border-slate-800 mt-auto">
       <div class="container mx-auto px-6">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div>
@@ -357,9 +266,22 @@
       </div>
     </footer>
 
-    <!-- SCRIPT PRINCIPAL DE LA PÁGINA -->
     <script>
-      // -------- utilidades ----------
+      const btnMobileMenu = document.getElementById('mobile-menu-button');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const iconPath = document.getElementById('menu-icon-path');
+
+      if(btnMobileMenu) {
+        btnMobileMenu.addEventListener('click', () => {
+          mobileMenu.classList.toggle('hidden');
+          if (mobileMenu.classList.contains('hidden')) {
+            iconPath.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
+          } else {
+            iconPath.setAttribute('d', 'M6 18L18 6M6 6l12 12');
+          }
+        });
+      }
+
       function onlyDigits(s) {
         return String(s || "").replace(/\D/g, "");
       }
@@ -380,7 +302,7 @@
         return {
           fecha: d.toLocaleDateString("es-EC", {
             year: "numeric",
-            month: "long",
+            month: "short",
             day: "numeric",
           }),
           hora: d.toLocaleTimeString("es-EC", {
@@ -409,544 +331,433 @@
         );
       }
 
-      // -------- estado global ----------
-      var currentUser = null;
-      try {
-        var raw = localStorage.getItem("currentUser");
-        if (raw) currentUser = JSON.parse(raw);
-      } catch (e) {}
-      var miniSession = document.getElementById("mini-session");
-      if (currentUser) {
-        miniSession.textContent =
-          "Sesión: " +
-          (currentUser.correo ||
-            currentUser.email ||
-            "Usuario #" + currentUser.id_usuario);
-      } else {
-        miniSession.textContent = "No autenticado";
-      }
-
-      var listaEl = document.getElementById("listaReservas");
-      var lblResumen = document.getElementById("lblResumenLista");
-      var lblErrores = document.getElementById("lblErrores");
-      var txtBuscar = document.getElementById("txtBuscar");
-      var ordenSelect = document.getElementById("ordenResultados");
-      var scopeBtns = [].slice.call(document.querySelectorAll(".tab-scope"));
-
-      var reservasRaw = []; // como vienen del backend
-      var reservasView = []; // proyectadas para la UI
-      var scope = "all";
-
-      // -------- fetch helper ----------
-      async function fetchJSON(url, options) {
-        try {
-          var r = await fetch(url, options || {});
-          var j = await r.json();
-          return { ok: r.ok, data: j };
-        } catch (err) {
-          return { ok: false, data: { message: "Error de conexión" } };
-        }
-      }
-
-      // -------- back: listar reservas del usuario ----------
-      async function cargarReservasUsuario(idUsuario) {
-        var try1 = await fetchJSON(
-          "https://reserva-vuelos-backend.onrender.com/usuario/" + idUsuario
-        );
-        if (try1.ok && Array.isArray(try1.data)) return try1.data;
-
-        var try2 = await fetchJSON(
-          "https://reserva-vuelos-backend.onrender.com/usuarios/" + idUsuario + "/reservas"
-        );
-        if (try2.ok && Array.isArray(try2.data)) return try2.data;
-
-        var try3 = await fetchJSON(
-          "https://reserva-vuelos-backend.onrender.com/reservas?usuario=" +
-            encodeURIComponent(idUsuario)
-        );
-        if (try3.ok && Array.isArray(try3.data)) return try3.data;
-
-        throw new Error(
-          (try1.data && try1.data.message) ||
-            (try2.data && try2.data.message) ||
-            (try3.data && try3.data.message) ||
-            "No se pudieron obtener las reservas."
-        );
-      }
-
-      // -------- back: resumen / checkout de una reserva ----------
-      async function cargarResumenReserva(idReserva) {
-        var r = await fetchJSON("https://reserva-vuelos-backend.onrender.com/checkout/" + idReserva);
-        if (!r.ok)
-          throw new Error(
-            r.data && r.data.message
-              ? r.data.message
-              : "No se pudo cargar el detalle"
-          );
-        return r.data;
-      }
-
-      // -------- pintar tarjetas ----------
-      function pintarLista() {
-        // 1. aplicar filtro de estado (scope)
-        var arr = reservasView.filter(function (x) {
-          if (scope === "all") return true;
-          return (
-            String(x.estado || "").toLowerCase() === String(scope).toLowerCase()
-          );
-        });
-
-        // 2. filtro por texto
-        var q = txtBuscar.value.trim().toLowerCase();
-        if (q) {
-          arr = arr.filter(function (x) {
-            var ruta = (x.ruta || "").toLowerCase();
-            var aero = (x.aerolinea || "").toLowerCase();
-            var idr = String(x.id_reserva || "");
-            return (
-              ruta.indexOf(q) >= 0 ||
-              aero.indexOf(q) >= 0 ||
-              idr.indexOf(q) >= 0
-            );
-          });
-        }
-
-        // 3. ordenar por fecha (recientes / antiguas)
-        arr.sort(function (a, b) {
-          var sa = new Date(
-            a.fecha_raw || a.fecha_reserva || a.fecha_registro || 0
-          ).getTime();
-          var sb = new Date(
-            b.fecha_raw || b.fecha_reserva || b.fecha_registro || 0
-          ).getTime();
-          if (ordenSelect.value === "recientes") return sb - sa;
-          return sa - sb;
-        });
-
-        lblResumen.textContent = "(" + arr.length + " reservas)";
-
-        listaEl.innerHTML = "";
-        if (arr.length === 0) {
-          var vacio = document.createElement("div");
-          vacio.className =
-            "bg-white rounded-xl shadow p-6 text-center text-gray-500";
-          vacio.textContent =
-            "No hay reservas para mostrar con los filtros actuales.";
-          listaEl.appendChild(vacio);
-          return;
-        }
-
-        arr.forEach(function (r) {
-          var f = formatDateTime(
-            r.fecha_reserva || r.fecha_registro || r.fecha || r.fecha_raw
-          );
-          var ruta = r.ruta || "Ruta no disponible";
-          var aero = r.aerolinea
-            ? r.aerolinea +
-              (r.codigo_aerolinea ? " (" + r.codigo_aerolinea + ")" : "")
-            : "Aerolínea no disponible";
-
-          var card = document.createElement("div");
-          card.className =
-            "bg-white rounded-xl shadow border border-gray-200 p-5";
-          card.setAttribute("data-id", String(r.id_reserva));
-
-          var actionsHtml = "";
-          var estLower = String(r.estado || "").toLowerCase();
-
-          if (estLower === "pendiente") {
-            actionsHtml +=
-              '<a href="/src/views/compra.html?id_reserva=' +
-              r.id_reserva +
-              '" class="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-lg shadow mr-2">Pagar ahora</a>' +
-              '<button data-act="cancelar" class="inline-flex items-center bg-red-600 hover:bg-red-700 text-white font-semibold px-4 py-2 rounded-lg shadow">Cancelar</button>';
-          } else if (estLower === "confirmada") {
-            actionsHtml +=
-              '<button data-act="detalles" class="inline-flex items-center bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold px-4 py-2 rounded-lg shadow mr-2">Ver detalles</button>' +
-              '<button data-act="reenviar" class="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-lg shadow">Reenviar correo</button>';
-          } else {
-            actionsHtml +=
-              '<span class="text-sm text-gray-500">Sin acciones disponibles.</span>';
-          }
-
-          card.innerHTML =
-            '<div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">' +
-            "<div>" +
-            '<div class="flex items-center gap-2 text-lg font-semibold text-gray-900">' +
-            "<span>#" +
-            r.id_reserva +
-            "</span>" +
-            "<span>·</span>" +
-            "<span>" +
-            badgeEstado(r.estado || "") +
-            "</span>" +
-            "</div>" +
-            '<div class="text-sm text-gray-600 mt-1">' +
-            aero +
-            "</div>" +
-            '<div class="text-sm text-gray-700">' +
-            ruta +
-            "</div>" +
-            '<div class="text-xs text-gray-500 mt-1">Reserva de ' +
-            f.fecha +
-            " · " +
-            f.hora +
-            "</div>" +
-            "</div>" +
-            '<div class="flex-shrink-0">' +
-            actionsHtml +
-            "</div>" +
-            "</div>" +
-            '<div class="mt-4 hidden detalle-box">' +
-            '<div class="text-sm text-gray-700">Cargando detalles...</div>' +
-            "</div>";
-
-          // handlers de acciones
-          card.addEventListener("click", async function (ev) {
-            var t = ev.target;
-            if (!t || !t.getAttribute) return;
-            var act = t.getAttribute("data-act");
-            if (!act) return;
-
-            if (act === "cancelar") {
-              ev.preventDefault();
-              await cancelarReserva(r.id_reserva, card);
-            }
-            if (act === "detalles") {
-              ev.preventDefault();
-              await toggleDetalles(r.id_reserva, card);
-            }
-            if (act === "reenviar") {
-              ev.preventDefault();
-              await reenviarCorreo(r.id_reserva, card);
-            }
-          });
-
-          listaEl.appendChild(card);
-        });
-      }
-
-      // -------- ver detalles (expande tarjeta) ----------
-      async function toggleDetalles(idReserva, cardEl) {
-        var box = cardEl.querySelector(".detalle-box");
-        if (!box) return;
-
-        // si ya está visible -> colapsar
-        if (!box.classList.contains("hidden")) {
-          box.classList.add("hidden");
-          box.innerHTML =
-            '<div class="text-sm text-gray-700">Cargando detalles...</div>';
-          return;
-        }
-
-        // abrir y cargar data
-        box.classList.remove("hidden");
-        box.innerHTML =
-          '<div class="text-sm text-gray-500">Cargando detalles...</div>';
-
-        try {
-          var det = await cargarResumenReserva(idReserva);
-
-          // formateo fechas salida/llegada
-          var fs = formatDateTime(det.vuelo && det.vuelo.fecha_salida);
-          var fl = formatDateTime(det.vuelo && det.vuelo.fecha_llegada);
-
-          var html =
-            '<div class="grid md:grid-cols-2 gap-4">' +
-            "<div>" +
-            '<div class="text-xs uppercase text-gray-500">Ruta</div>' +
-            '<div class="font-medium">' +
-            (det.vuelo ? det.vuelo.origen + " → " + det.vuelo.destino : "N/D") +
-            "</div>" +
-            '<div class="text-xs text-gray-600">Aerolínea: ' +
-            (det.vuelo
-              ? det.vuelo.aerolinea + " (" + det.vuelo.codigo_aerolinea + ")"
-              : "N/D") +
-            "</div>" +
-            "</div>" +
-            '<div class="grid grid-cols-2 gap-4 text-sm">' +
-            "<div>" +
-            '<div class="text-xs text-gray-500 uppercase">Salida</div>' +
-            '<div class="font-medium">' +
-            fs.fecha +
-            "</div>" +
-            '<div class="text-gray-800">' +
-            fs.hora +
-            "</div>" +
-            "</div>" +
-            "<div>" +
-            '<div class="text-xs text-gray-500 uppercase">Llegada</div>' +
-            '<div class="font-medium">' +
-            fl.fecha +
-            "</div>" +
-            '<div class="text-gray-800">' +
-            fl.hora +
-            "</div>" +
-            "</div>" +
-            "</div>" +
-            "</div>" +
-            '<div class="mt-3 grid md:grid-cols-3 gap-4 text-sm">' +
-            "<div>" +
-            '<div class="text-xs text-gray-500 uppercase">Clase</div>' +
-            '<div class="font-medium">' +
-            (det.categoria ? det.categoria.nombre_categoria : "N/D") +
-            "</div>" +
-            "</div>" +
-            "<div>" +
-            '<div class="text-xs text-gray-500 uppercase">Subtotal</div>' +
-            '<div class="font-medium">$ ' +
-            (det.precios
-              ? Number(det.precios.monto_total).toFixed(2)
-              : "0.00") +
-            "</div>" +
-            "</div>" +
-            "<div>" +
-            '<div class="text-xs text-gray-500 uppercase">Total</div>' +
-            '<div class="font-bold text-blue-600">$ ' +
-            (det.precios
-              ? Number(det.precios.total_con_impuestos).toFixed(2)
-              : "0.00") +
-            "</div>" +
-            "</div>" +
-            "</div>" +
-            '<div class="mt-2 text-xs text-gray-500">Reserva #' +
-            det.id_reserva +
-            " · Estado " +
-            (det.estado_reserva || "N/D") +
-            "</div>";
-
-          box.innerHTML = html;
-        } catch (e) {
-          box.innerHTML =
-            '<div class="text-sm text-red-600">No se pudieron cargar los detalles: ' +
-            (e.message || "Error") +
-            "</div>";
-        }
-      }
-
-      // pide al backend el id_compra para una reserva dada
-      async function fetchIdCompraPorReserva(idReserva) {
-        const resp = await fetchJSON(
-          "https://reserva-vuelos-backend.onrender.com/compra/" + idReserva
-        );
-        if (!resp.ok) {
-          throw new Error(
-            resp.data && resp.data.message
-              ? resp.data.message
-              : "No se pudo obtener la compra asociada a la reserva."
-          );
-        }
-        if (!resp.data || !resp.data.id_compra) {
-          throw new Error("No existe compra asociada a esta reserva.");
-        }
-        return resp.data.id_compra;
-      }
-
-      // -------- reenviar correo (usa /correo-compra/:id_compra) ----------
-      async function reenviarCorreo(idReserva, cardEl) {
-        try {
-          // 1. obtener el id_compra real de esta reserva
-          const id_compra = await fetchIdCompraPorReserva(idReserva);
-
-          // 2. llamar al endpoint oficial:
-          //    router.post("/correo-compra/:id_compra", reenviarCorreoCompra);
-          const resp = await fetchJSON(
-            "https://reserva-vuelos-backend.onrender.com/correo-compra/" + id_compra,
-            { method: "POST" }
-          );
-
-          if (resp.ok) {
-            const msg =
-              resp.data && resp.data.message
-                ? resp.data.message
-                : "Correo reenviado correctamente.";
-            alert(msg);
-          } else {
-            const errMsg =
-              resp.data && resp.data.message
-                ? resp.data.message
-                : "Error al reenviar el correo de compra.";
-            alert(errMsg);
-          }
-        } catch (e) {
-          alert("No se pudo reenviar el correo: " + (e.message || "Error"));
-        }
-      }
-
-      // -------- cancelar reserva ----------
-      async function cancelarReserva(idReserva, cardEl) {
-        if (!confirm("¿Seguro que deseas cancelar esta reserva?")) return;
-
-        var ok = false,
-          msg = "Reserva cancelada.";
-
-        var r1 = await fetchJSON(
-          "https://reserva-vuelos-backend.onrender.com/reservas/" + idReserva + "/cancelar",
-          { method: "POST" }
-        );
-        if (r1.ok) {
-          ok = true;
-          msg = (r1.data && (r1.data.message || r1.data.msg)) || msg;
-        }
-
-        if (!ok) {
-          var r2 = await fetch("https://reserva-vuelos-backend.onrender.com/reservas/" + idReserva, {
-            method: "DELETE",
-          });
-          if (r2.ok) {
-            ok = true;
-            msg = "Reserva cancelada.";
-          }
-        }
-
-        if (!ok) {
-          var r3 = await fetch("https://reserva-vuelos-backend.onrender.com/reservas/" + idReserva, {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ estado: "Cancelada" }),
-          });
-          if (r3.ok) {
-            ok = true;
-            msg = "Reserva cancelada.";
-          }
-        }
-
-        if (ok) {
-          reservasView = reservasView.map(function (x) {
-            if (Number(x.id_reserva) === Number(idReserva)) {
-              x.estado = "Cancelada";
-            }
-            return x;
-          });
-          pintarLista();
-          alert(msg);
-        } else {
-          alert("No fue posible cancelar la reserva en este momento.");
-        }
-      }
-
-      // -------- mapear respuesta cruda -> UI ----------
-      function proyectarReservasCrudas(arr) {
-        return arr.map(function (r) {
-          var estado = r.estado || r.estado_reserva || "Pendiente";
-
-          var ruta = "";
-          if (r.origen_ciudad && r.destino_ciudad) {
-            ruta =
-              r.origen_ciudad +
-              " (" +
-              (r.origen_codigo || "") +
-              ") → " +
-              r.destino_ciudad +
-              " (" +
-              (r.destino_codigo || "") +
-              ")";
-          } else if (r.ruta) {
-            ruta = r.ruta;
-          } else {
-            ruta = "Ruta disponible en Detalles";
-          }
-
-          return {
-            id_reserva: r.id_reserva,
-            id_vuelo: r.id_vuelo,
-            estado: estado,
-            aerolinea: r.nombre_aerolinea || r.aerolinea || "",
-            codigo_aerolinea: r.codigo_aerolinea || "",
-            ruta: ruta,
-            fecha_reserva: r.fecha_reserva || r.fecha_registro || r.fecha,
-            fecha_raw: r.fecha_reserva || r.fecha_registro || r.fecha,
-          };
-        });
-      }
-
-      // -------- init ----------
-      async function init() {
-        if (!currentUser || !currentUser.id_usuario) {
-          listaEl.innerHTML =
-            '<div class="bg-white rounded-xl shadow p-6 text-center text-gray-600">' +
-            "Debes iniciar sesión para ver tus reservas. " +
-            '<a class="text-blue-600 font-semibold" href="/src/views/login.html">Ir a login</a>' +
-            "</div>";
-          return;
-        }
-
-        // loader inicial
-        listaEl.innerHTML =
-          '<div class="bg-white rounded-xl shadow p-6">' +
-          '<div class="animate-pulse space-y-3">' +
-          '<div class="h-4 bg-gray-200 rounded w-1/3"></div>' +
-          '<div class="h-4 bg-gray-200 rounded w-2/3"></div>' +
-          '<div class="h-4 bg-gray-200 rounded w-1/2"></div>' +
-          "</div>" +
-          "</div>";
-
-        try {
-          var data = await cargarReservasUsuario(currentUser.id_usuario);
-          reservasRaw = data;
-          reservasView = proyectarReservasCrudas(reservasRaw);
-          pintarLista();
-        } catch (e) {
-          lblErrores.textContent =
-            e.message || "No se pudieron cargar las reservas.";
-          listaEl.innerHTML =
-            '<div class="bg-white rounded-xl shadow p-6 text-center text-red-600">Error: ' +
-            lblErrores.textContent +
-            "</div>";
-        }
-      }
-
-      // filtros UI
-      scopeBtns.forEach(function (b) {
-        b.addEventListener("click", function () {
-          scopeBtns.forEach(function (x) {
-            x.className =
-              "tab-scope bg-gray-100 text-gray-700 px-4 py-2 rounded-lg font-semibold hover:bg-gray-200";
-          });
-          b.className =
-            "tab-scope bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold";
-          scope = b.getAttribute("data-scope") || "all";
-          pintarLista();
-        });
-      });
-      txtBuscar.addEventListener("input", pintarLista);
-      ordenSelect.addEventListener("change", pintarLista);
-
-      document.addEventListener("DOMContentLoaded", init);
-    </script>
-
-    <!-- SCRIPT COMPARTIDO DEL HOME (muestra/oculta Mis Reservas + login/logout) -->
-    <script>
-      (function () {
-        let user = null;
+      document.addEventListener("DOMContentLoaded", () => {
+        let currentUser = null;
         try {
           const raw = localStorage.getItem("currentUser");
-          if (raw) user = JSON.parse(raw);
+          if (raw) currentUser = JSON.parse(raw);
         } catch (e) {}
 
         const navMisReservas = document.getElementById("nav-mis-reservas");
-        const footerMisReservas = document.getElementById(
-          "footer-mis-reservas"
-        );
+        const footerMisReservas = document.getElementById("footer-mis-reservas");
         const loginBtn = document.getElementById("login-button");
         const userMenu = document.getElementById("user-menu");
+        const adminPanel = document.getElementById("admin-panel");
+        const mobileLoginBtn = document.getElementById("mobile-login-button");
+        const mobileUserMenu = document.getElementById("mobile-user-menu");
+        const mobileNavMisReservas = document.getElementById("mobile-nav-mis-reservas");
+        const mobileAdminPanel = document.getElementById("mobile-admin-panel");
+        const logoutBtnDesktop = document.getElementById("logout-button");
+        const logoutBtnMobile = document.getElementById("mobile-logout-button");
+        const miniSession = document.getElementById("mini-session");
 
-        if (user && user.id_usuario) {
-          // usuario autenticado
+        const datosPersonales = currentUser ? (currentUser.usuario || currentUser.user || currentUser.data || currentUser) : null;
+        const rolDetectado = datosPersonales ? (datosPersonales.id_rol || datosPersonales.rol || datosPersonales.rol_id || datosPersonales.idRol) : null;
+        const isAdmin = (rolDetectado == 2 || String(rolDetectado).toLowerCase() === 'admin' || String(rolDetectado).toLowerCase() === 'administrador'); 
+
+        if (currentUser && currentUser.id_usuario) {
           if (navMisReservas) navMisReservas.classList.remove("hidden");
           if (footerMisReservas) footerMisReservas.classList.remove("hidden");
-
           if (loginBtn) loginBtn.classList.add("hidden");
-          if (userMenu) userMenu.classList.remove("hidden");
+          if (mobileLoginBtn) mobileLoginBtn.classList.add("hidden");
+          if (userMenu) { userMenu.classList.remove("hidden"); userMenu.classList.add("flex"); }
+          if (mobileNavMisReservas) mobileNavMisReservas.classList.remove("hidden");
+          if (mobileUserMenu) { mobileUserMenu.classList.remove("hidden"); mobileUserMenu.classList.add("flex"); }
+          
+          if (miniSession) {
+            miniSession.textContent = currentUser.correo || currentUser.email || ("Usuario #" + currentUser.id_usuario);
+          }
+
+          if (isAdmin) {
+            if (adminPanel) adminPanel.classList.remove("hidden");
+            if (mobileAdminPanel) { 
+                mobileAdminPanel.classList.remove("hidden"); 
+                mobileAdminPanel.classList.add("flex"); 
+            }
+          }
         } else {
-          // usuario NO autenticado
           if (navMisReservas) navMisReservas.classList.add("hidden");
           if (footerMisReservas) footerMisReservas.classList.add("hidden");
-
           if (loginBtn) loginBtn.classList.remove("hidden");
-          if (userMenu) userMenu.classList.add("hidden");
+          if (mobileLoginBtn) mobileLoginBtn.classList.remove("hidden");
+          if (userMenu) { userMenu.classList.add("hidden"); userMenu.classList.remove("flex"); }
+          if (mobileNavMisReservas) mobileNavMisReservas.classList.add("hidden");
+          if (mobileUserMenu) { mobileUserMenu.classList.add("hidden"); mobileUserMenu.classList.remove("flex"); }
+          if (adminPanel) adminPanel.classList.add("hidden");
+          if (mobileAdminPanel) { mobileAdminPanel.classList.add("hidden"); mobileAdminPanel.classList.remove("flex"); }
+          
+          if (miniSession) miniSession.textContent = "No autenticado";
         }
-      })();
+
+
+
+        const handleLogout = function(e) {
+            e.preventDefault(); 
+            localStorage.removeItem("currentUser"); 
+            localStorage.removeItem("token"); 
+            window.location.href = "/src/views/home.html"; 
+        };
+        if (logoutBtnDesktop) logoutBtnDesktop.addEventListener("click", handleLogout);
+        if (logoutBtnMobile) logoutBtnMobile.addEventListener("click", handleLogout);
+
+        var listaEl = document.getElementById("listaReservas");
+        var lblResumen = document.getElementById("lblResumenLista");
+        var lblErrores = document.getElementById("lblErrores");
+        var txtBuscar = document.getElementById("txtBuscar");
+        var ordenSelect = document.getElementById("ordenResultados");
+        var scopeBtns = [].slice.call(document.querySelectorAll(".tab-scope"));
+
+        var reservasRaw = [];
+        var reservasView = [];
+        var scope = "all";
+
+        async function fetchJSON(url, options) {
+          try {
+            var r = await fetch(url, options || {});
+            var j = await r.json();
+            return { ok: r.ok, data: j };
+          } catch (err) {
+            return { ok: false, data: { message: "Error de conexión" } };
+          }
+        }
+
+async function cargarReservasUsuario(idUsuario) {
+    var r = await fetchJSON(
+        "https://reserva-vuelos-backend.onrender.com/usuarios/" + idUsuario + "/reservas"
+    );
+
+    if (r.ok && Array.isArray(r.data)) {
+        return r.data;
+    }
+
+    throw new Error(
+        (r.data && r.data.message) ||
+        "No se pudieron obtener las reservas."
+    );
+}
+
+
+        async function cargarResumenReserva(idReserva) {
+          var r = await fetchJSON("https://reserva-vuelos-backend.onrender.com/checkout/" + idReserva);
+          if (!r.ok) {
+            throw new Error(r.data && r.data.message ? r.data.message : "No se pudo cargar el detalle");
+          }
+          return r.data;
+        }
+
+        function pintarLista() {
+          var arr = reservasView.filter(function (x) {
+            if (scope === "all") return true;
+            return String(x.estado || "").toLowerCase() === String(scope).toLowerCase();
+          });
+
+          var q = txtBuscar.value.trim().toLowerCase();
+          if (q) {
+            arr = arr.filter(function (x) {
+              var ruta = (x.ruta || "").toLowerCase();
+              var aero = (x.aerolinea || "").toLowerCase();
+              var idr = String(x.id_reserva || "");
+              return ruta.indexOf(q) >= 0 || aero.indexOf(q) >= 0 || idr.indexOf(q) >= 0;
+            });
+          }
+
+          arr.sort(function (a, b) {
+            var sa = new Date(a.fecha_raw || a.fecha_reserva || a.fecha_registro || 0).getTime();
+            var sb = new Date(b.fecha_raw || b.fecha_reserva || b.fecha_registro || 0).getTime();
+            if (ordenSelect.value === "recientes") return sb - sa;
+            return sa - sb;
+          });
+
+          lblResumen.textContent = "(" + arr.length + " reservas)";
+          listaEl.innerHTML = "";
+
+          if (arr.length === 0) {
+            var vacio = document.createElement("div");
+            vacio.className = "bg-white rounded-xl shadow p-8 text-center text-gray-500 font-medium";
+            vacio.textContent = "No hay reservas para mostrar con los filtros actuales.";
+            listaEl.appendChild(vacio);
+            return;
+          }
+
+          arr.forEach(function (r) {
+            var f = formatDateTime(r.fecha_reserva || r.fecha_registro || r.fecha || r.fecha_raw);
+            var ruta = r.ruta || "Ruta no disponible";
+            var aero = r.aerolinea ? r.aerolinea + (r.codigo_aerolinea ? " (" + r.codigo_aerolinea + ")" : "") : "Aerolínea no disponible";
+
+            var card = document.createElement("div");
+            card.className = "bg-white rounded-xl shadow border border-gray-200 p-5 w-full";
+            card.setAttribute("data-id", String(r.id_reserva));
+
+            var actionsHtml = "";
+            var estLower = String(r.estado || "").toLowerCase();
+
+            if (estLower === "pendiente") {
+              actionsHtml +=
+                '<a href="/src/views/compra.html?id_reserva=' + r.id_reserva + '" class="w-full sm:w-auto inline-flex justify-center items-center bg-blue-800 hover:bg-blue-900 text-white font-semibold px-4 py-2 rounded-lg shadow mb-2 sm:mb-0 sm:mr-2 transition-colors">Pagar ahora</a>' +
+                '<button data-act="cancelar" class="w-full sm:w-auto inline-flex justify-center items-center bg-red-700 hover:bg-red-800 text-white font-semibold px-4 py-2 rounded-lg shadow transition-colors">Cancelar</button>';
+            } else if (estLower === "confirmada") {
+              actionsHtml +=
+                '<button data-act="detalles" class="w-full sm:w-auto inline-flex justify-center items-center bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold px-4 py-2 rounded-lg shadow border border-gray-200 mb-2 sm:mb-0 sm:mr-2 transition-colors">Ver detalles</button>' +
+                '<button data-act="reenviar" class="w-full sm:w-auto inline-flex justify-center items-center bg-blue-800 hover:bg-blue-900 text-white font-semibold px-4 py-2 rounded-lg shadow transition-colors">Reenviar correo</button>';
+            } else {
+              actionsHtml += '<span class="text-sm text-gray-500 font-medium">Sin acciones disponibles.</span>';
+            }
+
+            card.innerHTML =
+              '<div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">' +
+                '<div class="flex-1">' +
+                  '<div class="flex items-center gap-2 text-lg font-semibold text-gray-900 mb-1">' +
+                    '<span>#' + r.id_reserva + '</span>' +
+                    '<span class="text-gray-300">·</span>' +
+                    '<span>' + badgeEstado(r.estado || "") + '</span>' +
+                  '</div>' +
+                  '<div class="text-sm text-gray-800 font-medium">' + aero + '</div>' +
+                  '<div class="text-sm text-gray-600 mb-1">' + ruta + '</div>' +
+                  '<div class="text-xs text-gray-500">Reserva: ' + f.fecha + ' · ' + f.hora + '</div>' +
+                '</div>' +
+                '<div class="flex-shrink-0 flex flex-col sm:flex-row w-full lg:w-auto mt-2 lg:mt-0">' +
+                  actionsHtml +
+                '</div>' +
+              '</div>' +
+              '<div class="mt-4 hidden detalle-box transition-all duration-300">' +
+                '<div class="text-sm text-gray-700 p-4 bg-gray-50 rounded-lg">Cargando detalles...</div>' +
+              '</div>';
+
+            card.addEventListener("click", async function (ev) {
+              var t = ev.target;
+              if (!t || !t.getAttribute) return;
+              var act = t.getAttribute("data-act");
+              if (!act) return;
+
+              if (act === "cancelar") {
+                ev.preventDefault();
+                await cancelarReserva(r.id_reserva, card);
+              }
+              if (act === "detalles") {
+                ev.preventDefault();
+                await toggleDetalles(r.id_reserva, card);
+              }
+              if (act === "reenviar") {
+                ev.preventDefault();
+                await reenviarCorreo(r.id_reserva, card);
+              }
+            });
+
+            listaEl.appendChild(card);
+          });
+        }
+
+        async function toggleDetalles(idReserva, cardEl) {
+          var box = cardEl.querySelector(".detalle-box");
+          if (!box) return;
+
+          if (!box.classList.contains("hidden")) {
+            box.classList.add("hidden");
+            box.innerHTML = '<div class="text-sm text-gray-700 p-4 bg-gray-50 rounded-lg">Cargando detalles...</div>';
+            return;
+          }
+
+          box.classList.remove("hidden");
+          box.innerHTML = '<div class="text-sm text-gray-500 p-4 bg-gray-50 rounded-lg animate-pulse">Cargando detalles...</div>';
+
+          try {
+            var det = await cargarResumenReserva(idReserva);
+            var fs = formatDateTime(det.vuelo && det.vuelo.fecha_salida);
+            var fl = formatDateTime(det.vuelo && det.vuelo.fecha_llegada);
+
+            var html =
+              '<div class="grid grid-cols-1 md:grid-cols-2 gap-6 p-5 bg-gray-50 rounded-xl border border-gray-200">' +
+                '<div class="flex flex-col space-y-4">' +
+                  '<div>' +
+                    '<div class="text-xs uppercase text-gray-500 font-bold tracking-wider mb-1">Ruta y Aerolínea</div>' +
+                    '<div class="font-semibold text-gray-900 text-base">' + (det.vuelo ? det.vuelo.origen + ' &rarr; ' + det.vuelo.destino : 'N/D') + '</div>' +
+                    '<div class="text-sm text-gray-600 mt-0.5">' + (det.vuelo ? det.vuelo.aerolinea + ' (' + det.vuelo.codigo_aerolinea + ')' : 'N/D') + '</div>' +
+                  '</div>' +
+                  '<div>' +
+                    '<div class="text-xs text-gray-500 uppercase font-bold tracking-wider mb-1">Clase</div>' +
+                    '<div class="font-medium text-gray-900">' + (det.categoria ? det.categoria.nombre_categoria : 'N/D') + '</div>' +
+                  '</div>' +
+                '</div>' +
+                '<div class="flex flex-col space-y-4">' +
+                  '<div class="grid grid-cols-2 gap-4">' +
+                    '<div>' +
+                      '<div class="text-xs text-gray-500 uppercase font-bold tracking-wider mb-1">Salida</div>' +
+                      '<div class="font-medium text-gray-900">' + fs.fecha + '</div>' +
+                      '<div class="text-sm text-gray-700">' + fs.hora + '</div>' +
+                    '</div>' +
+                    '<div>' +
+                      '<div class="text-xs text-gray-500 uppercase font-bold tracking-wider mb-1">Llegada</div>' +
+                      '<div class="font-medium text-gray-900">' + fl.fecha + '</div>' +
+                      '<div class="text-sm text-gray-700">' + fl.hora + '</div>' +
+                    '</div>' +
+                  '</div>' +
+                  '<div class="grid grid-cols-2 gap-4 pt-4 border-t border-gray-200">' +
+                    '<div>' +
+                      '<div class="text-xs text-gray-500 uppercase font-bold tracking-wider mb-1">Subtotal</div>' +
+                      '<div class="font-medium text-gray-900">$ ' + (det.precios ? Number(det.precios.monto_total).toFixed(2) : '0.00') + '</div>' +
+                    '</div>' +
+                    '<div>' +
+                      '<div class="text-xs text-blue-700 uppercase font-bold tracking-wider mb-1">Total Pagado</div>' +
+                      '<div class="font-bold text-blue-900 text-lg leading-none">$ ' + (det.precios ? Number(det.precios.total_con_impuestos).toFixed(2) : '0.00') + '</div>' +
+                    '</div>' +
+                  '</div>' +
+                '</div>' +
+              '</div>' +
+              '<div class="mt-4 flex items-center justify-end text-xs text-gray-400 font-medium">' +
+                'Reserva #' + det.id_reserva + ' <span class="mx-2">&bull;</span> Estado: ' + (det.estado_reserva || 'N/D') +
+              '</div>';
+
+            box.innerHTML = html;
+          } catch (e) {
+            box.innerHTML = '<div class="text-sm text-red-600 p-4 bg-red-50 rounded-lg border border-red-100">No se pudieron cargar los detalles: ' + (e.message || "Error") + '</div>';
+          }
+        }
+
+        async function fetchIdCompraPorReserva(idReserva) {
+          const resp = await fetchJSON("https://reserva-vuelos-backend.onrender.com/compra/" + idReserva);
+          if (!resp.ok) {
+            throw new Error(resp.data && resp.data.message ? resp.data.message : "No se pudo obtener la compra asociada a la reserva.");
+          }
+          if (!resp.data || !resp.data.id_compra) {
+            throw new Error("No existe compra asociada a esta reserva.");
+          }
+          return resp.data.id_compra;
+        }
+
+        async function reenviarCorreo(idReserva, cardEl) {
+          try {
+            const id_compra = await fetchIdCompraPorReserva(idReserva);
+            const resp = await fetchJSON("https://reserva-vuelos-backend.onrender.com/correo-compra/" + id_compra, { method: "POST" });
+            if (resp.ok) {
+              const msg = resp.data && resp.data.message ? resp.data.message : "Correo reenviado correctamente.";
+              alert(msg);
+            } else {
+              const errMsg = resp.data && resp.data.message ? resp.data.message : "Error al reenviar el correo de compra.";
+              alert(errMsg);
+            }
+          } catch (e) {
+            alert("No se pudo reenviar el correo: " + (e.message || "Error"));
+          }
+        }
+
+        async function cancelarReserva(idReserva, cardEl) {
+          if (!confirm("¿Seguro que deseas cancelar esta reserva?")) return;
+
+          var ok = false, msg = "Reserva cancelada.";
+          var r1 = await fetchJSON("https://reserva-vuelos-backend.onrender.com/reservas/" + idReserva + "/cancelar", { method: "POST" });
+          
+          if (r1.ok) {
+            ok = true;
+            msg = (r1.data && (r1.data.message || r1.data.msg)) || msg;
+          }
+
+          if (!ok) {
+            var r2 = await fetch("https://reserva-vuelos-backend.onrender.com/reservas/" + idReserva, { method: "DELETE" });
+            if (r2.ok) {
+              ok = true;
+              msg = "Reserva cancelada.";
+            }
+          }
+
+          if (!ok) {
+            var r3 = await fetch("https://reserva-vuelos-backend.onrender.com/reservas/" + idReserva, {
+              method: "PUT",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ estado: "Cancelada" }),
+            });
+            if (r3.ok) {
+              ok = true;
+              msg = "Reserva cancelada.";
+            }
+          }
+
+          if (ok) {
+            reservasView = reservasView.map(function (x) {
+              if (Number(x.id_reserva) === Number(idReserva)) x.estado = "Cancelada";
+              return x;
+            });
+            pintarLista();
+            alert(msg);
+          } else {
+            alert("No fue posible cancelar la reserva en este momento.");
+          }
+        }
+
+        function proyectarReservasCrudas(arr) {
+          return arr.map(function (r) {
+            var estado = r.estado || r.estado_reserva || "Pendiente";
+            var ruta = "";
+            if (r.origen_ciudad && r.destino_ciudad) {
+              ruta = r.origen_ciudad + " (" + (r.origen_codigo || "") + ") → " + r.destino_ciudad + " (" + (r.destino_codigo || "") + ")";
+            } else if (r.ruta) {
+              ruta = r.ruta;
+            } else {
+              ruta = "Ruta disponible en Detalles";
+            }
+
+            return {
+              id_reserva: r.id_reserva,
+              id_vuelo: r.id_vuelo,
+              estado: estado,
+              aerolinea: r.nombre_aerolinea || r.aerolinea || "",
+              codigo_aerolinea: r.codigo_aerolinea || "",
+              ruta: ruta,
+              fecha_reserva: r.fecha_reserva || r.fecha_registro || r.fecha,
+              fecha_raw: r.fecha_reserva || r.fecha_registro || r.fecha,
+            };
+          });
+        }
+
+        async function init() {
+          if (!currentUser || !currentUser.id_usuario) {
+            listaEl.innerHTML =
+              '<div class="bg-white rounded-xl shadow p-8 text-center text-gray-600 font-medium">' +
+              "Debes iniciar sesión para ver tus reservas.<br><br>" +
+              '<a class="inline-block bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-700 transition-colors mt-2" href="/src/views/login.html">Ir a login</a>' +
+              "</div>";
+            return;
+          }
+
+          listaEl.innerHTML =
+            '<div class="bg-white rounded-xl shadow p-6 w-full">' +
+            '<div class="animate-pulse space-y-4">' +
+            '<div class="h-5 bg-gray-200 rounded w-1/3"></div>' +
+            '<div class="h-4 bg-gray-200 rounded w-2/3 mt-2"></div>' +
+            '<div class="h-4 bg-gray-200 rounded w-1/2"></div>' +
+            "</div>" +
+            "</div>";
+
+          try {
+            var data = await cargarReservasUsuario(currentUser.id_usuario);
+            reservasRaw = data;
+            reservasView = proyectarReservasCrudas(reservasRaw);
+            pintarLista();
+          } catch (e) {
+            lblErrores.textContent = e.message || "No se pudieron cargar las reservas.";
+            listaEl.innerHTML =
+              '<div class="bg-white rounded-xl shadow p-6 text-center text-red-600 font-medium">Error: ' +
+              lblErrores.textContent +
+              "</div>";
+          }
+        }
+
+        scopeBtns.forEach(function (b) {
+          b.addEventListener("click", function () {
+            scopeBtns.forEach(function (x) {
+              x.className = "tab-scope bg-gray-100 text-gray-700 px-4 py-2 rounded-lg font-semibold hover:bg-gray-200 text-sm sm:text-base transition-colors";
+            });
+            b.className = "tab-scope bg-blue-900 text-white px-4 py-2 rounded-lg font-semibold text-sm sm:text-base transition-colors";
+            scope = b.getAttribute("data-scope") || "all";
+            pintarLista();
+          });
+        });
+
+        txtBuscar.addEventListener("input", pintarLista);
+        ordenSelect.addEventListener("change", pintarLista);
+
+        init();
+      });
+
     </script>
   </body>
 </html>
