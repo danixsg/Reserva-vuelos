@@ -432,7 +432,13 @@
         try {
           btnSubmit.disabled = true;
 
-          const resp = await fetch("https://reserva-vuelos-backend.onrender.com/reservas", {
+          const apiBase =
+            window.location.hostname === "localhost" ||
+            window.location.hostname === "127.0.0.1"
+              ? "http://localhost:3000"
+              : "https://reserva-vuelos-backend.onrender.com";
+
+          const resp = await fetch(`${apiBase}/reservas`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload),
@@ -456,6 +462,9 @@
               "<p><strong>Fecha de reserva:</strong> " +
               (data.reserva.fecha_registro || data.reserva.fecha_reserva) +
               "</p>" +
+              (data.correoEnviado
+                ? '<p class="mt-2 text-xs text-green-700 font-medium">📧 Se envió la confirmación de tu reserva a tu correo electrónico.</p>'
+                : "") +
               '<p class="mt-3 text-xs text-gray-600">Tu asiento ha sido apartado. Ahora puedes continuar al pago.</p>' +
               '<a href="/src/views/compra.html?id_reserva=' +
               data.reserva.id_reserva +

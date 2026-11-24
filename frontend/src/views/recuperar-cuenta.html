@@ -106,8 +106,14 @@
             mensajeEl.textContent = "⏳ Actualizando contraseña...";
             mensajeEl.className = "text-center mt-4 text-blue-600 font-medium";
 
+            const apiBase =
+              window.location.hostname === "localhost" ||
+              window.location.hostname === "127.0.0.1"
+                ? "http://localhost:3000"
+                : "https://reserva-vuelos-backend.onrender.com";
+
             const res = await fetch(
-              `https://reserva-vuelos-backend.onrender.com/update-password-rec/${idUsuario}`,
+              `${apiBase}/update-password-rec/${idUsuario}`,
               {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },

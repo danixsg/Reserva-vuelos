@@ -516,10 +516,12 @@
           <div class="mt-6">
             <button
               type="submit"
-              class="w-full bg-blue-600 text-white font-bold p-3 rounded-lg hover:bg-blue-700 transition duration-300 shadow-md"
+              id="recovery-submit-btn"
+              class="w-full bg-blue-600 text-white font-bold p-3 rounded-lg hover:bg-blue-700 transition duration-300 shadow-md disabled:opacity-60 disabled:cursor-not-allowed"
             >
               Enviar Correo de Recuperación
             </button>
+            <p id="recovery-status" class="mt-3 text-sm text-center hidden"></p>
           </div>
         </form>
       </div>
@@ -752,33 +754,69 @@
             const email = document
               .getElementById("recovery-email")
               .value.trim();
+            const recoveryBtn = document.getElementById("recovery-submit-btn");
+            const recoveryStatus = document.getElementById("recovery-status");
 
             if (!email) {
               alert("⚠️ Por favor, ingresa tu correo electrónico.");
               return;
             }
 
+            const apiBase =
+              window.location.hostname === "localhost" ||
+              window.location.hostname === "127.0.0.1"
+                ? "http://localhost:3000"
+                : "https://reserva-vuelos-backend.onrender.com";
+
             try {
-              const res = await fetch("https://reserva-vuelos-backend.onrender.com/recuperar-cuenta", {
+              if (recoveryBtn) {
+                recoveryBtn.disabled = true;
+                recoveryBtn.textContent = "Enviando correo...";
+              }
+              if (recoveryStatus) {
+                recoveryStatus.className = "mt-3 text-sm text-center text-blue-600 font-medium";
+                recoveryStatus.textContent = "⏳ Enviando correo de recuperación...";
+              }
+
+              const res = await fetch(`${apiBase}/recuperar-cuenta`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ correo: email }),
               });
 
-              const data = await res.json();
+              const data = await res.json().catch(() => ({}));
 
               if (res.ok) {
-                alert(
-                  `✅ Se han enviado las instrucciones de recuperación a: ${email}`
-                );
+                const msg = `✅ Correo de recuperación enviado a: ${email}`;
+                if (recoveryStatus) {
+                  recoveryStatus.className = "mt-3 text-sm text-center text-green-600 font-medium";
+                  recoveryStatus.textContent = msg;
+                }
+                alert(msg);
                 forgotPasswordModal.classList.add("hidden");
                 forgotPasswordForm.reset();
+                if (recoveryStatus) recoveryStatus.classList.add("hidden");
               } else {
-                alert(`⚠️ ${data.message || "No se pudo enviar el correo"}`);
+                const errMsg = `⚠️ ${data.message || "No se pudo enviar el correo"}`;
+                if (recoveryStatus) {
+                  recoveryStatus.className = "mt-3 text-sm text-center text-red-600 font-medium";
+                  recoveryStatus.textContent = errMsg;
+                }
+                alert(errMsg);
               }
             } catch (err) {
               console.error("Error al enviar correo de recuperación:", err);
-              alert("❌ No se pudo conectar al servidor. Intenta nuevamente.");
+              const netMsg = "❌ No se pudo conectar al servidor. Intenta nuevamente.";
+              if (recoveryStatus) {
+                recoveryStatus.className = "mt-3 text-sm text-center text-red-600 font-medium";
+                recoveryStatus.textContent = netMsg;
+              }
+              alert(netMsg);
+            } finally {
+              if (recoveryBtn) {
+                recoveryBtn.disabled = false;
+                recoveryBtn.textContent = "Enviar Correo de Recuperación";
+              }
             }
           });
         }
